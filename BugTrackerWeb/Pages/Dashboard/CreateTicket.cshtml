@@ -1,0 +1,59 @@
+﻿@page
+@model BugTrackerWeb.Pages.Dashboard.CreateTicketModel
+@{
+}
+<br />
+<h2 class="text-info">Create New Ticket</h2>
+<div class="border container" style="padding:30px;">
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="NewTicket.Title"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="NewTicket.Title" class="form-control" />
+            </div>
+            <span asp-validation-for="NewTicket.Title" class="text-danger field-validation-valid">Required</span>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="NewTicket.Description"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="NewTicket.Description" class="form-control" />
+            </div>
+            <span asp-validation-for="NewTicket.Description" class="text-danger field-validation-valid">Required</span>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="NewTicket.Author"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="NewTicket.Author" class="form-control" />
+            </div>
+            <span asp-validation-for="NewTicket.Author" class="text-danger field-validation-valid">Author required</span>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="NewTicket.ProjectId"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="NewTicket.ProjectId" class="form-control" />
+            </div>
+            <span asp-validation-for="NewTicket.ProjectId" class="text-danger field-validation-valid">Project ID required</span>
+        </div>
+        <div class="form-group row">
+            <div class="col-3 offset-4">
+                <input type="submit" value="Create" class="btn btn-primary form-control" />
+            </div>
+            <div class="col-3">
+                <a asp-for="Index" class="btn btn-success form-control">Back to the dashboard</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{ 
+<partial name="_ValidationScriptsPartial"/>
+}

@@ -1,0 +1,21 @@
+﻿using BugTracker.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace BugTracker.Persistance
+{
+    public interface ITicketPersistance
+    {
+        public void SaveTicket(Ticket t);
+        Task Save(Ticket t);
+        Task<Ticket> GetById(int? i);
+        public List<Ticket> GetAll();
+        public List<Ticket> GetCreatedByAuthor(string author);
+        public List<Ticket> GetAssignedToProject(string project);
+        public Task Edit(Ticket t, string title, string description);
+        public Task DeleteById(int id);
+        public Task Delete(Ticket t);
+
+    }
+}
+
