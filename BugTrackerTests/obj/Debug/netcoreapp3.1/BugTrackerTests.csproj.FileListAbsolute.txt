@@ -162,11 +162,7 @@ C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerTests\bin\Debug\netcor
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerTests\bin\Debug\netcoreapp3.1\BugTrackerTests.dll
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerTests\bin\Debug\netcoreapp3.1\BugTrackerTests.pdb
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerTests\bin\Debug\netcoreapp3.1\Castle.Core.dll
-C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerTests\bin\Debug\netcoreapp3.1\EntityFramework.SqlServer.dll
-C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerTests\bin\Debug\netcoreapp3.1\EntityFramework.dll
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerTests\bin\Debug\netcoreapp3.1\Humanizer.dll
-C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerTests\bin\Debug\netcoreapp3.1\Microsoft.AspNet.Identity.Core.dll
-C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerTests\bin\Debug\netcoreapp3.1\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerTests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.CodeCoverage.Shim.dll
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerTests\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerTests\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
@@ -306,3 +302,8 @@ C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerTests\obj\Debug\netcor
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerTests\obj\Debug\netcoreapp3.1\BugTrackerTests.dll
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerTests\obj\Debug\netcoreapp3.1\BugTrackerTests.pdb
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerTests\obj\Debug\netcoreapp3.1\BugTrackerTests.genruntimeconfig.cache
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerTests\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerTests\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerTests\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerTests\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerTests\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll

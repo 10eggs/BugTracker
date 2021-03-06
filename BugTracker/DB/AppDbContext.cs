@@ -1,15 +1,19 @@
 ﻿using BugTracker.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace BugTracker.DB
 {
-    public class AppDbContext:DbContext
+    public class AppDbContext: DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options):
-            base(options) { }
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+        : base(options) { }
+
+        //public AppDbContext(DbContextOptions<AppDbContext> options):
+        //    base(options) { }
 
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Project> Project { get; set; }

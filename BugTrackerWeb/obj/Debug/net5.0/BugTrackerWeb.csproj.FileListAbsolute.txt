@@ -729,11 +729,7 @@ C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\r
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\refs\WindowsBase.dll
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\BugTrackerWeb.Views.dll
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\BugTrackerWeb.Views.pdb
-C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\EntityFramework.SqlServer.dll
-C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\EntityFramework.dll
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\Humanizer.dll
-C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\Microsoft.AspNet.Identity.Core.dll
-C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\Microsoft.AspNetCore.Razor.Language.dll

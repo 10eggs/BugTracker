@@ -8,21 +8,23 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly: HostingStartup(typeof(BugTrackerWeb.Areas.Identity.IdentityHostingStartup))]
+//[assembly: HostingStartup(typeof(BugTrackerWeb.Areas.Identity.IdentityHostingStartup))]
 namespace BugTrackerWeb.Areas.Identity
 {
-    public class IdentityHostingStartup : IHostingStartup
+    public class IdentityHostingStartup
+    //: IHostingStartup
     {
-        public void Configure(IWebHostBuilder builder)
-        {
-            builder.ConfigureServices((context, services) => {
-                services.AddDbContext<AuthContext>(options =>
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("AuthContextConnection")));
+        //    public void Configure(IWebHostBuilder builder)
+        //    {
+        //        builder.ConfigureServices((context, services) => {
+        //            services.AddDbContext<AuthContext>(options =>
+        //                options.UseSqlServer(
+        //                    context.Configuration.GetConnectionString("AuthContextConnection")));
 
-                services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<AuthContext>();
-            });
-        }
+        //            services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+        //                .AddEntityFrameworkStores<AuthContext>();
+        //        });
+        //    }
+        //}
     }
 }
