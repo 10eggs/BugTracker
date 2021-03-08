@@ -34,7 +34,6 @@ namespace BugTracker.Models
 
         public string Author { get; set; }
         public DateTime Date { get; set; }
-
         //Navigation property
         public Project Project { get; set; }
         //ForeignKey
