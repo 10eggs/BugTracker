@@ -11,6 +11,7 @@ namespace BugTracker.Persistance
         Task<Ticket> GetById(int? i);
         public List<Ticket> GetAll();
         public List<Ticket> GetCreatedByAuthor(string author);
+        public Task<List<Ticket>> GetCreatedByAuthorAsync(string author);
         public List<Ticket> GetAssignedToProject(string project);
         public Task Edit(Ticket t, string title, string description);
         public Task DeleteById(int id);

@@ -80,6 +80,10 @@ namespace BugTracker.Persistance
             await _ctx.SaveChangesAsync();
         }
 
+        public async Task<List<Ticket>> GetCreatedByAuthorAsync(string author)
+        {
+            return await _ctx.Tickets.Where(t => t.Author == author).ToListAsync();
+        }
     }
 }
 

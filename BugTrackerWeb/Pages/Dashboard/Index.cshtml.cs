@@ -16,17 +16,22 @@ namespace BugTrackerWeb.Pages.Dashboard
     public class IndexModel : PageModel
     {
         private readonly AppDbContext _ctx;
-        private readonly ITicketPersistance tp;
-        public IndexModel(AppDbContext ctx)
+        private readonly ITicketPersistance _tp;
+        public IndexModel(AppDbContext ctx, ITicketPersistance tp)
         {
             _ctx = ctx;
-            tp = new TicketPersistance(ctx);
+            //tp = new TicketPersistance(ctx);
+            _tp = tp;
         }
 
         public List<Ticket> Tickets { get; set; }
 
+        //This need to be separated later, 
+        public List<Ticket> UserTickets { get; set; }
+
         public async Task OnGet()
         {
+            UserTickets = await _tp.GetCreatedByAuthorAsync(User.Identity.Name);
             Tickets = await _ctx.Tickets.ToListAsync();
         }
 
@@ -36,7 +41,7 @@ namespace BugTrackerWeb.Pages.Dashboard
         {
             using (_ctx)
             {
-                await tp.DeleteById(id);
+                await _tp.DeleteById(id);
             }
             return RedirectToPage("Index");
         }
