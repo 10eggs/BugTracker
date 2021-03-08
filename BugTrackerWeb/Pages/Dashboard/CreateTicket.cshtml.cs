@@ -36,6 +36,7 @@ namespace BugTrackerWeb.Pages.Dashboard
                 using (var db = _ctx)
                 {
                     var tp = new TicketPersistance(_ctx);
+                    AssignUserId();
                     await tp.Save(NewTicket);
                     return RedirectToPage("Index");
                 }
@@ -45,6 +46,11 @@ namespace BugTrackerWeb.Pages.Dashboard
             {
                 return Page();
             }
+        }
+
+        public void AssignUserId()
+        {
+            NewTicket.Author = User.Identity.Name;
         }
     }
 }

@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using BugTracker.DB;
 using BugTracker.Models;
 using BugTracker.Persistance;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace BugTrackerWeb.Pages.Dashboard
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly AppDbContext _ctx;

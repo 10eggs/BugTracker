@@ -1,5 +1,6 @@
 using BugTracker.DB;
 using BugTracker.Models;
+using BugTracker.Persistance;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +33,11 @@ namespace BugTrackerWeb
             services.AddDbContext<AppIdentityDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppIdentityDbContext>();
+
+
+
+
+            services.AddScoped<ITicketPersistance, TicketPersistance>();
             services.AddControllersWithViews();
             services.AddRazorPages();
 
