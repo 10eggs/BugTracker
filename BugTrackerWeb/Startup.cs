@@ -3,6 +3,7 @@ using BugTracker.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,7 +31,7 @@ namespace BugTrackerWeb
             services.AddDbContext<AppDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<AppIdentityDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<User>().AddEntityFrameworkStores<AppIdentityDbContext>();
+            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppIdentityDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
 
@@ -55,6 +56,7 @@ namespace BugTrackerWeb
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

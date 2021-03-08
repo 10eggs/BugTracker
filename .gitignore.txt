@@ -341,3 +341,6 @@ healthchecksdb
 
 #new ones
 *.suo
+
+#mine
+BugTrackerWeb/obj/Debug/*
