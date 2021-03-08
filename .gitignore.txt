@@ -343,8 +343,8 @@ healthchecksdb
 *.suo
 
 #mine
-./BugTrackerWeb/obj/Debug/
-./BugTrackerTests/obj/Debug/
-./BugTracker/.vs/
-./BugTracker/bin/Debug
+BugTrackerWeb/obj/Debug/
+BugTrackerTests/obj/Debug/
+BugTracker/.vs/
+BugTracker/bin/Debug
 *.testlog
