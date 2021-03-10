@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace BugTracker.Models
@@ -11,7 +12,6 @@ namespace BugTracker.Models
         {
             Tickets = new List<Ticket>();
         }
-
         public Project(List<Ticket> tickets)
         {
             Tickets = tickets;
@@ -21,6 +21,7 @@ namespace BugTracker.Models
         public int Id { get; set; }
         //Navigation property
         public ProjectOwner ProjectOwner { get; set; }
+        [Required]
         public int ProjectOwnerId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

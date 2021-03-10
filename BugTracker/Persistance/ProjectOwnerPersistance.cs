@@ -22,10 +22,19 @@ namespace BugTracker.Persistance
 
         public ProjectOwner GetProjectOwnerWithRelatedProjects(string userId)
         {
+            //IQueryable<ProjectOwner> result1 = _ctx.ProjectOwner;
+            //var result1List = result1.ToList();
+
+            ////IQueryable<ProjectOwner> result2 = result1.Include(e=>e.Projects);
+            ////var result2List = result2.ToList();
+
+            //IQueryable<ProjectOwner> result3 = result1.Where(item => item.UserId == userId).Include(e => e.Projects);
+            //var result3List = result3.ToList();
             return _ctx.ProjectOwner
              .Include(po => po.Projects)
-             .Where(e =>e.UserId==userId)
+             .Where(e => e.UserId == userId)
              .SingleOrDefault();
+
         }
 
         public List<Project> GetRelatedProjects(int poId)
