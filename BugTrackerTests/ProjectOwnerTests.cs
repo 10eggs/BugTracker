@@ -2,12 +2,10 @@
 using BugTracker.Persistance;
 using BugTracker.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xunit;
 using static Xunit.Assert;
-using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace BugTrackerTests
@@ -47,42 +45,55 @@ namespace BugTrackerTests
                 IProjectOwnerPersistance pop = new ProjectOwnerPersistance(db);
                 var projs1 = pop.GetRelatedProjects(1);
                 var projs2 = pop.GetRelatedProjects(2);
+            }
+        }
 
+        [Fact]
+        public void GetProjectOwnerWithRelatedProjects()
+        {
+
+            ProjectOwner po = new ProjectOwner() {Id=1 ,UserId = "1" };
+            Project proj1 = new Project() { ProjectOwnerId = 1 , Description="desc1"};
+            Project proj2 = new Project() { ProjectOwnerId = 1 , Description="des2"};
+
+            using (var db = DbContextFactory.Create(nameof(GetProjectOwnerWithRelatedProjects)))
+            {
+                IProjectOwnerPersistance pop = new ProjectOwnerPersistance(db);
+                pop.SaveAsync(po);
             }
 
+            using (var db = DbContextFactory.Create(nameof(GetProjectOwnerWithRelatedProjects)))
+            {
+                IProjectPersistance pp = new ProjectPersistance(db);
+                pp.Save(proj1);
+                pp.Save(proj2);
+            }
+            using (var db = DbContextFactory.Create(nameof(GetProjectOwnerWithRelatedProjects)))
+            {
+                IProjectOwnerPersistance pop = new ProjectOwnerPersistance(db);
+                var poRetrived = pop.GetProjectOwnerWithRelatedProjects("1");
+                Assert.Equal("1", poRetrived.UserId);
+                Assert.Equal(2, poRetrived.Projects.Count);
 
+            }
         }
-    }
-
-    internal interface IProjectOwnerPersistance
-    {
-        public void Save(ProjectOwner po);
-        List<Project> GetRelatedProjects(int poId);
-    }
-
-    public class ProjectOwnerPersistance : IProjectOwnerPersistance
-    {
-        private AppDbContext _ctx;
-        public ProjectOwnerPersistance(AppDbContext context)
+        [Fact]
+        public void GetProjectOwner()
         {
-            _ctx = context;
-        }
-        public List<Project> GetRelatedProjects(int poId)
-        {
-            return _ctx.ProjectOwner
-                .Include(po => po.Projects)
-                .ThenInclude(p => p.Tickets)
-                .Where(e => EF.Property<int>(e, "Id") == poId)
-                .SingleOrDefault()
-                .Projects;
-                
-                
-        }
 
-        public void Save(ProjectOwner po)
-        {
-            _ctx.ProjectOwner.Add(po);
-            _ctx.SaveChanges();
+            ProjectOwner po = new ProjectOwner() { UserId = "1"};
+            using (var db = DbContextFactory.Create(nameof(GetProjectOwner)))
+            {
+                IProjectOwnerPersistance pop = new ProjectOwnerPersistance(db);
+                pop.SaveAsync(po);
+            }
+            using (var db = DbContextFactory.Create(nameof(GetProjectOwner)))
+            {
+                IProjectOwnerPersistance pop = new ProjectOwnerPersistance(db);
+                var poRetrived = pop.GetProjectOwner("1");
+                Assert.Equal("1", poRetrived.Result.UserId);
+
+            }
         }
     }
 }

@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System.Security.Claims;
+using System.Diagnostics;
 
 namespace BugTrackerWeb.Areas.Identity.Pages.Account
 {
@@ -84,6 +86,12 @@ namespace BugTrackerWeb.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+
+
+                    //if (User.IsInRole("ProjectOwner"))
+                    //{
+
+                    //}
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }

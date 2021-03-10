@@ -32,12 +32,16 @@ namespace BugTrackerWeb
             services.AddDbContext<AppDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<AppIdentityDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppIdentityDbContext>();
+            services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDbContext>();
+
 
 
 
 
             services.AddScoped<ITicketPersistance, TicketPersistance>();
+            services.AddScoped<IProjectOwnerPersistance, ProjectOwnerPersistance>();
             services.AddControllersWithViews();
             services.AddRazorPages();
 

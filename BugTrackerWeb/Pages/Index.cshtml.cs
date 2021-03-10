@@ -19,9 +19,13 @@ namespace BugTrackerWeb.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGet()
         {
-
+            if (User.IsInRole("ProjectOwner"))
+            {
+                return RedirectToPage("/ProjectOwner/Index");
+            }
+            return Page();
         }
     }
 }
