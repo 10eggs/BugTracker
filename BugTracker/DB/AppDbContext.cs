@@ -34,21 +34,30 @@ namespace BugTracker.DB
                         .WithMany(e => e.Tickets);
 
                     b.Navigation(b => b.Project);
-                    
+
                 });
 
             modelBuilder.Entity<Project>(
                 b =>
                 {
-                    b.Property<int>("Id");
+                    //b.Property<int>("Id");
+                    b.Property(e => e.Id);
                     b.HasOne(e => e.ProjectOwner)
                         .WithMany(e => e.Projects);
 
                     b.Navigation(e => e.ProjectOwner);
-                    
+
                 });
 
-            modelBuilder.Entity<ProjectOwner>().Property<int>("Id");
+            modelBuilder.Entity<ProjectOwner>(
+                b =>
+                {
+                    b.Property(b => b.Id);
+                    b.Property(b => b.UserId);
+                    b.Property(b => b.Name);
+                    b.HasMany(b => b.Projects);
+                        
+                });
 
         }
     }
