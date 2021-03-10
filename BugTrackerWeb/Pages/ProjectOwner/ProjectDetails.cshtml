@@ -1,4 +1,13 @@
 ﻿@page
 @model BugTrackerWeb.Pages.ProjectOwner.ProjectDetailsModel
 @{
+    if (Model.ProjectTickets.Count > 0)
+    {
+        <div>
+            @foreach(var t in Model.ProjectTickets)
+            {
+            <p>@t.Title @t.Description @t.Author</p>
+            }
+        </div>
+    }
 }

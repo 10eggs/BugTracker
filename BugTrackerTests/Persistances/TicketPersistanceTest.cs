@@ -85,25 +85,30 @@ namespace BugTrackerTests
         public void GetAssignedToTheProject()
         {
             //Arrange
-            var project1 = new Project { Name = "Project1" };
-            var project2 = new Project { Name = "Project2" };
+            var project1 = new Project { Id = 1 };
+            var project2 = new Project { Id = 2 };
 
-            var ticketForProjOne = new Ticket("Title0", "Text0", "Name0", project1);
-            var firstTicketFoProjTwo = new Ticket("Title1", "Text1", "Name0", project2);
-            var secTicketForProjTwo = new Ticket("Title2", "Text2", "Name0", project2);
+            var ticketForProjOne = new Ticket() { Title = "Title0", Description = "Text0", Author = "Name0", ProjectId = 1 };
+            var firstTicketForProjTwo = new Ticket { Title = "Title1", Description = "Text1", Author = "Name1", ProjectId = 2 };
+            var secTicketForProjTwo = new Ticket { Title = "Title2", Description = "Text2", Author = "Name2", ProjectId = 2 };
 
 
             ////Act
             using (var db = DbContextFactory.Create(nameof(GetAssignedToTheProject)))
             {
+                IProjectPersistance pp = new ProjectPersistance(db);
+                pp.Save(project1);
+                pp.Save(project2);
+
                 ITicketPersistance tp = new TicketPersistance(db);
                 tp.SaveTicket(ticketForProjOne);
-
-                //Reference to the Project is here, but it's not under next invocation
-                var rec = db.Tickets.Select(b => b).ToList().FirstOrDefault();
-
-                tp.SaveTicket(firstTicketFoProjTwo);
+                tp.SaveTicket(firstTicketForProjTwo);
                 tp.SaveTicket(secTicketForProjTwo);
+                //??
+                //Reference to the Project is here, but it's not under next invocation
+                //var rec = db.Tickets.Select(b => b).ToList().FirstOrDefault();
+
+
             }
 
             //Assert
@@ -113,16 +118,23 @@ namespace BugTrackerTests
 
                 //Reference to the object is no longer present
 
-                var assignedToTheProjectOne = tp.GetAssignedToProject("Project1");
-                var assignedToTheProjecTwo = tp.GetAssignedToProject("Project2");
+                var assignedToTheProjectOne = tp.GetAssignedToProject(1);
+                var assignedToTheProjectTwo = tp.GetAssignedToProject(2);
 
                 Assert.Collection(assignedToTheProjectOne,
-                    item1 => Assert.Equal("Project1", item1.Project.Name)
-                    );
-                Assert.Collection(assignedToTheProjecTwo,
-                    item1=>Assert.Equal("Project2",item1.Project.Name),
-                    item2=>Assert.Equal("Project2",item2.Project.Name)
-                    );
+                    item1 => Assert.Equal("Title0", item1.Title));
+
+                Assert.Collection(assignedToTheProjectTwo,
+                    item1 => Assert.Equal("Title1", item1.Title),
+                    item2 => Assert.Equal("Title2", item2.Title));
+
+                //Assert.Collection(assignedToTheProjectOne,
+                //    item1 => Assert.Equal("Project1", item1.Project.Name)
+                //    );
+                //Assert.Collection(assignedToTheProjecTwo,
+                //    item1=>Assert.Equal("Project2",item1.Project.Name),
+                //    item2=>Assert.Equal("Project2",item2.Project.Name)
+                //    );
             }
         }
 

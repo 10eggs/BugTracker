@@ -27,10 +27,11 @@ namespace BugTracker.Persistance
             return await _ctx.Tickets.ToListAsync();
         }
 
-        public List<Ticket> GetAssignedToProject(string projectName)
+        public List<Ticket> GetAssignedToProject(int projectId)
         {
+            //Do I need reference to the Project itself ?
             return _ctx.Tickets.Include(t => t.Project)
-                .Where(t => t.Project.Name == projectName)
+                .Where(t => t.ProjectId == projectId)
                 .ToList();
         }
 
