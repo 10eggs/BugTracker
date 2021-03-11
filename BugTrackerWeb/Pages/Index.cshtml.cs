@@ -25,6 +25,10 @@ namespace BugTrackerWeb.Pages
             {
                 return RedirectToPage("/ProjectOwner/Index");
             }
+            else if (User.IsInRole("QA"))
+            {
+                return RedirectToPage("/QA/Index");
+            }
             return Page();
         }
     }

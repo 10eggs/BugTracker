@@ -22,8 +22,4 @@
     <ProjectReference Include="..\BugTracker\BugTracker.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\QA\" />
-  </ItemGroup>
-
 </Project>
