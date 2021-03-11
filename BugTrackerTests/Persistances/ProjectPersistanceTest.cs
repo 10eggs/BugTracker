@@ -186,6 +186,18 @@ namespace BugTrackerTests
                     });
             }
         }
+        
+        [Fact]
+        public void GetAssignedQAsTest()
+        {
+
+            using (var db = DbContextFactory.Create(nameof(GetAssignedQAsTest)))
+            {
+                IProjectPersistance tp = new ProjectPersistance(db);
+
+            }
+            //GetAssignedQAs
+        }
 
     }
 
@@ -212,6 +224,14 @@ namespace BugTrackerTests
                 .Include(e => e.ProjectOwner)
                 .Include(e => e.Tickets)
                 .Select(x => x).ToList();
+        }
+
+        public List<QA> GetAssignedQAs(int projId)
+        {
+            return _ctx.Project.Include(p => p.QAs)
+                .Where(p => p.Id == projId)
+                .Select(p => p.QAs)
+                .SingleOrDefault();
         }
 
         public List<Project> GetOwnedBy(ProjectOwner po)
@@ -249,5 +269,7 @@ namespace BugTrackerTests
         public List<Project> GetAll();
         public List<Project> GetOwnedBy(ProjectOwner author);
         public List<Ticket> GetRelatedTickets(Project project);
+
+        public List<QA> GetAssignedQAs(int projId);
     }
 }

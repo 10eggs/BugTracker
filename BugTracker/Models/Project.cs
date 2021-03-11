@@ -26,6 +26,6 @@ namespace BugTracker.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public List<Ticket> Tickets { get; set; }
-        public ICollection<QA> QAs { get; set; }
+        public List<QA> QAs { get; set; }
     }
 }
