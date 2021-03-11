@@ -73,7 +73,8 @@ namespace BugTracker.DB
               {
                 b.Property(b => b.Id);
                 b.Property(b => b.Name);
-                b.HasMany(b => b.Projects);
+                  b.HasMany(b => b.Projects)
+                    .WithMany(p => p.QAs);
                 b.HasMany(b => b.Tickets);
               });
 

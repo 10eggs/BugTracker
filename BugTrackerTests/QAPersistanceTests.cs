@@ -32,7 +32,7 @@ namespace BugTrackerTests
 
     }
 
-    internal class QAPersistance : IQAPersistance
+    public class QAPersistance : IQAPersistance
     {
         private AppDbContext _ctx;
         public QAPersistance(AppDbContext ctx)
@@ -44,15 +44,17 @@ namespace BugTrackerTests
             return _ctx.QA.ToList();
         }
 
-        public IQueryable<QA> GetAllQuery()
+        public void Save(QA qa)
         {
-            return _ctx.QA;
+            _ctx.QA.Add(qa);
+            _ctx.SaveChanges();
         }
     }
 
-    internal interface IQAPersistance
+    public interface IQAPersistance
     {
+        void Save(QA qa);
         ICollection<QA> GetAll();
-        IQueryable<QA> GetAllQuery();
+
     }
 }

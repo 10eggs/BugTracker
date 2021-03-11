@@ -190,13 +190,37 @@ namespace BugTrackerTests
         [Fact]
         public void GetAssignedQAsTest()
         {
+            var proj1 = new Project { Id = 1 ,Name="ProjectName"};
+            var qa1 = new QA { Id = 1, Name = "Adam" };
+            var qa2 = new QA { Id = 2, Name = "Eva" };
 
             using (var db = DbContextFactory.Create(nameof(GetAssignedQAsTest)))
             {
                 IProjectPersistance tp = new ProjectPersistance(db);
+                tp.Save(proj1);
+
+                db.QA.AddRange(new List<QA> { qa1, qa2 });
+                db.SaveChanges();
 
             }
-            //GetAssignedQAs
+
+
+            using (var db = DbContextFactory.Create(nameof(GetAssignedQAsTest)))
+            {
+                IProjectPersistance tp = new ProjectPersistance(db);
+                var proj=tp.GetProject(1);
+                proj.QAs.AddRange(new List<QA> { qa1, qa2 });
+                db.SaveChanges();
+
+            }
+
+            using (var db = DbContextFactory.Create(nameof(GetAssignedQAsTest)))
+            {
+                IProjectPersistance tp = new ProjectPersistance(db);
+                var QAs = tp.GetAssignedQAs(1);
+                Assert.Equal(2, QAs.Count);
+
+            }
         }
 
     }
@@ -214,7 +238,15 @@ namespace BugTrackerTests
             return _ctx.Project
                     .Include(e => e.ProjectOwner)
                     .Include(e => e.Tickets)
-                    .Where(e=>EF.Property<int>(e, "Id")==id)
+                    .Where(e=>e.Id==id)
+                    .Single();
+        }
+
+        public Project GetProject(int id)
+        {
+            return _ctx.Project
+                    .Include(e=>e.QAs)
+                    .Where(e => e.Id == id)
                     .Single();
         }
 
@@ -266,6 +298,7 @@ namespace BugTrackerTests
         //How to access record from db - by passing reference or value
         public void Save(Project t);
         public Project Get(int id);
+        public Project GetProject(int id);
         public List<Project> GetAll();
         public List<Project> GetOwnedBy(ProjectOwner author);
         public List<Ticket> GetRelatedTickets(Project project);

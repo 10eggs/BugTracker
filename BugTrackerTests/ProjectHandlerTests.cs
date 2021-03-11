@@ -16,8 +16,6 @@ namespace BugTrackerTests
             using(var db = DbContextFactory.Create(nameof(GetQAsAssignedToTheProject)))
             {
                 IProjectHandler iph = new ProjectHandler(db);
-                var qasList = iph.GetQAs(1);
-                Assert.NotNull(qasList);
             }
             
             //arrange
@@ -29,11 +27,19 @@ namespace BugTrackerTests
     internal class ProjectHandler : IProjectHandler
     {
         private IProjectPersistance _ipp;
+        private IQAPersistance _qap;
         public ProjectHandler(AppDbContext ctx)
         {
             _ipp = new ProjectPersistance(ctx);
+            _qap = new QAPersistance(ctx);
         }
-        public ICollection<QA> GetQAs(int projId)
+
+        public ICollection<QA> GetAllQAs()
+        {
+            return _qap.GetAll();
+        }
+
+        public ICollection<QA> GetQAsForProject(int projId)
         {
             return _ipp.GetAssignedQAs(projId);
         }
@@ -41,6 +47,7 @@ namespace BugTrackerTests
 
     internal interface IProjectHandler
     {
-        ICollection<QA> GetQAs(int projId);
+        ICollection<QA> GetQAsForProject(int projId);
+        ICollection<QA> GetAllQAs();
     }
 }
