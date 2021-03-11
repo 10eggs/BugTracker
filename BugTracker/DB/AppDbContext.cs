@@ -19,6 +19,8 @@ namespace BugTracker.DB
         public DbSet<Project> Project { get; set; }
         public DbSet<ProjectOwner> ProjectOwner { get; set; }
 
+        public DbSet<QA> QA { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Ticket>(
@@ -58,6 +60,15 @@ namespace BugTracker.DB
                     b.HasMany(b => b.Projects);
                         
                 });
+
+            modelBuilder.Entity<QA>(
+              b =>
+              {
+                b.Property(b => b.Id);
+                b.Property(b => b.Name);
+                b.HasMany(b => b.Projects);
+                b.HasMany(b => b.Tickets);
+              });
 
         }
     }

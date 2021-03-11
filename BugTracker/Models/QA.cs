@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BugTracker.Models
 {
-    class QA
+    public class QA
     {
         [Key]
         public int Id { get; set; }
