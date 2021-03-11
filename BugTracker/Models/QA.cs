@@ -14,6 +14,5 @@ namespace BugTracker.Models
         public List<Project> Projects { get; set; }
         public ICollection<AssignedTicket> Tickets { get; set; }
 
-
     }
 }
