@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BugTracker.Models
 {
-    class AssignedTicket:Ticket
+    public class AssignedTicket:Ticket
     {
         public QA Qa { get; set; }
         public int QaID { get; set; }

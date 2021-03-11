@@ -70,6 +70,8 @@ namespace BugTracker.DB
                 b.HasMany(b => b.Tickets);
               });
 
+            //add-migration CamelCase -Context "MyContext"
+            //update-database
         }
     }
 }
