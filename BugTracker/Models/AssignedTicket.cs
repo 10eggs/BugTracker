@@ -10,7 +10,7 @@ namespace BugTracker.Models
         public QA Qa { get; set; }
         public int QaID { get; set; }
         public string TicketStatus { get; set; }
-        public string Updated { get; set; }
+        public DateTime Updated { get; set; }
         public string TicketPriority { get; set; }
         public string TicketCategory { get; set; }
 

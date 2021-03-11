@@ -39,6 +39,12 @@ namespace BugTracker.DB
 
                 });
 
+            modelBuilder.Entity<AssignedTicket>(
+                b =>
+                {
+                    b.HasOne(e => e.Qa);
+                });
+
             modelBuilder.Entity<Project>(
                 b =>
                 {
