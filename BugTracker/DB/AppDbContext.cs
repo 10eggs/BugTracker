@@ -16,6 +16,7 @@ namespace BugTracker.DB
         //    base(options) { }
 
         public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<AssignedTicket> AssignedTickets { get; set; }
         public DbSet<Project> Project { get; set; }
         public DbSet<ProjectOwner> ProjectOwner { get; set; }
 
