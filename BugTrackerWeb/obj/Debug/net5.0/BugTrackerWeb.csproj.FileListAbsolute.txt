@@ -895,6 +895,7 @@ C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\R
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Register.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
-C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\ProjectOwner\Index.cshtml.g.cs
-C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\ProjectOwner\ProjectDetails.cshtml.g.cs
-C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\QA\Index.cshtml.g.cs
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\ProjectOwnerView\Index.cshtml.g.cs
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\ProjectOwnerView\ManageUsers.cshtml.g.cs
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\ProjectOwnerView\ProjectDetails.cshtml.g.cs
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\QAView\Index.cshtml.g.cs

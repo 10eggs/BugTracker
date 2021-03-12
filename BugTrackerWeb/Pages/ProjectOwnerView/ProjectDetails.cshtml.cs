@@ -8,7 +8,7 @@ using BugTracker.Persistance;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace BugTrackerWeb.Pages.ProjectOwner
+namespace BugTrackerWeb.Pages.ProjectOwnerView
 {
     public class ProjectDetailsModel : PageModel
     {

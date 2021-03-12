@@ -1,5 +1,5 @@
 ﻿@page
-@model BugTrackerWeb.Pages.ProjectOwner.IndexModel
+@model BugTrackerWeb.Pages.ProjectOwnerView.IndexModel
 @{
     <p>This is an initial view for ProjectOwner</p>
     <br />
@@ -25,6 +25,9 @@
                 </td>
                 <td>
                     <a asp-page="ProjectDetails" asp-route-id="@p.Id">Details</a>
+                </td>
+                <td>
+                    <a asp-page="ManageUsers" asp-route-id="@p.Id">ManageUsers</a>
                 </td>
             </tr>
         }

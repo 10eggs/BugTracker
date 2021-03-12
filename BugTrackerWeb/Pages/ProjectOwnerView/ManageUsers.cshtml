@@ -1,0 +1,29 @@
+﻿@page
+@model BugTrackerWeb.Pages.ProjectOwnerView.ManageUsersModel
+@{
+    <table class="table table-striped border">
+        <tr class="table-secondary">
+            <th>
+                Name
+            </th>
+        </tr>
+        @foreach (var qa in Model.AllQAs)
+        {
+            <tr>
+                <td>
+                    @qa.Name
+                </td>
+                <td>
+                    <div class="form-group row">
+                        <div class="col-3 offset-4">
+                            <form method="post">
+                                <input type="submit" asp-route-qaId=@qa.Id asp-route-projectId=@Model.ProjectId value="Assign" class="btn btn-primary form-control" />
+                            </form>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+
+}

@@ -1,5 +1,6 @@
 using BugTracker.DB;
 using BugTracker.Models;
+using BugTracker.PageManagers;
 using BugTracker.Persistance;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,11 +38,13 @@ namespace BugTrackerWeb
                 .AddEntityFrameworkStores<AppIdentityDbContext>();
 
 
-
-
-
             services.AddScoped<ITicketPersistance, TicketPersistance>();
             services.AddScoped<IProjectOwnerPersistance, ProjectOwnerPersistance>();
+            services.AddScoped<IProjectPersistance, ProjectPersistance>();
+            services.AddScoped<IQAPersistance, QAPersistance>();
+            services.AddScoped<IQAManager, QAManager>();
+
+
             services.AddControllersWithViews();
             services.AddRazorPages();
 

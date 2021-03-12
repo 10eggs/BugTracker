@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace BugTrackerWeb.Pages.QA
+namespace BugTrackerWeb.Pages.QAView
 {
     public class IndexModel : PageModel
     {
