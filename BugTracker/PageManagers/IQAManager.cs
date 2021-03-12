@@ -10,5 +10,6 @@ namespace BugTracker.PageManagers
         public ICollection<QA> GetQAsForProject(int projId);
         public ICollection<QA> GetAllQAs();
         public void AssignQaToTheProject(int qaId, int projId);
+        public void DeleteQaFromTheProject(int qaId, int projId);
     }
 }

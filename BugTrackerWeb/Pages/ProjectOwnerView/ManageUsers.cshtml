@@ -26,4 +26,35 @@
         }
     </table>
 
+    <div class="col-6">
+        <h2 class="text-info">Assigned QAs</h2>
+    </div>
+    @if (Model.ProjectQAs.Count > 0)
+    { 
+         <table class="table table-striped border">
+            <tr class="table-secondary">
+                <th>
+                    <label>Name</label>
+                </th>
+            </tr>
+            @foreach (var qa in Model.ProjectQAs)
+            {
+             <tr>
+                 <td>
+                     @qa.Name
+                 </td>
+                 <td>
+                     <div class="form-group row">
+                         <div class="col-3 offset-4">
+                             <form  method="post">
+                                 <input type="submit" asp-page-handler="DischargeQa" asp-route-qaId=@qa.Id asp-route-projectId=@Model.ProjectId value="Discharge" class="btn btn-primary form-control" />
+                             </form>
+                         </div>
+                     </div>
+                 </td>
+             </tr>
+            }
+         </table>
+
+    }
 }

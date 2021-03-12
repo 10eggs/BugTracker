@@ -18,7 +18,7 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
             _qam = qam;
         }
         public ICollection<QA> AllQAs { get; set; }
-        public List<QA> ProjectQAs { get; set; }
+        public ICollection<QA> ProjectQAs { get; set; }
 
         public int ProjectId { get; set; }
         public void OnGet(int id)
@@ -26,11 +26,18 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
             Debug.WriteLine("Project from query string is " + id);
             ProjectId = id;
             AllQAs = _qam.GetAllQAs();
+            ProjectQAs = _qam.GetQAsForProject(id);
         }
 
         public IActionResult OnPost(int qaId, int projectId)
         {
             _qam.AssignQaToTheProject(qaId, projectId);
+            return RedirectToPage(new { id = projectId });
+        }
+
+        public IActionResult OnPostDischargeQa(int qaId, int projectId)
+        {
+            _qam.DeleteQaFromTheProject(qaId, projectId);
             return RedirectToPage(new { id = projectId });
         }
     }
