@@ -55,7 +55,13 @@ namespace BugTracker.Persistance
 
         }
 
-        public async Task<Ticket> GetById(int? i)
+        public Ticket GetById(int id)
+        {
+            return _ctx.Tickets.Where(t => t.Id == id)
+                .SingleOrDefault();
+        }
+
+        public async Task<Ticket> GetByIdAsync(int? i)
         {
             return await _ctx.Tickets.FindAsync(i);
         }
@@ -69,7 +75,7 @@ namespace BugTracker.Persistance
 
         public async Task DeleteById(int id)
         {
-            var t = await GetById(id) ?? throw new NullReferenceException();
+            var t = await GetByIdAsync(id) ?? throw new NullReferenceException();
             _ctx.Tickets.Remove(t);
             await _ctx.SaveChangesAsync();
 
@@ -84,6 +90,21 @@ namespace BugTracker.Persistance
         public async Task<List<Ticket>> GetCreatedByAuthorAsync(string author)
         {
             return await _ctx.Tickets.Where(t => t.Author == author).ToListAsync();
+        }
+
+        public void SaveAssigned(int ticketId)
+        {
+            var ticket = _ctx.Tickets.Include(t=>t.Project)
+                .Where(t=>t.Id==ticketId)
+                .SingleOrDefault();
+
+            var assignedTicket = new AssignedTicket(ticket);
+
+            _ctx.Tickets.Remove(ticket);
+            _ctx.SaveChanges();
+
+            _ctx.Tickets.Add(assignedTicket);
+            _ctx.SaveChanges();
         }
     }
 }

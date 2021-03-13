@@ -12,6 +12,13 @@ namespace BugTrackerTests
         {
             _ctx = ctx;
         }
+
+        public QA Get(int id)
+        {
+            return _ctx.QA.Where(q => q.Id == id)
+                .SingleOrDefault();
+        }
+
         public ICollection<QA> GetAll()
         {
             return _ctx.QA.ToList();

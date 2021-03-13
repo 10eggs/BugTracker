@@ -28,7 +28,7 @@ namespace BugTrackerWeb.Pages.Dashboard
             using(_ctx)
             {
                 var tp =new TicketPersistance(_ctx);
-                EditedTicket = await tp.GetById(id);
+                EditedTicket = await tp.GetByIdAsync(id);
             }
         }
 
@@ -41,7 +41,7 @@ namespace BugTrackerWeb.Pages.Dashboard
                 using (_ctx)
                 {
                     var tp = new TicketPersistance(_ctx);
-                    var et = await tp.GetById(EditedTicket.Id);
+                    var et = await tp.GetByIdAsync(EditedTicket.Id);
 
                     await tp.Edit(et, EditedTicket.Title, EditedTicket.Description);
                     await _ctx.SaveChangesAsync();

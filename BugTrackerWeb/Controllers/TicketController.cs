@@ -36,7 +36,7 @@ namespace BugTrackerWeb.Controllers
             using (_ctx)
             {
                 var tp = new TicketPersistance(_ctx);
-                var bookFromDb = await tp.GetById(id);
+                var bookFromDb = await tp.GetByIdAsync(id);
                 if(bookFromDb == null)
                 {
                     return Json(new { success = false, message = "Error while Deleting" });

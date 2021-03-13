@@ -1,21 +1,61 @@
 ﻿@page
 @model BugTrackerWeb.Pages.ProjectOwnerView.ProjectDetailsModel
 @{
+    <div class="col-6">
+        <h2 class="text-info">All tickets</h2>
+    </div>
     if (Model.ProjectTickets.Count > 0)
     {
-        <div>
-            @foreach (var t in Model.ProjectTickets)
-            {
-                <p>@t.Title @t.Description @t.Author</p>
-            }
-        </div>
-
         <table class="table table-striped border">
             <tr class="table-secondary">
                 <th>
+                    Title
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Author
                 </th>
             </tr>
-            <tr></tr>
+            @foreach (var t in Model.ProjectTickets)
+            {
+                <tr>
+                    <td>@t.Title</td>
+                    <td>@t.Description</td>
+                    <td>@t.Author</td>
+                </tr>
+            }
         </table>
     }
+    <div class="col-6">
+        <h2 class="text-info">Assigned tickets</h2>
+    </div>
+    <table class="table table-striped border">
+        <tr class="table-secondary">
+            <th>
+                Title
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Assigned QA
+            </th>
+        </tr>
+        @*@foreach (var t in Model.ProjectTickets)
+        {
+            <tr>
+                <td>@t.Title</td>
+                <td>@t.Description</td>
+                <td>@t.Author</td>
+            </tr>
+        }*@
+    </table>
 }

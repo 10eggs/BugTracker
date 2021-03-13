@@ -34,7 +34,7 @@ namespace BugTrackerWeb.Pages.Dashboard
             using (_ctx)
             {
                 var tp = new TicketPersistance(_ctx);
-                EditedTicket = await tp.GetById(id);
+                EditedTicket = await tp.GetByIdAsync(id);
                 if (EditedTicket == null)
                 {
                     return NotFound();
@@ -62,7 +62,7 @@ namespace BugTrackerWeb.Pages.Dashboard
                     else
                     {
                         //tp.Update would update every field in the book
-                        var et = await tp.GetById(EditedTicket.Id);
+                        var et = await tp.GetByIdAsync(EditedTicket.Id);
                         await tp.Edit(et, EditedTicket.Title, EditedTicket.Description);
                     }
 

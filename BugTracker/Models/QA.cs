@@ -7,6 +7,10 @@ namespace BugTracker.Models
 {
     public class QA
     {
+        public QA()
+        {
+            Tickets = new List<AssignedTicket>();
+        }
         [Key]
         public int Id { get; set; }
         public string UserId { get; set; }

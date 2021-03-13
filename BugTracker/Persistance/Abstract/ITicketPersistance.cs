@@ -6,9 +6,12 @@ namespace BugTracker.Persistance
 {
     public interface ITicketPersistance
     {
+        //Remove 'ticket' word
         public void SaveTicket(Ticket t);
+        public void SaveAssigned(int ticketId);
         Task Save(Ticket t);
-        Task<Ticket> GetById(int? i);
+        Task<Ticket> GetByIdAsync(int? i);
+        Ticket GetById(int i);
         public List<Ticket> GetAll();
         public List<Ticket> GetCreatedByAuthor(string author);
         public Task<List<Ticket>> GetCreatedByAuthorAsync(string author);

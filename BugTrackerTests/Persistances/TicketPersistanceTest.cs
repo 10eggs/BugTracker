@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using Xunit;
 using static Xunit.Assert;
+using Microsoft.EntityFrameworkCore;
 
 namespace BugTrackerTests
 {
@@ -154,7 +155,7 @@ namespace BugTrackerTests
             using (var db = DbContextFactory.Create(nameof(GetById)))
             {
                 ITicketPersistance tp = new TicketPersistance(db);
-                var ticket = await tp.GetById(1);
+                var ticket = await tp.GetByIdAsync(1);
 
                 Assert.NotNull(ticket);
                 Assert.Equal("Title0", ticket.Title);
@@ -178,15 +179,50 @@ namespace BugTrackerTests
             {
                 Debug.WriteLine("Ticket for project one id: " + ticketForProjOne.Id);
                 var tp = new TicketPersistance(db);
-                var t = await tp.GetById(1);
+                var t = await tp.GetByIdAsync(1);
                 tp.Edit(t, "TitleChanged", "TextChanged");
             }
 
             using (var db = DbContextFactory.Create(nameof(EditTicket)))
             {
                 var tp = new TicketPersistance(db);
-                var t= await tp.GetById(1);
+                var t= await tp.GetByIdAsync(1);
                 Assert.Equal("TitleChanged", t.Title);
+            }
+
+        }
+
+        [Fact]
+        public void SaveAssigned()
+        {
+            //Arrange
+            var project = new Project() { Id = 1, Name="ProjectName",Description = "ProjectDescription"};
+            var ticket = new Ticket() { Id = 1, Title = "Testticket",ProjectId=1, Description="Description"};
+
+            using (var db = DbContextFactory.Create(nameof(SaveAssigned)))
+            {
+                db.Project.Add(project);
+                db.Tickets.Add(ticket);
+                db.SaveChanges();
+
+            }
+            //Act
+            using (var db = DbContextFactory.Create(nameof(SaveAssigned)))
+            {
+                var tp = new TicketPersistance(db);
+                tp.SaveAssigned(ticket.Id);
+            }
+            //Assert
+            using (var db = DbContextFactory.Create(nameof(SaveAssigned)))
+            {
+                var assignedTicket = db.Tickets
+                    .Include(t => t.Project)
+                    .Select(t => t)
+                    .SingleOrDefault();
+
+                Assert.Equal(assignedTicket.Description,ticket.Description);
+                Assert.Equal(assignedTicket.ProjectId,ticket.ProjectId);
+                
             }
 
         }

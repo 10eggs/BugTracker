@@ -4,34 +4,38 @@
     <p>This is an initial view for ProjectOwner</p>
     <br />
     <br />
-    if (Model.ProjectOwner.Projects.Count > 0){
-    <table class="table table-striped border">
-        <tr class="table-secondary">
-            <th>
-                <label asp-for="ProjectOwner.Projects.FirstOrDefault().Name"></label>
-            </th>
-            <th>
-                <label asp-for="ProjectOwner.Projects.FirstOrDefault().Description"></label>
-            </th>
-        </tr>
-        @foreach(var p in Model.ProjectOwner.Projects)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(m => p.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(m => p.Description)
-                </td>
-                <td>
-                    <a asp-page="ProjectDetails" asp-route-id="@p.Id">Details</a>
-                </td>
-                <td>
-                    <a asp-page="ManageUsers" asp-route-id="@p.Id">ManageUsers</a>
-                </td>
+    <div class="col-6">
+        <h2 class="text-info">Projects List</h2>
+    </div>
+    if (Model.ProjectOwner.Projects.Count > 0)
+    {
+        <table class="table table-striped border">
+            <tr class="table-secondary">
+                <th>
+                    <label asp-for="ProjectOwner.Projects.FirstOrDefault().Name"></label>
+                </th>
+                <th>
+                    <label asp-for="ProjectOwner.Projects.FirstOrDefault().Description"></label>
+                </th>
             </tr>
-        }
-    </table>
+            @foreach (var p in Model.ProjectOwner.Projects)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => p.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => p.Description)
+                    </td>
+                    <td>
+                        <a asp-page="ProjectDetails" asp-route-id="@p.Id">Details</a>
+                    </td>
+                    <td>
+                        <a asp-page="ManageUsers" asp-route-id="@p.Id">ManageUsers</a>
+                    </td>
+                </tr>
+            }
+        </table>
     }
     else
     {

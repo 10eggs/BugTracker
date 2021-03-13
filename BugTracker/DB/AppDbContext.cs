@@ -75,7 +75,8 @@ namespace BugTracker.DB
                 b.Property(b => b.Name);
                   b.HasMany(b => b.Projects)
                     .WithMany(p => p.QAs);
-                b.HasMany(b => b.Tickets);
+                  b.HasMany(b => b.Tickets)
+                    .WithOne(t => t.Qa);
               });
 
             //add-migration CamelCase -Context "MyContext"

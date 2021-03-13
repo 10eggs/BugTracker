@@ -11,7 +11,14 @@ namespace BugTracker.Models
         public Project()
         {
             Tickets = new List<Ticket>();
+            QAs = new List<QA>();
         }
+        public Project(List<Ticket> tickets, List<QA> qas)
+        {
+            Tickets = tickets;
+            QAs = qas;
+        }
+
         public Project(List<Ticket> tickets)
         {
             Tickets = tickets;
