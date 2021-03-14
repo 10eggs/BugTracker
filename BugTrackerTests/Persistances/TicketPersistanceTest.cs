@@ -197,7 +197,9 @@ namespace BugTrackerTests
         {
             //Arrange
             var project = new Project() { Id = 1, Name="ProjectName",Description = "ProjectDescription"};
-            var ticket = new Ticket() { Id = 1, Title = "Testticket",ProjectId=1, Description="Description"};
+            var ticket = new Ticket() { Id = 4, Title = "Testticket",ProjectId=1, Description="Description"};
+            var qa = new QA() { Id = 1, Name = "Tom" };
+
 
             using (var db = DbContextFactory.Create(nameof(SaveAssigned)))
             {
@@ -210,7 +212,7 @@ namespace BugTrackerTests
             using (var db = DbContextFactory.Create(nameof(SaveAssigned)))
             {
                 var tp = new TicketPersistance(db);
-                tp.SaveAssigned(ticket.Id);
+                tp.SaveAssigned(ticket.Id,qa);
             }
             //Assert
             using (var db = DbContextFactory.Create(nameof(SaveAssigned)))
@@ -221,7 +223,6 @@ namespace BugTrackerTests
                     .SingleOrDefault();
 
                 Assert.Equal(assignedTicket.Description,ticket.Description);
-                Assert.Equal(assignedTicket.ProjectId,ticket.ProjectId);
                 
             }
 

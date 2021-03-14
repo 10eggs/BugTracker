@@ -60,6 +60,9 @@ namespace BugTracker.Persistance
             return _ctx.Tickets.Where(t => t.Id == id)
                 .SingleOrDefault();
         }
+        
+        //To verification
+
 
         public async Task<Ticket> GetByIdAsync(int? i)
         {
@@ -92,13 +95,13 @@ namespace BugTracker.Persistance
             return await _ctx.Tickets.Where(t => t.Author == author).ToListAsync();
         }
 
-        public void SaveAssigned(int ticketId)
+        public void SaveAssigned(int ticketId, QA qa)
         {
             var ticket = _ctx.Tickets.Include(t=>t.Project)
                 .Where(t=>t.Id==ticketId)
                 .SingleOrDefault();
 
-            var assignedTicket = new AssignedTicket(ticket);
+            var assignedTicket = new AssignedTicket(ticket,qa);
 
             _ctx.Tickets.Remove(ticket);
             _ctx.SaveChanges();
