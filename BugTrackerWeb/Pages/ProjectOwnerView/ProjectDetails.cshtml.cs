@@ -17,11 +17,13 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
         {
             _tp = tp;
         }
+        public int ProjectId { get; set; }
 
         public List<Ticket> ProjectTickets;
         public void OnGet(int id)
         {
             ProjectTickets = _tp.GetAssignedToProject(id);
+            ProjectId = id;
         }
     }
 }

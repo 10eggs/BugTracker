@@ -28,7 +28,8 @@
                         @Html.DisplayFor(m => p.Description)
                     </td>
                     <td>
-                        <a asp-page="ProjectDetails" asp-route-id="@p.Id">Details</a>
+                        @*<a asp-page="ProjectDetails" asp-route-id="@p.Id">Details</a>*@
+                        <button onclick="loadTicketTable(@p.Id)">Ticket list</button>
                     </td>
                     <td>
                         <a asp-page="ManageUsers" asp-route-id="@p.Id">ManageUsers</a>
@@ -36,10 +37,28 @@
                 </tr>
             }
         </table>
+
+        <div class="col-12 border p-3">
+
+            <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Author</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
     }
     else
     {
         <p>No projects!</p>
     }
+}
+
+@section Scripts{
+    <script src="~/js/poProjDetails.js"></script>
 }
 

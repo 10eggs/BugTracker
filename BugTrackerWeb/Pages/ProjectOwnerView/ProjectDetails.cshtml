@@ -50,12 +50,13 @@
             </th>
         </tr>
         @*@foreach (var t in Model.ProjectTickets)
-        {
-            <tr>
-                <td>@t.Title</td>
-                <td>@t.Description</td>
-                <td>@t.Author</td>
-            </tr>
-        }*@
+            {
+                <tr>
+                    <td>@t.Title</td>
+                    <td>@t.Description</td>
+                    <td>@t.Author</td>
+                </tr>
+            }*@
     </table>
+    <button onclick="clickMe(@Model.ProjectId)">Verification btn</button>
 }

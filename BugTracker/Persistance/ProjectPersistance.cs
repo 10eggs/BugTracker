@@ -3,7 +3,7 @@ using BugTracker.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-
+using System.Threading.Tasks;
 
 namespace BugTracker.Persistance
 {
@@ -80,5 +80,15 @@ namespace BugTracker.Persistance
             proj.QAs.Add(qa);
             _ctx.SaveChanges();
         }
+
+        public async Task<List<Ticket>> GetRelatedTicketsAsync(int projectId)
+        {
+            return await _ctx.Project
+                .Include(e => e.ProjectOwner)
+                .Include(e => e.Tickets)
+                .Where(e => e.Id == projectId)
+                .Select(t => t.Tickets)
+                .SingleOrDefaultAsync();
+    }
     }
 }
