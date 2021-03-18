@@ -6,10 +6,8 @@
 //})
 
 function loadTicketTable(projectId) {
-    console.log('Load data invoked!');
+    console.log("Project id is",projectId);
     if ($.fn.dataTable.isDataTable('#DT_load')) {
-        console.log('if statement works!')
-        //dataTable = $('#DT_load').DataTable();
         dataTable.destroy()
     }
 
@@ -30,8 +28,4 @@ function loadTicketTable(projectId) {
         },
         "width": "100%"
     });
-}
-
-function clickMe(myVar) {
-    console.log('Project id is equal to ',myVar);
 }

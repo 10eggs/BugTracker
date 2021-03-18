@@ -57,5 +57,25 @@ namespace BugTrackerTests
         }
 
 
+        [Fact]
+        public void TestEnums()
+        {
+            TestEnum.CheckType(Types.ONE);
+        }
     }
+
+    public enum Types
+    {
+        ONE,TWO,THREE
+    }
+    
+    public class TestEnum
+    {
+        public static void CheckType(Types t)
+        {
+            var typeCode = t.ToString();
+            Enum.Parse(typeof(Types), typeCode);
+        }
+    }
+
 }

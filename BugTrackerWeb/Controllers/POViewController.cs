@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 namespace BugTrackerWeb.Controllers
 {
     [Route("api/ProjectOwnerView/{projectId:int}")]
-    //[Route("api/ProjectOwnerView")]
     [ApiController]
 
     public class POViewController : Controller
@@ -23,7 +22,6 @@ namespace BugTrackerWeb.Controllers
         }
 
         [HttpGet]
-
         public async Task<JsonResult> GetAllTicketsForProject(int projectId)
         {
             using (_ctx)
