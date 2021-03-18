@@ -17,8 +17,6 @@ namespace BugTrackerWeb.Pages.Dashboard
         public UpsertModel(AppDbContext context)
         {
             _ctx = context;
-
-
         }
 
         [BindProperty]

@@ -21,7 +21,16 @@ function loadTicketTable(projectId) {
             { "data": "title", "width": "30%" },
             { "data": "description", "width": "30%" },
             { "data": "author", "width": "30%" },
-            { "data": "id", "width": "20%" }
+            {
+                "data": "id",
+                "render": function (data) {
+                    return `<div class="text-center">
+                        <a href="/ProjectOwnerView/TicketDetails?id=${data}" class='btn btn-success text-white' style='cursor:pointer; width:80px;'>
+                            Details
+                        </a>
+                        </div>`;
+                }, "width": "20%"
+            }
         ],
         "language": {
             "emptyTable": "no data found"

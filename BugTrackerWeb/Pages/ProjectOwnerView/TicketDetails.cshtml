@@ -1,0 +1,62 @@
+﻿@page
+@model BugTrackerWeb.Pages.ProjectOwnerView.TicketDetailsModel
+@{
+
+    if (Model.Ticket != null)
+    {
+
+        <h2>@Model.Ticket.Title</h2>
+        <label><b>Description</b></label>
+        <br />
+        <br />
+        <tr>@Model.Ticket.Description</tr>
+        <br />
+        <br />
+        <label><b>Author</b></label>
+        <br />
+        <br />
+        <tr>@Model.Ticket.Author</tr>
+        <br />
+        <br />
+        <label><b>Date</b></label>
+        <tr>@Model.Ticket.Date</tr>
+        <br />
+        <br />
+        <label><b>Type</b></label>
+        <tr>@Model.Ticket.GetType()</tr>
+        <br />
+        <br />
+    }
+
+    if (Model.AvailableQAs != null)
+    {
+
+
+        <table id="qas" class="table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.AvailableQAs.Count; i++)
+                {
+                    <tr class="clickable-row">
+                        <th scope="row">@(i+1)</th>
+                        <td class="qaName">@Model.AvailableQAs.ElementAt(i).Name</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <form method="post">
+            @Html.Hidden("QaName", Model.QaName);
+            <input type="submit" asp-page-handler="AssignTicket" asp-route-ticketId=@Model.Ticket.Id asp-route-qaName=@Model.QaName class="btn btn-danger btn-sm" value="Assign" />
+        </form>
+    }
+}
+
+
+@section Scripts{
+    <script src="~/js/poTicketDetails.js"></script>
+}

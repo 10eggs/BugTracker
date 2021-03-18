@@ -11,5 +11,7 @@ namespace BugTracker.PageManagers
         public ICollection<AssignedTicket> GetAllAssignedForProject(int projectId);
         public ICollection<AssignedTicket> GetAllFromProjectAssignedToQa(int projectId, int qaId);
 
+
+
     }
 }
