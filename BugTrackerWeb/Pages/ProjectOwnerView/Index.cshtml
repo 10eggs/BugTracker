@@ -29,7 +29,7 @@
                     </td>
                     <td>
                         @*<a asp-page="ProjectDetails" asp-route-id="@p.Id">Details</a>*@
-                        <button onclick="loadTicketTable(@p.Id)">Ticket list</button>
+                        <button class="btn-info" onclick="loadTicketTable(@p.Id)">Ticket list</button>
                     </td>
                     <td>
                         <a asp-page="ManageUsers" asp-route-id="@p.Id">ManageUsers</a>

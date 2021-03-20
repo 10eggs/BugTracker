@@ -20,6 +20,7 @@ namespace BugTracker.Persistance
             return _ctx.Project
                     .Include(e => e.ProjectOwner)
                     .Include(e => e.Tickets)
+                    .Include(e => e.QAs)
                     .Where(e=>e.Id==id)
                     .Single();
         }

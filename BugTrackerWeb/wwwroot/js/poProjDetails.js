@@ -1,4 +1,5 @@
 ﻿var dataTable;
+var projectId;
 
 
 //$(document).ready(function () {
@@ -6,7 +7,8 @@
 //})
 
 function loadTicketTable(projectId) {
-    console.log("Project id is",projectId);
+    console.log("Project id is", projectId);
+    projectId = projectId;
     if ($.fn.dataTable.isDataTable('#DT_load')) {
         dataTable.destroy()
     }
@@ -25,10 +27,10 @@ function loadTicketTable(projectId) {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="text-center">
-                        <a href="/ProjectOwnerView/TicketDetails?id=${data}" class='btn btn-success text-white' style='cursor:pointer; width:80px;'>
+                        <a href="/ProjectOwnerView/TicketDetails?projectId=${projectId}&ticketId=${data}" class='btn btn-success text-white' style='cursor:pointer; width:80px;'>
                             Details
                         </a>
-                        </div>`;
+                        </div>`
                 }, "width": "20%"
             }
         ],

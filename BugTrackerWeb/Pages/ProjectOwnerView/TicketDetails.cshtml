@@ -50,7 +50,7 @@
             </tbody>
         </table>
         <form method="post">
-            @Html.Hidden("QaName", Model.QaName);
+            @Html.Hidden("QaName", Model.QaName)
             <input type="submit" asp-page-handler="AssignTicket" asp-route-ticketId=@Model.Ticket.Id asp-route-qaName=@Model.QaName class="btn btn-danger btn-sm" value="Assign" />
         </form>
     }
