@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -44,6 +45,17 @@ namespace BugTrackerWeb
             services.AddScoped<IQAPersistance, QAPersistance>();
             services.AddScoped<IQAManager, QAManager>();
 
+            services.AddScoped<ITicketManager, TicketManager>();
+
+            //
+            //Remove this later
+            //services.AddMvc().AddRazorPagesOptions(o =>
+            //{
+            //    o.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
+            //});
+            //
+            services.AddMvc();
+            services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
 
             services.AddControllersWithViews();
             services.AddRazorPages();

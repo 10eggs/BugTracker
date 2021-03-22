@@ -9,7 +9,6 @@ namespace BugTracker.Models
     {
         public AssignedTicket(Ticket t,QA qa):base()
         {
-            this.Id = t.Id;
             this.Title = t.Title;
             this.Description = t.Description;
             this.Author = t.Author;

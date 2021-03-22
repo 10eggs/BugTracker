@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using System;
 
 namespace BugTracker.Persistance
 {
@@ -90,6 +91,34 @@ namespace BugTracker.Persistance
                 .Where(e => e.Id == projectId)
                 .Select(t => t.Tickets)
                 .SingleOrDefaultAsync();
-    }
+        }
+
+        public async Task<List<Ticket>> GetRelatedUnassignedTicketsAsync(int projectId)
+        {
+            var allTickets = await _ctx.Project
+                .Include(e => e.ProjectOwner)
+                .Include(e => e.Tickets)
+                .Where(e => e.Id == projectId)
+                .Select(e => e.Tickets).SingleOrDefaultAsync();
+
+            var unassignedTickets= allTickets.Where(t => t.GetType() == typeof(Ticket))
+                .Select(t=>t).ToList();
+            return unassignedTickets;
+        }
+
+        public async Task<List<AssignedTicket>> GetRelatedAssignedTicketsAsync(int projectId)
+        {
+            var allTickets = await _ctx.Project
+                .Include(e => e.ProjectOwner)
+                .Include(e => e.Tickets)
+                .Where(e => e.Id == projectId)
+                .Select(e => e.Tickets).SingleOrDefaultAsync();
+
+            
+            var assignedTickets = allTickets.Where(t => t.GetType() == typeof(AssignedTicket))
+                .Select(t => new AssignedTicket(t)).ToList();
+
+            return assignedTickets;
+        }
     }
 }

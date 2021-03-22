@@ -1,9 +1,11 @@
-﻿@page
+﻿@page 
 @model BugTrackerWeb.Pages.ProjectOwnerView.TicketDetailsModel
 @{
 
     if (Model.Ticket != null)
     {
+        <p>@Model.ProjectId</p>
+        <p>@Model.TicketId</p>
 
         <h2>@Model.Ticket.Title</h2>
         <label><b>Description</b></label>
@@ -26,6 +28,8 @@
         <tr>@Model.Ticket.GetType()</tr>
         <br />
         <br />
+        //Need to be hidden
+        <p id="ticketId" style="display:none">@Model.Ticket.Id</p>
     }
 
     if (Model.AvailableQAs != null)
@@ -45,14 +49,21 @@
                     <tr class="clickable-row">
                         <th scope="row">@(i+1)</th>
                         <td class="qaName">@Model.AvailableQAs.ElementAt(i).Name</td>
+                        <td id="qaId" style="display:none">@Model.AvailableQAs.ElementAt(i).Id</td>
                     </tr>
+
                 }
             </tbody>
         </table>
+        <!--<form method="post">
+            <input id="assignticket" type="submit" class="btn btn-danger btn-sm" value="Assign" />-->
+        @*type="submit" asp-page-handler="AssignTicket" asp-route-ticketId=@Model.Ticket.Id asp-route-qaName=@Model.QaName*@
+        <!--</form>-->
         <form method="post">
-            @Html.Hidden("QaName", Model.QaName)
-            <input type="submit" asp-page-handler="AssignTicket" asp-route-ticketId=@Model.Ticket.Id asp-route-qaName=@Model.QaName class="btn btn-danger btn-sm" value="Assign" />
+            <button id="assignticket" type="submit" class="btn btn-danger btn-sm" value="Assign" />
+            @*<input type="submit" asp-page-handler="CheckAjax" asp-route-qaId=qaId value="Assign" />*@
         </form>
+
     }
 }
 

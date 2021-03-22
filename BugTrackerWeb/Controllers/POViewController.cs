@@ -26,7 +26,15 @@ namespace BugTrackerWeb.Controllers
         {
             using (_ctx)
             {
-                var data = await _pp.GetRelatedTicketsAsync(projectId);
+                //Mock
+                //Get all tickets
+                //var data = await _pp.GetRelatedTicketsAsync(projectId);
+
+                //Get assigned tickets
+                var data = await _pp.GetRelatedUnassignedTicketsAsync(projectId);
+
+                //Get unassigned tickets
+                //var data = await _pp.GetRelatedUnassignedTicketsAsync(projectId);
                 return Json(new { data });
             }
 

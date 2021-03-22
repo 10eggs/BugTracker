@@ -14,13 +14,11 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
     public class TicketDetailsModel : PageModel
     {
         //Remove this line
-        private ITicketPersistance _tp;
         private IProjectPersistance _pp;
-        private IQAManager _qam;
-        public TicketDetailsModel(ITicketPersistance tp,IProjectPersistance pp,IQAManager qam)
+        private ITicketManager _itm;
+        public TicketDetailsModel(IProjectPersistance pp,ITicketManager itm)
         {
-            _tp = tp;
-            _qam = qam;
+            _itm = itm;
             _pp = pp;
         }
         
@@ -29,25 +27,62 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
         public Ticket Ticket { get; set; }
         public string QaName { get; set; }
 
+        //Test properties
+        [BindProperty]
+        public int ProjectId { get; set; }
+
+        [BindProperty]
+        public int TicketId { get; set; }
+
+        //Check this !
+        //[FromQuery(Name = "foo-bar")]
+        //public string FooBar { get; set; }
+
         [BindProperty]
         public ICollection<QA> AvailableQAs { get; set; }
         public void OnGet(int projectId, int ticketId)
         {
-            Debug.WriteLine("Project id equal to "+ projectId);
-            var t = ticketId;
-            //Search for project with id, and then search for ticket from project
+            //This two have been added for test purpose
+            //ProjectId = projectId;
+            //TicketId = ticketId;
+
+
             Project = _pp.Get(projectId);
             Ticket = Project.Tickets
                 .Where(t => t.Id == ticketId)
                 .SingleOrDefault();
-            //Search for Qas based on projectId from ROUTE
+
             AvailableQAs = Project.QAs;
         }
 
-        public IActionResult OnPostAssignTicket(string qaName, int ticketId)
+        //public IActionResult OnPostCheckAjax(int qaId)
+        //{
+        //    Debug.WriteLine("My name is Luka and qaid is "+qaId);
+        //    return RedirectToPage("/ProjectOwnerView/Index");
+        //}
+
+        public IActionResult OnPostCheckAjax(int qaId, int ticketId)
         {
-            Debug.WriteLine("Qa name is " + qaName);
-            return RedirectToPage("./ProjectOwnerView");
+            //HTTP stateless, model values are not here
+            //********WEIRD BEHAVIOR - PROJECT ID VALUE DOES NOT AVAILABLE HERE*****************//
+            //Debug.WriteLine("Check if assigned model values are still here.ProjId: " + ProjectId + ", TicketId" + TicketId);
+            //Debug.WriteLine($"Ticket id is {ticketId} and qaId is {qaId}");
+
+
+            _itm.AssignToQa(ticketId, qaId);
+
+            return RedirectToPage("/ProjectOwnerView/Index");
+
+        }
+
+        public async Task<JsonResult> OnPostAssignTicket(int qaId, int ticketId)
+        {
+            _itm.AssignToQa(ticketId, qaId);
+            //previous
+            //return new JsonResult(new { redirectToUrl = Url.Action("action", "contoller") });
+            return new JsonResult(new { redirectToUrl = Url.Action("action", "contoller") });
+
+            //return RedirectToPage("/ProjectOwnerView");
         }
     }
 }

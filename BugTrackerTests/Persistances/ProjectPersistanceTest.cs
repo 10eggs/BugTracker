@@ -221,5 +221,38 @@ namespace BugTrackerTests
             }
         }
 
+        [Fact]
+        public async void GetRelatedUnassignedTicketsAsync()
+        {
+            ProjectOwner projOwn = new ProjectOwner();
+
+            Project proj1 = new Project() { ProjectOwner = projOwn };
+
+            var ticket1 = new Ticket("Title", "Description", "Author1", proj1);
+            var ticket2 = new Ticket("Title", "Description", "Author2", proj1);
+            var assignedTicket = new AssignedTicket() { Title = "Title", Description = "Description", Author = "Author3", Project = proj1 };
+
+            using (var db = DbContextFactory.Create(nameof(GetRelatedTickets)))
+            {
+                IProjectPersistance pp = new ProjectPersistance(db);
+                pp.Save(proj1);
+
+                ITicketPersistance tp = new TicketPersistance(db);
+                tp.SaveTicket(ticket1);
+                tp.SaveTicket(ticket2);
+                tp.SaveTicket(assignedTicket);
+            }
+
+            using (var db = DbContextFactory.Create(nameof(GetRelatedTickets)))
+            {
+                IProjectPersistance pp = new ProjectPersistance(db);
+                var uat = pp.GetRelatedUnassignedTicketsAsync(1);
+                Equal(2, uat.Result.Count);
+
+                var at = pp.GetRelatedAssignedTicketsAsync(1);
+                Equal(1, at.Result.Count);
+            }
+        }
+
     }
 }

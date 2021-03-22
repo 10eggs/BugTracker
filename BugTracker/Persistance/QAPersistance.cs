@@ -18,12 +18,15 @@ namespace BugTracker.Persistance
             return _ctx.QA.Where(q => q.Id == id)
                 .SingleOrDefault();
         }
-
+        public QA GetByName(string name)
+        {
+            return _ctx.QA.Where(q => q.Name == name)
+                .SingleOrDefault();
+        }
         public ICollection<QA> GetAll()
         {
             return _ctx.QA.ToList();
         }
-
         public void Save(QA qa)
         {
             _ctx.QA.Add(qa);
