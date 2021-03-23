@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using BugTracker.Models.TicketProperties;
 
 namespace BugTracker.DB
 {
@@ -44,6 +45,21 @@ namespace BugTracker.DB
                 b =>
                 {
                     b.HasOne(e => e.Qa);
+
+                    b.Property(at => at.TicketStatus)
+                    .HasDefaultValue(TicketStatus.Open)
+                    .HasConversion(at => at.ToString(),
+                    at => (TicketStatus)Enum.Parse(typeof(TicketStatus), at));
+
+                    b.Property(at => at.TicketPriority)
+                    .HasDefaultValue(TicketPriority.Low)
+                    .HasConversion(at => at.ToString(),
+                    at => (TicketPriority)Enum.Parse(typeof(TicketPriority), at));
+
+                    b.Property(at => at.TicketCategory)
+                    .HasDefaultValue(TicketCategory.Other)
+                    .HasConversion(at => at.ToString(),
+                    at => (TicketCategory)Enum.Parse(typeof(TicketCategory), at));
                 });
 
             modelBuilder.Entity<Project>(

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BugTracker.Models.TicketProperties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -35,10 +36,10 @@ namespace BugTracker.Models
 
         public QA Qa { get; set; }
         public int QaID { get; set; }
-        public string TicketStatus { get; set; }
+        public TicketStatus TicketStatus { get; set; }
         public DateTime Updated { get; set; }
-        public string TicketPriority { get; set; }
-        public string TicketCategory { get; set; }
+        public TicketPriority TicketPriority { get; set; }
+        public TicketCategory TicketCategory { get; set; }
 
     }
 }
