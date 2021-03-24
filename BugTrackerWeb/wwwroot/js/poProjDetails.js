@@ -27,7 +27,7 @@ function loadTicketTable(projectId) {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="text-center">
-                        <a href="/ProjectOwnerView/TicketDetails?projectId=${projectId}&ticketId=${data}" class='btn btn-success text-white' style='cursor:pointer; width:80px;'>
+                        <a href="/ProjectOwnerView/TicketDetails?handler=TicketDetails&projectId=${projectId}&ticketId=${data}" class='btn btn-success text-white' style='cursor:pointer; width:80px;'>
                             Details
                         </a>
                         </div>`

@@ -1,9 +1,20 @@
-﻿@page 
+﻿@page
 @model BugTrackerWeb.Pages.ProjectOwnerView.TicketDetailsModel
 @{
 
-    if (Model.Ticket != null)
-    {
+    //This one works
+    <label asp-for="AssignedTicket.TicketCategory"></label>
+    <select asp-for="AssignedTicket.TicketCategory" asp-items=@Model.TicketCatDDLOptions>
+    </select>
+    <p id="response">RESPONSE HERE</p>
+    <form method="post">
+        <button asp-page-handler="Redirect">Check Me babe</button>
+    </form>
+        <select asp-for="AssignedTicket.TicketCategory" asp-items=@Model.QAsList>
+        </select>
+
+        if (Model.Ticket != null)
+        {
         <p>@Model.ProjectId</p>
         <p>@Model.TicketId</p>
 
@@ -30,10 +41,10 @@
         <br />
         //Need to be hidden
         <p id="ticketId" style="display:none">@Model.Ticket.Id</p>
-    }
+        }
 
-    if (Model.AvailableQAs != null)
-    {
+        if (Model.AvailableQAs != null)
+        {
 
 
         <table id="qas" class="table-bordered table-hover">
@@ -63,11 +74,11 @@
             <button id="assignticket" type="submit" class="btn btn-danger btn-sm" value="Assign" />
             @*<input type="submit" asp-page-handler="CheckAjax" asp-route-qaId=qaId value="Assign" />*@
         </form>
+        }
 
-    }
-}
+        }
 
 
-@section Scripts{
-    <script src="~/js/poTicketDetails.js"></script>
-}
+        @section Scripts{
+            <script src="~/js/poTicketDetails.js"></script>
+        }
