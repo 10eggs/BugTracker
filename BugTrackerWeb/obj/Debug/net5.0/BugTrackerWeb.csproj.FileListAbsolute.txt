@@ -900,3 +900,5 @@ C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\R
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\ProjectOwnerView\ProjectDetails.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\QAView\Index.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\ProjectOwnerView\TicketDetails.cshtml.g.cs
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll

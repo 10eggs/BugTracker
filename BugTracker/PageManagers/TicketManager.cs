@@ -33,6 +33,11 @@ namespace BugTracker.PageManagers
 
         }
 
+        public void AssignToQa(int ticketId, AssignedTicket assignedTicket)
+        {
+            _tp.SaveAssigned(ticketId, assignedTicket);
+        }
+
         public ICollection<AssignedTicket> GetAllAssignedForProject(int projectId)
         {
             return _ctx.Tickets.OfType<AssignedTicket>()

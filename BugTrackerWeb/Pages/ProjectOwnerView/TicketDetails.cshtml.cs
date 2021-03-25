@@ -24,28 +24,39 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
             _itm = itm;
             _pp = pp;
             //This assignment have to be changed!!!
-            TicketCatDDLOptions = new SelectList(EnumUtil.GetValues<TicketCategory>());
+            //TicketCatDDLOptions = new SelectList(EnumUtil.GetValues<TicketCategory>());
         }
         
         [BindProperty]
         public AssignedTicket AssignedTicket { get; set; }
-
+        
         public SelectList TicketCatDDLOptions { get; set; }
         public SelectList TicketPriorDDLOptions { get; set; }
         public SelectList TicketStatDDLOptions { get; set; }
-
-        //This works
-        //public SelectList QAsList { get; set; }
 
         public List<SelectListItem> QAsList { get; set; }
 
         [BindProperty]
         public Project Project { get; set; }
+
+        [BindProperty]
+        public int ProjectID { get; set; }
+
+        [BindProperty]
         public Ticket Ticket { get; set; }
 
         [BindProperty]
+        public int TicketId { get; set; }
+
+        [BindProperty]
         public int QAId { get; set; }
-        
+
+        //[BindProperty]
+        //public int TicketId { get; set; }
+
+        //[BindProperty]
+        //public int QAId { get; set; }
+
 
 
         //Test property for query parameter
@@ -62,10 +73,13 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
             Debug.WriteLine($"From query: {ProjectIdFromQuery}");
 
             Project = _pp.Get(projectId);
+            ProjectID = Project.Id;
+
             Ticket = Project.Tickets
                 .Where(t => t.Id == ticketId)
                 .SingleOrDefault();
 
+            TicketId = Ticket.Id;
             AvailableQAs = Project.QAs;
 
 
@@ -94,16 +108,35 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
 
         public async Task<IActionResult> OnPostAssignTicketFromForm()
         {
+            //var tempData = TempData["TicketId"];
+            //var t = Ticket.Id;
+            Debug.WriteLine($"Assigned title is {AssignedTicket.Title}");
+            Debug.WriteLine(ModelState.Values);
             if (!ModelState.IsValid)
             {
-                return Page();
+                OnGetTicketDetails(ProjectID, TicketId);
+                return null;
+                //return RedirectToPage($"/ProjectOwnerView/TicketDetails?handler=ticketdetails&projectid={ProjectID}&ticketid={TicketId}");
             }
-            var ticCat = AssignedTicket.TicketCategory;
-            var ticPriority = AssignedTicket.TicketPriority;
-            var ticStat = AssignedTicket.TicketStatus;
-            var qaId = AssignedTicket.QaID;
 
-            Debug.WriteLine($"All captured values: {ticCat},{ticPriority},{ticStat}");
+            Project = _pp.Get(ProjectID);
+            ProjectID = Project.Id;
+
+            Ticket = Project.Tickets
+                .Where(t => t.Id == TicketId)
+                .SingleOrDefault();
+
+            var qa = _pp.GetAssignedQAs(ProjectID).Where(p => p.Id == AssignedTicket.QaID).SingleOrDefault();
+
+            var at = new AssignedTicket(Ticket, qa)
+            {
+                TicketCategory = AssignedTicket.TicketCategory,
+                TicketPriority = AssignedTicket.TicketPriority,
+                TicketStatus = AssignedTicket.TicketStatus
+            };
+
+            _itm.AssignToQa(TicketId, at);
+
             return Page();
         }
     }

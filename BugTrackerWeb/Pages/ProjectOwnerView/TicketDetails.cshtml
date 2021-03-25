@@ -1,5 +1,6 @@
 ﻿@page
 @model BugTrackerWeb.Pages.ProjectOwnerView.TicketDetailsModel
+@using BugTracker.Models
 @{
 
     //This one works
@@ -11,6 +12,7 @@
 
     if (Model.Ticket != null)
     {
+        <input id="TicketID" type="hidden" value="@Model.Ticket.Id" />
 
         <h2>@Model.Ticket.Title</h2>
         <label><b>Description</b></label>
@@ -65,43 +67,58 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+            @*Check me*@
+            <input type="hidden" asp-for="@Model.TicketId" value="@Model.Ticket.Id">
+            <input type="hidden" asp-for="@Model.ProjectID" value="@Model.ProjectID">
+
+
             <div class="form-group">
                 <label asp-for="AssignedTicket.Title" class="control-label"></label>
-                <input asp-for="AssignedTicket.Title" class="form-control" value="@Model.Ticket.Title">
+                <input asp-for="AssignedTicket.Title" class="form-control">
+                @*<span asp-validation-for="AssignedTicket.Title" class="text-danger"></span>*@
+
             </div>
 
             <div class="form-group">
                 <label asp-for="AssignedTicket.Description" class="control-label"></label>
-                <input asp-for="AssignedTicket.Description" class="form-control" value="@Model.Ticket.Description">
+                <input asp-for="AssignedTicket.Description" class="form-control">
+                @*<span asp-validation-for="AssignedTicket.Description" class="text-danger"></span>*@
+
             </div>
 
             <div class="form-group">
                 <label asp-for="AssignedTicket.TicketCategory" class="control-label"></label>
                 <select asp-for="AssignedTicket.TicketCategory" class="form-control" asp-items="@Model.TicketCatDDLOptions"></select>
+                <span asp-validation-for="AssignedTicket.TicketCategory" class="text-danger"></span>
+
             </div>
 
             <div class="form-group">
                 <label asp-for="AssignedTicket.TicketPriority" class="control-label"></label>
                 <select asp-for="AssignedTicket.TicketPriority" class="form-control" asp-items="@Model.TicketPriorDDLOptions"></select>
+                <span asp-validation-for="AssignedTicket.TicketPriority" class="text-danger"></span>
+
             </div>
 
             <div class="form-group">
                 <label asp-for="AssignedTicket.TicketStatus" class="control-label"></label>
                 <select asp-for="AssignedTicket.TicketStatus" class="form-control" asp-items="@Model.TicketStatDDLOptions"></select>
+                <span asp-validation-for="AssignedTicket.TicketStatus" class="text-danger"></span>
+
             </div>
 
             <div class="form-group">
                 <label asp-for="@Model.QAsList" class="control-label"></label>
                 <select asp-for="@Model.AssignedTicket.QaID" class="form-control" asp-items="@Model.QAsList"></select>
+                <span asp-validation-for="@Model.AssignedTicket.QaID" class="text-danger"></span>
+
             </div>
 
             <div class="form-group">
-                <input asp-page-handler="AssignTicketFromForm" type="submit" value="AssignTicket" class="btn btn-secondary text-white" />
+                <input asp-page-handler="AssignTicketFromForm" type="submit" value="Assign Ticket" class="btn btn-secondary text-white" />
             </div>
         </form>
     </div>
-    //TicketPriority
-    //TicketStatus
     @*FORM SECTION ENDED HERE *@
 
 }

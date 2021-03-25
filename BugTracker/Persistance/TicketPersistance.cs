@@ -109,6 +109,19 @@ namespace BugTracker.Persistance
             _ctx.Tickets.Add(assignedTicket);
             _ctx.SaveChanges();
         }
+
+        public void SaveAssigned(int ticketId, AssignedTicket assignedTicket)
+        {
+            var ticToRemove = _ctx.Tickets
+                .Where(t => t.Id == ticketId)
+                .SingleOrDefault();
+
+            _ctx.Tickets.Remove(ticToRemove);
+            _ctx.SaveChanges();
+
+            _ctx.Tickets.Add(assignedTicket);
+            _ctx.SaveChanges();
+        }
     }
 }
 
