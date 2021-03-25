@@ -34,13 +34,20 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
         public SelectList TicketPriorDDLOptions { get; set; }
         public SelectList TicketStatDDLOptions { get; set; }
 
+        //This works
+        //public SelectList QAsList { get; set; }
 
-        public SelectList QAsList { get; set; }
+        public List<SelectListItem> QAsList { get; set; }
 
         [BindProperty]
         public Project Project { get; set; }
         public Ticket Ticket { get; set; }
+
+        [BindProperty]
+        public int QAId { get; set; }
         
+
+
         //Test property for query parameter
         [FromQuery(Name = "projectId")]
         public string ProjectIdFromQuery { get; set; }
@@ -62,7 +69,13 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
             AvailableQAs = Project.QAs;
 
 
-            QAsList = new SelectList(AvailableQAs.Select(qa => qa.Name));
+            //QAsList = new SelectList(AvailableQAs.Select(qa => qa.Name));
+            QAsList = AvailableQAs.Select(qa => new SelectListItem
+            {
+                Value = qa.Id.ToString(),
+                Text = qa.Name
+            }).ToList();
+
             TicketCatDDLOptions = new SelectList(EnumUtil.GetValues<TicketCategory>());
             TicketPriorDDLOptions = new SelectList(EnumUtil.GetValues<TicketPriority>());
             TicketStatDDLOptions = new SelectList(EnumUtil.GetValues<TicketStatus>());
@@ -88,6 +101,7 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
             var ticCat = AssignedTicket.TicketCategory;
             var ticPriority = AssignedTicket.TicketPriority;
             var ticStat = AssignedTicket.TicketStatus;
+            var qaId = AssignedTicket.QaID;
 
             Debug.WriteLine($"All captured values: {ticCat},{ticPriority},{ticStat}");
             return Page();
