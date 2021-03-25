@@ -6,47 +6,34 @@
     <label asp-for="AssignedTicket.TicketCategory"></label>
     <select asp-for="AssignedTicket.TicketCategory" asp-items=@Model.TicketCatDDLOptions>
     </select>
-    <p id="response">RESPONSE HERE</p>
-    <form method="post">
-        <button asp-page-handler="Redirect">Check Me babe</button>
-    </form>
-        <select asp-for="AssignedTicket.TicketCategory" asp-items=@Model.QAsList>
-        </select>
+    <select asp-for="AssignedTicket.TicketCategory" asp-items=@Model.QAsList>
+    </select>
 
-        if (Model.Ticket != null)
-        {
-        <p>@Model.ProjectId</p>
-        <p>@Model.TicketId</p>
+    if (Model.Ticket != null)
+    {
 
         <h2>@Model.Ticket.Title</h2>
         <label><b>Description</b></label>
         <br />
-        <br />
         <tr>@Model.Ticket.Description</tr>
-        <br />
         <br />
         <label><b>Author</b></label>
         <br />
-        <br />
         <tr>@Model.Ticket.Author</tr>
-        <br />
         <br />
         <label><b>Date</b></label>
         <tr>@Model.Ticket.Date</tr>
         <br />
-        <br />
         <label><b>Type</b></label>
         <tr>@Model.Ticket.GetType()</tr>
         <br />
-        <br />
         //Need to be hidden
         <p id="ticketId" style="display:none">@Model.Ticket.Id</p>
-        }
 
-        if (Model.AvailableQAs != null)
-        {
+    }
 
-
+    if (Model.AvailableQAs != null)
+    {
         <table id="qas" class="table-bordered table-hover">
             <thead>
                 <tr>
@@ -66,19 +53,61 @@
                 }
             </tbody>
         </table>
-        <!--<form method="post">
-            <input id="assignticket" type="submit" class="btn btn-danger btn-sm" value="Assign" />-->
-        @*type="submit" asp-page-handler="AssignTicket" asp-route-ticketId=@Model.Ticket.Id asp-route-qaName=@Model.QaName*@
-        <!--</form>-->
+        <br />
         <form method="post">
-            <button id="assignticket" type="submit" class="btn btn-danger btn-sm" value="Assign" />
-            @*<input type="submit" asp-page-handler="CheckAjax" asp-route-qaId=qaId value="Assign" />*@
+            <input id="assignticket" type="submit" class="btn btn-success text-white" value="Assign" />
         </form>
-        }
+    }
 
-        }
+    @*FORM SECTION STARTER HERE *@
+    <h3 class="text-info">Assign with details</h3>
+    <div class=".container-sm" style="padding:30px;">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="AssignedTicket.Title" class="control-label"></label>
+                <input asp-for="AssignedTicket.Title" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AssignedTicket.Description" class="control-label"></label>
+                <input asp-for="AssignedTicket.Description" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AssignedTicket.TicketCategory" class="control-label"></label>
+                <select asp-for="AssignedTicket.TicketCategory" class="form-control" asp-items="@Model.TicketCatDDLOptions"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AssignedTicket.TicketPriority" class="control-label"></label>
+                <select asp-for="AssignedTicket.TicketPriority" class="form-control" asp-items="@Model.TicketPriorDDLOptions"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AssignedTicket.TicketStatus" class="control-label"></label>
+                <select asp-for="AssignedTicket.TicketStatus" class="form-control" asp-items="@Model.TicketStatDDLOptions"></select>
+            </div>
+
+            <div class="form-group">
+                <input asp-page-handler="AssignTicketFromForm" type="submit" value="AssignTicket" class="btn btn-secondary text-white" />
+            </div>
+        </form>
+    </div>
+    //TicketPriority
+    //TicketStatus
+    @*FORM SECTION ENDED HERE *@
+
+}
 
 
-        @section Scripts{
-            <script src="~/js/poTicketDetails.js"></script>
-        }
+@section Scripts{
+    <script src="~/js/poTicketDetails.js"></script>
+}
+
+
+<!--<form method="post">
+    <input id="assignticket" type="submit" class="btn btn-danger btn-sm" value="Assign" />-->
+@*type="submit" asp-page-handler="AssignTicket" asp-route-ticketId=@Model.Ticket.Id asp-route-qaName=@Model.QaName*@
+<!--</form>-->
