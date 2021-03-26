@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BugTracker.Models.TicketProperties;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace BugTracker.Models
@@ -22,16 +23,12 @@ namespace BugTracker.Models
         {
 
         }
-
         [Key]
         public int Id { get; set; }
-
         [Required]
         public string Title { get; set; }
-
         [Required]
         public string Description { get; set; }
-
         public string Author { get; set; }
         public DateTime Date { get; set; }
         //Navigation property
@@ -39,5 +36,13 @@ namespace BugTracker.Models
         //ForeignKey
         [Required]
         public int ProjectId { get; set; }
+        public bool IsAssigned { get; set; }
+        public QA Qa { get; set; }
+        public int QaID { get; set; }
+        public TicketStatus TicketStatus { get; set; }
+        public TicketPriority TicketPriority { get; set; }
+        public TicketCategory TicketCategory { get; set; }
+        public DateTime Updated { get; set; }
+
     }
 }

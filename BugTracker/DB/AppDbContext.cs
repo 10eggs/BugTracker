@@ -13,37 +13,50 @@ namespace BugTracker.DB
         public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options) { }
 
-        //public AppDbContext(DbContextOptions<AppDbContext> options):
-        //    base(options) { }
-
+        public DbSet<Request> Requests { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
-        public DbSet<AssignedTicket> AssignedTickets { get; set; }
         public DbSet<Project> Project { get; set; }
+        public DbSet<QA> QA { get; set; }
         public DbSet<ProjectOwner> ProjectOwner { get; set; }
 
-        public DbSet<QA> QA { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<Request>(
+                b =>
+                {
+                    b.Property(r => r.Title)
+                    .IsRequired();
+
+                    b.Property(r => r.Description)
+                    .IsRequired();
+
+                    b.Property(r => r.Author)
+                    .IsRequired();
+
+                    b.HasOne(r => r.Project)
+                    .WithMany(p => p.Requests);
+                });
+
+
             modelBuilder.Entity<Ticket>(
                 b =>
                 {
-                    //b.Property<int>("Id");
-                    b.Property(e => e.Id);
-                    b.Property(e => e.Title);
-                    b.Property(e => e.Description);
-                    b.Property(e => e.Author);
-                    b.Property(e => e.Date);
+                    b.Property(e => e.Title)
+                    .IsRequired();
+
+                    b.Property(e => e.Description)
+                    .IsRequired();
+
+                    b.Property(e => e.Author)
+                    .IsRequired();
+
                     b.HasOne(e => e.Project)
                         .WithMany(e => e.Tickets);
 
                     b.Navigation(b => b.Project);
 
-                });
-
-            modelBuilder.Entity<AssignedTicket>(
-                b =>
-                {
                     b.HasOne(e => e.Qa);
 
                     b.Property(at => at.TicketStatus)
@@ -52,20 +65,41 @@ namespace BugTracker.DB
                     at => (TicketStatus)Enum.Parse(typeof(TicketStatus), at));
 
                     b.Property(at => at.TicketPriority)
-                    .HasDefaultValue(TicketPriority.Low)
+                    .HasDefaultValue(TicketPriority.None)
                     .HasConversion(at => at.ToString(),
                     at => (TicketPriority)Enum.Parse(typeof(TicketPriority), at));
 
                     b.Property(at => at.TicketCategory)
-                    .HasDefaultValue(TicketCategory.Other)
+                    .HasDefaultValue(TicketCategory.None)
                     .HasConversion(at => at.ToString(),
                     at => (TicketCategory)Enum.Parse(typeof(TicketCategory), at));
+
                 });
+
+            //modelBuilder.Entity<AssignedTicket>(
+            //    b =>
+            //    {
+            //        b.HasOne(e => e.Qa);
+
+            //        b.Property(at => at.TicketStatus)
+            //        .HasDefaultValue(TicketStatus.Open)
+            //        .HasConversion(at => at.ToString(),
+            //        at => (TicketStatus)Enum.Parse(typeof(TicketStatus), at));
+
+            //        b.Property(at => at.TicketPriority)
+            //        .HasDefaultValue(TicketPriority.Low)
+            //        .HasConversion(at => at.ToString(),
+            //        at => (TicketPriority)Enum.Parse(typeof(TicketPriority), at));
+
+            //        b.Property(at => at.TicketCategory)
+            //        .HasDefaultValue(TicketCategory.Other)
+            //        .HasConversion(at => at.ToString(),
+            //        at => (TicketCategory)Enum.Parse(typeof(TicketCategory), at));
+            //    });
 
             modelBuilder.Entity<Project>(
                 b =>
                 {
-                    //b.Property<int>("Id");
                     b.Property(e => e.Id);
                     b.HasOne(e => e.ProjectOwner)
                         .WithMany(e => e.Projects);

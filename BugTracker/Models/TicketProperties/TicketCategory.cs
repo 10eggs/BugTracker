@@ -6,6 +6,6 @@ namespace BugTracker.Models.TicketProperties
 {
     public enum TicketCategory
     {
-        Hardware,Login,Registration,Dashboard,Other
+        None,Hardware,Login,Registration,Dashboard,Other
     }
 }

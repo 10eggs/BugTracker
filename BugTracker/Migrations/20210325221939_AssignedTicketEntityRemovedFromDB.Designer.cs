@@ -4,14 +4,16 @@ using BugTracker.DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BugTracker.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210325221939_AssignedTicketEntityRemovedFromDB")]
+    partial class AssignedTicketEntityRemovedFromDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,8 +97,9 @@ namespace BugTracker.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsAssigned")
-                        .HasColumnType("bit");
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProjectId")
                         .HasColumnType("int");
@@ -133,9 +136,9 @@ namespace BugTracker.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.HasIndex("QaID");
-
                     b.ToTable("Tickets");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Ticket");
                 });
 
             modelBuilder.Entity("ProjectQA", b =>
@@ -151,6 +154,15 @@ namespace BugTracker.Migrations
                     b.HasIndex("QAsId");
 
                     b.ToTable("ProjectQA");
+                });
+
+            modelBuilder.Entity("BugTracker.Models.AssignedTicket", b =>
+                {
+                    b.HasBaseType("BugTracker.Models.Ticket");
+
+                    b.HasIndex("QaID");
+
+                    b.HasDiscriminator().HasValue("AssignedTicket");
                 });
 
             modelBuilder.Entity("BugTracker.Models.Project", b =>
@@ -172,15 +184,7 @@ namespace BugTracker.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BugTracker.Models.QA", "Qa")
-                        .WithMany("Tickets")
-                        .HasForeignKey("QaID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Project");
-
-                    b.Navigation("Qa");
                 });
 
             modelBuilder.Entity("ProjectQA", b =>
@@ -196,6 +200,17 @@ namespace BugTracker.Migrations
                         .HasForeignKey("QAsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BugTracker.Models.AssignedTicket", b =>
+                {
+                    b.HasOne("BugTracker.Models.QA", "Qa")
+                        .WithMany("Tickets")
+                        .HasForeignKey("QaID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Qa");
                 });
 
             modelBuilder.Entity("BugTracker.Models.Project", b =>

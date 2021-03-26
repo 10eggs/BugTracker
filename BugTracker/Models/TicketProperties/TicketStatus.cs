@@ -6,6 +6,6 @@ namespace BugTracker.Models.TicketProperties
 {
     public enum TicketStatus
     {
-        Open,Completed
+        None,Open,Completed
     }
 }

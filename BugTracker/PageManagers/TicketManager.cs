@@ -26,21 +26,14 @@ namespace BugTracker.PageManagers
             _tp.SaveAssigned(ticketId,qa);
         }
 
-        public void AssignToQa(int ticketId, string qaName)
+        public void AssignToQa(int ticketId, Ticket assignedTicket)
         {
-            var qa = _qap.GetByName(qaName);
-            _tp.SaveAssigned(ticketId, qa);
-
+            throw new System.NotImplementedException();
         }
 
-        public void AssignToQa(int ticketId, AssignedTicket assignedTicket)
+        public ICollection<Ticket> GetAllAssignedForProject(int projectId)
         {
-            _tp.SaveAssigned(ticketId, assignedTicket);
-        }
-
-        public ICollection<AssignedTicket> GetAllAssignedForProject(int projectId)
-        {
-            return _ctx.Tickets.OfType<AssignedTicket>()
+            return _ctx.Tickets
                  .Include(t => t.Qa)
                  .Include(t => t.Project)
                 .Where(t => t.ProjectId == projectId)
@@ -48,9 +41,9 @@ namespace BugTracker.PageManagers
                 .ToList();
         }
 
-        public ICollection<AssignedTicket> GetAllFromProjectAssignedToQa(int projectId, int qaId)
+        public ICollection<Ticket> GetAllFromProjectAssignedToQa(int projectId, int qaId)
         {
-            return _ctx.Tickets.OfType<AssignedTicket>()
+            return _ctx.Tickets
                      .Include(t => t.Qa)
                      .Include(t => t.Project)
                     .Where(t => t.ProjectId == projectId && t.QaID==qaId)

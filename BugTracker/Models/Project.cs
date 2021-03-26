@@ -26,12 +26,12 @@ namespace BugTracker.Models
 
         [Key]
         public int Id { get; set; }
-        //Navigation property
         public ProjectOwner ProjectOwner { get; set; }
         [Required]
         public int ProjectOwnerId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public ICollection<Request> Requests { get; set; }
         public List<Ticket> Tickets { get; set; }
         public List<QA> QAs { get; set; }
     }

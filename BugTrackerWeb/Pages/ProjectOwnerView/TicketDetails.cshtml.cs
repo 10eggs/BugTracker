@@ -28,7 +28,7 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
         }
         
         [BindProperty]
-        public AssignedTicket AssignedTicket { get; set; }
+        public Ticket AssignedTicket { get; set; }
         
         public SelectList TicketCatDDLOptions { get; set; }
         public SelectList TicketPriorDDLOptions { get; set; }
@@ -128,14 +128,14 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
 
             var qa = _pp.GetAssignedQAs(ProjectID).Where(p => p.Id == AssignedTicket.QaID).SingleOrDefault();
 
-            var at = new AssignedTicket(Ticket, qa)
-            {
-                TicketCategory = AssignedTicket.TicketCategory,
-                TicketPriority = AssignedTicket.TicketPriority,
-                TicketStatus = AssignedTicket.TicketStatus
-            };
+            //var at = new Tic(Ticket, qa)
+            //{
+            //    TicketCategory = AssignedTicket.TicketCategory,
+            //    TicketPriority = AssignedTicket.TicketPriority,
+            //    TicketStatus = AssignedTicket.TicketStatus
+            //};
 
-            _itm.AssignToQa(TicketId, at);
+            //_itm.AssignToQa(TicketId, at);
 
             return Page();
         }

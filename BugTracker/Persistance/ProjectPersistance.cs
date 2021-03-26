@@ -106,17 +106,13 @@ namespace BugTracker.Persistance
             return unassignedTickets;
         }
 
-        public async Task<List<AssignedTicket>> GetRelatedAssignedTicketsAsync(int projectId)
+        public async Task<List<Ticket>> GetRelatedAssignedTicketsAsync(int projectId)
         {
-            var allTickets = await _ctx.Project
+            var assignedTickets = await _ctx.Project
                 .Include(e => e.ProjectOwner)
                 .Include(e => e.Tickets)
-                .Where(e => e.Id == projectId)
-                .Select(e => e.Tickets).SingleOrDefaultAsync();
-
-            
-            var assignedTickets = allTickets.Where(t => t.GetType() == typeof(AssignedTicket))
-                .Select(t => new AssignedTicket(t)).ToList();
+                .Where(e => e.Id == projectId )
+                .Select(e => e.Tickets.Where(t=>t.IsAssigned==true).ToList()).SingleOrDefaultAsync();
 
             return assignedTickets;
         }

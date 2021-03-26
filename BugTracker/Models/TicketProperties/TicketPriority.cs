@@ -6,6 +6,6 @@ namespace BugTracker.Models.TicketProperties
 {
     public enum TicketPriority
     {
-        Low,Medium,High
+        None,Low,Medium,High
     }
 }

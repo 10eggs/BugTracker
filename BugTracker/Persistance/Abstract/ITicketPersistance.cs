@@ -10,7 +10,7 @@ namespace BugTracker.Persistance
         public void SaveTicket(Ticket t);
         public void SaveAssigned(int ticketId, QA qa);
 
-        public void SaveAssigned(int ticketId, AssignedTicket ticket);
+        public void SaveAssigned(int ticketId, Ticket ticket);
         Task Save(Ticket t);
         Task<Ticket> GetByIdAsync(int? i);
         Ticket GetById(int i);

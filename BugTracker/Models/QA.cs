@@ -9,14 +9,14 @@ namespace BugTracker.Models
     {
         public QA()
         {
-            Tickets = new List<AssignedTicket>();
+            Tickets = new List<Ticket>();
         }
         [Key]
         public int Id { get; set; }
         public string UserId { get; set; }
         public string Name { get; set; }
         public List<Project> Projects { get; set; }
-        public ICollection<AssignedTicket> Tickets { get; set; }
+        public ICollection<Ticket> Tickets { get; set; }
 
     }
 }

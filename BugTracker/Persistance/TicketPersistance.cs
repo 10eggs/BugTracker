@@ -101,7 +101,8 @@ namespace BugTracker.Persistance
                 .Where(t=>t.Id==ticketId)
                 .SingleOrDefault();
 
-            var assignedTicket = new AssignedTicket(ticket,qa);
+            //check this line
+            var assignedTicket = new Ticket();
 
             _ctx.Tickets.Remove(ticket);
             _ctx.SaveChanges();
@@ -110,7 +111,7 @@ namespace BugTracker.Persistance
             _ctx.SaveChanges();
         }
 
-        public void SaveAssigned(int ticketId, AssignedTicket assignedTicket)
+        public void SaveAssigned(int ticketId, Ticket assignedTicket)
         {
             var ticToRemove = _ctx.Tickets
                 .Where(t => t.Id == ticketId)
