@@ -3,50 +3,41 @@
 @{
 }
 <br />
-<h2 class="text-info">Create New Ticket</h2>
+<h2 class="text-info">Create New Request</h2>
 <div class="border container" style="padding:30px;">
     <form method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group row">
             <div class="col-4">
-                <label asp-for="NewTicket.Title"></label>
+                <label asp-for="NewRequest.Title"></label>
             </div>
             <div class="col-6">
-                <input asp-for="NewTicket.Title" class="form-control" />
+                <input asp-for="NewRequest.Title" class="form-control" />
             </div>
-            <span asp-validation-for="NewTicket.Title" class="text-danger field-validation-valid">Required</span>
+            <span asp-validation-for="NewRequest.Title" class="text-danger field-validation-valid">Required</span>
         </div>
         <div class="form-group row">
             <div class="col-4">
-                <label asp-for="NewTicket.Description"></label>
+                <label asp-for="NewRequest.Description"></label>
             </div>
             <div class="col-6">
-                <input asp-for="NewTicket.Description" class="form-control" />
+                <input asp-for="NewRequest.Description" class="form-control" />
             </div>
-            <span asp-validation-for="NewTicket.Description" class="text-danger field-validation-valid">Required</span>
+            <span asp-validation-for="NewRequest.Description" class="text-danger field-validation-valid">Required</span>
         </div>
-        
-        @*  This part will be generated automatically inside controller
-            <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="NewTicket.Author"></label>
-            </div>
-            <div class="col-6">
-                <input asp-for="NewTicket.Author" class="form-control" />
-            </div>
-            <span asp-validation-for="NewTicket.Author" class="text-danger field-validation-valid">Author required</span>
-        </div>*@
 
         <div class="form-group row">
             <div class="col-4">
-                <label asp-for="NewTicket.ProjectId"></label>
+                <label asp-for="NewRequest.ProjectId">Project name</label>
             </div>
             <div class="col-6">
-                <input asp-for="NewTicket.ProjectId" class="form-control" />
+                <select asp-for="NewRequest.ProjectId" class="form-control" asp-items="@Model.ProjectListDDL"></select>
             </div>
-            <span asp-validation-for="NewTicket.ProjectId" class="text-danger field-validation-valid">Project ID required</span>
+            <div>
+                <span asp-validation-for="ProjectId" class="text-danger field-validation-valid">Project ID required</span>
+            </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group">
             <div class="col-3 offset-4">
                 <input type="submit" value="Create" class="btn btn-primary form-control" />
             </div>
@@ -54,9 +45,16 @@
                 <a asp-for="Index" class="btn btn-success form-control">Back to the dashboard</a>
             </div>
         </div>
+
     </form>
 </div>
 
-@section Scripts{ 
-<partial name="_ValidationScriptsPartial"/>
-}
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+  }
+
+@*<div class="form-group">
+        <label asp-for="NewRequest.ProjectId" class="control-label"></label>
+        <select asp-for="NewRequest.ProjectId" class="form-control" asp-items="@Model.QAsList"></select>
+        <span asp-validation-for="@Model.AssignedTicket.QaID" class="text-danger"></span>
+    </div>*@

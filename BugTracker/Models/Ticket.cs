@@ -25,19 +25,20 @@ namespace BugTracker.Models
         }
         [Key]
         public int Id { get; set; }
-        [Required]
+        //[Required]
         public string Title { get; set; }
-        [Required]
+        //[Required]
         public string Description { get; set; }
         public string Author { get; set; }
         public DateTime Date { get; set; }
         //Navigation property
         public Project Project { get; set; }
         //ForeignKey
-        [Required]
+        //[Required]
         public int ProjectId { get; set; }
         public bool IsAssigned { get; set; }
         public QA Qa { get; set; }
+        //[Required]
         public int QaID { get; set; }
         public TicketStatus TicketStatus { get; set; }
         public TicketPriority TicketPriority { get; set; }

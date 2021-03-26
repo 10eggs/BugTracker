@@ -2,6 +2,7 @@ using BugTracker.DB;
 using BugTracker.Models;
 using BugTracker.PageManagers;
 using BugTracker.Persistance;
+using BugTracker.Persistance.Abstract;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,7 +39,7 @@ namespace BugTrackerWeb
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDbContext>();
 
-
+            services.AddScoped<IRequestPersistance, RequestPersistance>();
             services.AddScoped<ITicketPersistance, TicketPersistance>();
             services.AddScoped<IProjectOwnerPersistance, ProjectOwnerPersistance>();
             services.AddScoped<IProjectPersistance, ProjectPersistance>();

@@ -18,5 +18,7 @@ namespace BugTracker.Persistance
         public Task<List<Ticket>> GetRelatedAssignedTicketsAsync(int projectId);
         public void AssignQa(int projectId, QA qa);
         public List<QA> GetAssignedQAs(int projId);
+        public Task<List<Request>> GetRelatedRequestsAsync(int projId);
+
     }
 }

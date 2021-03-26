@@ -7,40 +7,47 @@ using BugTracker.Persistance;
 using BugTracker.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using BugTracker.Persistance.Abstract;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Diagnostics;
 
 namespace BugTrackerWeb.Pages.Dashboard
 {
     public class CreateTicketModel : PageModel
     {
         private readonly AppDbContext _ctx;
-        private  readonly ITicketPersistance tp;
-        public CreateTicketModel(AppDbContext context)
+        private readonly IRequestPersistance _rp;
+        private readonly IProjectPersistance _pp;
+        public CreateTicketModel(AppDbContext context, IRequestPersistance rp, IProjectPersistance pp)
         {
             _ctx = context;
-            tp = new TicketPersistance(_ctx);
-
+            _rp = rp;
+            _pp = pp;
         }
 
         
         [BindProperty]
-        public Ticket NewTicket { get; set; }
+        public Request NewRequest { get; set; }
+
+        [BindProperty]
+        public int ProjectId { get; set; }
+
+        [BindProperty]
+        public List<SelectListItem> ProjectListDDL { get; set; }
+        
+
         public void OnGet()
         {
-
+            ProjectListDDL = PopulateProjectList();
         }
 
         public async Task<IActionResult> OnPost()
         {
             if (ModelState.IsValid)
             {
-                using (var db = _ctx)
-                {
-                    var tp = new TicketPersistance(_ctx);
-                    AssignUserId();
-                    await tp.Save(NewTicket);
-                    return RedirectToPage("Index");
-                }
-
+                AssignUserToRequest();
+                await _rp.SaveAsync(NewRequest);
+                return RedirectToPage("Index");
             }
             else
             {
@@ -48,9 +55,29 @@ namespace BugTrackerWeb.Pages.Dashboard
             }
         }
 
-        public void AssignUserId()
+        public void AssignUserToRequest()
         {
-            NewTicket.Author = User.Identity.Name;
+            NewRequest.Author = User.Identity.Name;
+        }
+
+        //Maybe it could be generic at some point?
+        public List<SelectListItem> PopulateProjectList()
+        {
+
+            return _pp.GetAll().Select(p => new SelectListItem
+            {
+                Value = p.Id.ToString(),
+                Text = p.Name
+
+            }).ToList();
         }
     }
 }
+
+//using (var db = _ctx)
+//{
+//    var tp = new TicketPersistance(_ctx);
+//    AssignUserId();
+//    await tp.Save(NewTicket);
+//    return RedirectToPage("Index");
+//}

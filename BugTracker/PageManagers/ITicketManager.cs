@@ -9,6 +9,8 @@ namespace BugTracker.PageManagers
         public void AssignToQa(int ticketId, int qaId);
 
         public void AssignToQa(int ticketId, Ticket assignedTicket);
+
+        public Task AssignTicket(int requestId,Ticket ticket);
         public ICollection<Ticket> GetAllAssignedForProject(int projectId);
         public ICollection<Ticket> GetAllFromProjectAssignedToQa(int projectId, int qaId);
 

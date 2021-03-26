@@ -1,5 +1,6 @@
 ﻿using BugTracker.DB;
 using BugTracker.Persistance;
+using BugTracker.Persistance.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,24 +9,26 @@ using System.Threading.Tasks;
 
 namespace BugTrackerWeb.Controllers
 {
-    [Route("api/Ticket")]
+    [Route("api/Requests")]
     [ApiController]
     public class TicketController : Controller
     {
         private readonly AppDbContext _ctx;
-        public TicketController(AppDbContext ctx)
+        private readonly IRequestPersistance _rp;
+        public TicketController(AppDbContext ctx, IRequestPersistance rp)
         {
             _ctx = ctx;
+            _rp = rp;
+            
         }
 
         [HttpGet]
         public async Task<JsonResult> GetAll()
         {
-            //return Json(new { data = _ctx.Tickets.ToList() });
             using (_ctx)
             {
-                var tp = new TicketPersistance(_ctx);
-                var data = await tp.GetAllAsync();
+                var rp = new RequestPersistance(_ctx);
+                var data = await rp.GetAllAsync();
                 return Json(new { data });
             }
         }
@@ -35,14 +38,14 @@ namespace BugTrackerWeb.Controllers
         {
             using (_ctx)
             {
-                var tp = new TicketPersistance(_ctx);
-                var bookFromDb = await tp.GetByIdAsync(id);
-                if(bookFromDb == null)
+                var rp = new RequestPersistance(_ctx);
+                var reqToDelete = await rp.GetByIdAsync(id);
+                if(reqToDelete == null)
                 {
                     return Json(new { success = false, message = "Error while Deleting" });
 
                 }
-                await tp.Delete(bookFromDb);
+                await rp.Delete(reqToDelete);
                 return Json(new { success = true, message = "Delete successful" });
 
             }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BugTracker.DB;
 using BugTracker.Models;
 using BugTracker.Persistance;
+using BugTracker.Persistance.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -17,32 +18,26 @@ namespace BugTrackerWeb.Pages.Dashboard
     {
         private readonly AppDbContext _ctx;
         private readonly ITicketPersistance _tp;
-        public IndexModel(AppDbContext ctx, ITicketPersistance tp)
+        private readonly IRequestPersistance _rp;
+        public IndexModel(AppDbContext ctx, ITicketPersistance tp, IRequestPersistance rp)
         {
             _ctx = ctx;
-            //tp = new TicketPersistance(ctx);
             _tp = tp;
+            _rp = rp;
         }
 
-        public List<Ticket> Tickets { get; set; }
+        public List<Request> Requests { get; set; }
 
-        //This need to be separated later, 
-        public List<Ticket> UserTickets { get; set; }
 
         public async Task OnGet()
         {
-            UserTickets = await _tp.GetCreatedByAuthorAsync(User.Identity.Name);
-            Tickets = await _ctx.Tickets.ToListAsync();
+            //UserRequests = await _rp.GetCreatedByAuthorAsync(User.Identity.Name);
+            Requests = await _rp.GetAllAsync();
         }
 
-        //Handler for Delete action
-        //Task<IActionResult> redirect us to the same page
         public async Task<IActionResult> OnPostDelete(int id)
         {
-            using (_ctx)
-            {
-                await _tp.DeleteById(id);
-            }
+            await _rp.DeleteById(id);
             return RedirectToPage("Index");
         }
     }

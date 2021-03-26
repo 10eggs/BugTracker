@@ -1,6 +1,7 @@
 ﻿using BugTracker.DB;
 using BugTracker.Models;
 using BugTracker.Persistance;
+using BugTracker.Persistance.Abstract;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +13,25 @@ namespace BugTracker.PageManagers
     {
         private AppDbContext _ctx;
         private ITicketPersistance _tp;
+        private IRequestPersistance _rp;
         private IQAPersistance _qap;
-        public TicketManager(AppDbContext ctx,ITicketPersistance tp, IQAPersistance qap)
+        public TicketManager(AppDbContext ctx, IRequestPersistance rp,ITicketPersistance tp, IQAPersistance qap)
         {
             _ctx = ctx;
             _tp = tp;
             _qap = qap;
+            _rp = rp;
 
         }
+
+        public async Task AssignTicket(int requestId,Ticket t)
+        {
+            var req= await _rp.GetByIdAsync(requestId);
+            _rp.Delete(req);
+            _tp.Save(t);
+
+        }
+
         public void AssignToQa(int ticketId, int qaId)
         {
             var qa = _qap.Get(qaId);
