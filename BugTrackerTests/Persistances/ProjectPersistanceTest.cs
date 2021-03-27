@@ -7,7 +7,9 @@ using System.Diagnostics;
 using System.Text;
 using Xunit;
 using static Xunit.Assert;
-
+using Microsoft.AspNetCore.Mvc;
+using System.Web.Helpers;
+using Newtonsoft.Json;
 
 namespace BugTrackerTests
 {
@@ -217,6 +219,37 @@ namespace BugTrackerTests
                 IProjectPersistance tp = new ProjectPersistance(db);
                 var QAs = tp.GetAssignedQAs(1);
                 Assert.Equal(2, QAs.Count);
+
+            }
+        }
+
+        [Fact]
+        public async void CheckCircularReference()
+        {
+            var proj1 = new Project { Id = 1, Name = "ProjectName" };
+            var qa1 = new QA { Id = 1, Name = "Adam", Projects = new List<Project> { proj1 } };
+            var qa2 = new QA { Id = 2, Name = "Eva" };
+
+            var ticket1 = new Ticket { Author = "A", Description = "D", Title = "T" ,QaID=1,ProjectId=1 };
+            var ticket2 = new Ticket { Author = "B", Description = "DD", Title = "TT",QaID=1,ProjectId=1 };
+
+            using (var db = DbContextFactory.Create(nameof(CheckCircularReference)))
+            {
+                IProjectPersistance tp = new ProjectPersistance(db);
+                tp.Save(proj1);
+
+                db.QA.AddRange(new List<QA> { qa1, qa2 });
+                db.SaveChanges();
+
+                db.Tickets.AddRange(new List<Ticket> { ticket1, ticket2 });
+                db.SaveChanges();
+
+            }
+            using (var db = DbContextFactory.Create(nameof(CheckCircularReference)))
+            {
+                IProjectPersistance pp = new ProjectPersistance(db);
+                var proj = await pp.GetRelatedTicketsAsync(1);
+                JsonConvert.SerializeObject(proj);
 
             }
         }

@@ -26,9 +26,8 @@ namespace BugTracker.PageManagers
 
         public async Task AssignTicket(int requestId,Ticket t)
         {
-            var req= await _rp.GetByIdAsync(requestId);
-            _rp.Delete(req);
-            _tp.Save(t);
+            _rp.DeleteById(requestId);
+            _tp.SaveTicket(t);
 
         }
 

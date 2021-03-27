@@ -29,15 +29,16 @@
                     </td>
                     <td>
                         @*<a asp-page="ProjectDetails" asp-route-id="@p.Id">Details</a>*@
-                        <button class="btn-info" onclick="loadTicketTable(@p.Id)">Ticket list</button>
+                        <button class="btn btn-info form-control" onclick="loadProjectDetails(@p.Id)">Details</button>
                     </td>
                     <td>
-                        <a asp-page="ManageUsers" asp-route-id="@p.Id">ManageUsers</a>
+                        <a class="btn btn-info form-control" asp-page="ManageUsers" asp-route-id="@p.Id">Manage Users</a>
                     </td>
                 </tr>
             }
         </table>
 
+        <h4 class="text-info">Requests in queue</h4>
         <div class="col-12 border p-3">
 
             <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
@@ -51,10 +52,25 @@
                 </thead>
             </table>
         </div>
+
+        <h4 class="text-info">Assigned tickets</h4>
+        <div class="col-12 border p-3">
+
+            <table id="DT_AT" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Created by</th>
+                        <th>Assigned to</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
     }
     else
     {
-        <p>No requests here!</p>
+        <p>There is no available projects</p>
     }
 }
 

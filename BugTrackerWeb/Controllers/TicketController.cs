@@ -45,7 +45,7 @@ namespace BugTrackerWeb.Controllers
                     return Json(new { success = false, message = "Error while Deleting" });
 
                 }
-                await rp.Delete(reqToDelete);
+                await rp.DeleteAsync(reqToDelete);
                 return Json(new { success = true, message = "Delete successful" });
 
             }

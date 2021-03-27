@@ -30,6 +30,7 @@ namespace BugTracker.Models
         //[Required]
         public string Description { get; set; }
         public string Author { get; set; }
+        public string RequestAuthor { get; set; }
         public DateTime Date { get; set; }
         //Navigation property
         public Project Project { get; set; }

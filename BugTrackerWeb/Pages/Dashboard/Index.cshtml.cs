@@ -37,7 +37,7 @@ namespace BugTrackerWeb.Pages.Dashboard
 
         public async Task<IActionResult> OnPostDelete(int id)
         {
-            await _rp.DeleteById(id);
+            await _rp.DeleteByIdAsync(id);
             return RedirectToPage("Index");
         }
     }

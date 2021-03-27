@@ -18,11 +18,13 @@ namespace BugTrackerWeb.Pages.Dashboard
         private readonly AppDbContext _ctx;
         private readonly IRequestPersistance _rp;
         private readonly IProjectPersistance _pp;
-        public CreateTicketModel(AppDbContext context, IRequestPersistance rp, IProjectPersistance pp)
+        private readonly ITicketPersistance _tp;
+        public CreateTicketModel(AppDbContext context, IRequestPersistance rp, IProjectPersistance pp,ITicketPersistance tp)
         {
             _ctx = context;
             _rp = rp;
             _pp = pp;
+            _tp = tp;
         }
 
         

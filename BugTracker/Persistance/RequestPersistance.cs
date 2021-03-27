@@ -18,15 +18,28 @@ namespace BugTracker.Persistance
             _ctx = ctx;
         }
 
-        public async Task Delete(Request req)
+        public void Delete(Request req)
+        {
+            _ctx.Remove(req);
+            _ctx.SaveChanges();
+        }
+
+        public async Task DeleteAsync(Request req)
         {
             _ctx.Remove(req);
             await _ctx.SaveChangesAsync();
         }
 
-        public async Task DeleteById(int id)
+        public void DeleteById(int id)
         {
-            var request = await GetByIdAsync(id) ?? throw new NullReferenceException();
+            var request =  GetById(id) ?? throw new NullReferenceException();
+            _ctx.Requests.Remove(request);
+            _ctx.SaveChanges();
+        }
+
+        public async Task DeleteByIdAsync(int id)
+        {
+            var request = GetById(id) ?? throw new NullReferenceException();
             _ctx.Requests.Remove(request);
             await _ctx.SaveChangesAsync();
         }
@@ -79,18 +92,12 @@ namespace BugTracker.Persistance
 
         }
 
-        public async Task<bool> SaveAsync(Request req)
+        //This is weird behavior of ef which doesnt save a record! Need to be verified
+        public async Task SaveAsync(Request req)
         {
-            try
-            {
-                await _ctx.Requests.AddAsync(req);
-                await _ctx.SaveChangesAsync();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            await _ctx.Requests.AddAsync(req);
+            await _ctx.SaveChangesAsync();
         }
+
     }
 }

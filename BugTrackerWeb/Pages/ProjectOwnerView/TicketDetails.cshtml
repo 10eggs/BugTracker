@@ -6,13 +6,13 @@
 
     if (Model.Request != null)
     {
-        <input id="TicketID" type="hidden" value="@Model.Request.Id" />
+        <input id="RequestId" type="hidden" value="@Model.Request.Id" />
         <h2>Request details</h2>
 
         <label><b>Title</b></label>
         <br />
         <tr>@Model.Request.Title</tr>
-
+        <br />
         <label><b>Description</b></label>
         <br />
         <tr>@Model.Request.Description</tr>
@@ -21,38 +21,12 @@
         <br />
         <tr>@Model.Request.Author</tr>
         <br />
-        <label><b>Date</b></label>
+        <label><b>Created At</b></label>
         <tr>@Model.Request.CreatedAt</tr>
         <br />
         //Need to be hidden
     }
 
-    if (Model.AvailableQAs != null)
-    {
-        <table id="qas" class="table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (int i = 0; i < Model.AvailableQAs.Count; i++)
-                {
-                    <tr class="clickable-row">
-                        <th scope="row">@(i+1)</th>
-                        <td class="qaName">@Model.AvailableQAs.ElementAt(i).Name</td>
-                        <td id="qaId" style="display:none">@Model.AvailableQAs.ElementAt(i).Id</td>
-                    </tr>
-
-                }
-            </tbody>
-        </table>
-        <br />
-        <form method="post">
-            <input id="assignticket" type="submit" class="btn btn-success text-white" value="Assign" />
-        </form>
-    }
 
     @*FORM SECTION STARTER HERE *@
     <h3 class="text-info">Assign with details</h3>
@@ -60,16 +34,18 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            @*Check me*@
-            <input type="hidden" asp-for="@Model.TicketId" value="@Model.TicketId">
-            <input type="hidden" asp-for="@Model.ProjectId" value="@Model.ProjectId">
+
+            <input type="hidden" asp-for="@Model.RequestId" value="@Model.RequestId">
+            <input type="hidden" asp-for="@Model.Ticket.ProjectId" value="@Model.ProjectId">
+            <input type="hidden" asp-for="@Model.Ticket.RequestAuthor" value="@Model.Request.Author">
+            <input type="hidden" asp-for="@Model.Ticket.Author" value="@User.Identity.Name">
+            <input type="hidden" asp-for="@Model.Ticket.Updated" value="@DateTime.UtcNow">
 
 
             <div class="form-group">
                 <label asp-for="Ticket.Title" class="control-label"></label>
                 <input asp-for="Ticket.Title" class="form-control" value="@Model.Request.Title">
                 <span asp-validation-for="Ticket.Title" class="text-danger"></span>
-
             </div>
 
             <div class="form-group">
@@ -103,7 +79,7 @@
             <div class="form-group">
                 <label asp-for="@Model.QAsList" class="control-label"></label>
                 <select asp-for="@Model.Ticket.QaID" class="form-control" asp-items="@Model.QAsList"></select>
-                @*<span asp-validation-for="@Model.Ticket.QaID" class="text-danger"></span>*@
+                <span asp-validation-for="@Model.Ticket.QaID" class="text-danger"></span>
             </div>
 
             <div class="form-group">
@@ -113,7 +89,36 @@
     </div>
     @*FORM SECTION ENDED HERE *@
 
+
+    if (Model.AvailableQAs != null)
+    {
+        <table id="qas" class="table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.AvailableQAs.Count; i++)
+                {
+                    <tr class="clickable-row">
+                        <th scope="row">@(i+1)</th>
+                        <td class="qaName">@Model.AvailableQAs.ElementAt(i).Name</td>
+                        <td id="qaId" style="display:none">@Model.AvailableQAs.ElementAt(i).Id</td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+        <br />
+        <form method="post">
+            <input id="assignticket" type="submit" class="btn btn-success text-white" value="Assign" />
+        </form>
+    }
 }
+
+
 
 
 @section Scripts{

@@ -1,4 +1,5 @@
-﻿var dataTable;
+﻿var requestsTable;
+var ticketsTable;
 var projectId;
 
 
@@ -6,16 +7,19 @@ var projectId;
 //    loadDataTable();
 //})
 
-function loadTicketTable(projectId) {
+function loadProjectDetails(projectId) {
     console.log("Project id is", projectId);
     projectId = projectId;
     if ($.fn.dataTable.isDataTable('#DT_load')) {
-        dataTable.destroy()
+        requestsTable.destroy()
+    }
+    if ($.fn.dataTable.isDataTable('#DT_AT')) {
+        ticketsTable.destroy()
     }
 
-    dataTable = $('#DT_load').DataTable({
+    requestsTable = $('#DT_load').DataTable({
         "ajax": {
-            "url": "/api/projectownerview" + `/${projectId}`,
+            "url": "/api/projectownerview/requests" + `/${projectId}`,
             "type": "GET",
             "datatype": "json"
         },
@@ -39,4 +43,23 @@ function loadTicketTable(projectId) {
         },
         "width": "100%"
     });
+
+    ticketsTable = $('#DT_AT').DataTable({
+        "ajax": {
+            "url": "/api/projectownerview/tickets" + `/${projectId}`,
+            "type": "GET",
+            "datatype": "json"
+        },
+        "columns": [
+            { "data": "title", "width": "30%" },
+            { "data": "description", "width": "30%" },
+            { "data": "author", "width": "30%" },
+            { "data": "qaName", "width": "30%" }
+            
+        ],
+        "language": {
+            "emptyTable": "no data found"
+        },
+        "width": "100%"
+    })
 }

@@ -21,11 +21,13 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
         private readonly IProjectPersistance _pp;
         private readonly ITicketManager _itm;
         private readonly IRequestPersistance _rp;
-        public TicketDetailsModel(IProjectPersistance pp,ITicketManager itm, IRequestPersistance rp )
+        private readonly ITicketPersistance _tp;
+        public TicketDetailsModel(IProjectPersistance pp,ITicketManager itm, IRequestPersistance rp,ITicketPersistance tp)
         {
             _itm = itm;
             _pp = pp;
             _rp = rp;
+            _tp = tp;
             //This assignment have to be changed!!!
             //TicketCatDDLOptions = new SelectList(EnumUtil.GetValues<TicketCategory>());
         }
@@ -43,7 +45,7 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
         public int ProjectId { get; set; }
 
         [BindProperty]
-        public int TicketId { get; set; }
+        public int RequestId { get; set; }
 
         [BindProperty]
         public ICollection<QA> AvailableQAs { get; set; }
@@ -63,10 +65,11 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
         {
             //Check if FromQuery works
             //Checked and works
+            //Rather than getting this request from requests pool, try to get it from projects pool in the future
             Request = _rp.GetById(requestId);
             Project = _pp.Get(projectId);
             ProjectId = Project.Id;
-            TicketId = requestId;
+            RequestId = requestId;
 
             AvailableQAs = Project.QAs;
 
@@ -83,14 +86,13 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
 
         public async Task<IActionResult> OnPostAssignTicketFromForm()
         {
+
             if (!ModelState.IsValid)
             {
                 return RedirectToPage($"/ProjectOwnerView/");
                 
             }
-
-            Ticket.ProjectId = ProjectId;
-            _itm.AssignTicket(TicketId, Ticket);
+            _itm.AssignTicket(RequestId, Ticket);
 
             return RedirectToPage($"/ProjectOwnerView/Index");
         }

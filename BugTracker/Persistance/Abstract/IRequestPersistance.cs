@@ -8,7 +8,7 @@ namespace BugTracker.Persistance.Abstract
 {
     public interface IRequestPersistance
     {
-        public Task<bool> SaveAsync(Request req);
+        public Task SaveAsync(Request req);
         //Task Save(Request req);
         Task<Request> GetByIdAsync(int? i);
         Request GetById(int i);
@@ -18,8 +18,10 @@ namespace BugTracker.Persistance.Abstract
         public Task<List<Request>> GetCreatedByAuthorAsync(string author);
         public List<Request> GetAssignedToProject(int projectId);
         public Task Edit(Request t, string title, string description);
-        public Task DeleteById(int id);
-        public Task Delete(Request t);
+        public void DeleteById(int id);
+        public Task DeleteByIdAsync(int id);
+        public void Delete(Request t);
+        public Task DeleteAsync(Request t);
 
     }
 }

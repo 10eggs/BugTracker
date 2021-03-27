@@ -86,9 +86,10 @@ namespace BugTracker.Persistance
         public async Task<List<Ticket>> GetRelatedTicketsAsync(int projectId)
         {
             return await _ctx.Project
+                .Where(p => p.Id == projectId)
                 .Include(e => e.ProjectOwner)
-                .Include(e => e.Tickets)
-                .Where(e => e.Id == projectId)
+                //Then include error prone
+                .Include(e => e.Tickets).ThenInclude(t=>t.Qa)
                 .Select(t => t.Tickets)
                 .SingleOrDefaultAsync();
         }
