@@ -902,3 +902,10 @@ C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\R
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\ProjectOwnerView\TicketDetails.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\QAView\ManageTicket.cshtml.g.cs
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\QAView\ProjectDetails.cshtml.g.cs
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\Index.cshtml.g.cs
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\Shared\_SidebarPartial.cshtml.g.cs
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\CreateRequest.cshtml.g.cs
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\EditRequest.cshtml.g.cs
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\UpsertRequest.cshtml.g.cs

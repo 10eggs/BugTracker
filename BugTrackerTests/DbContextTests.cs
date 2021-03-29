@@ -16,9 +16,12 @@ namespace BugTrackerTests
         [Fact]
         public void TicketCanBeSaved()
         {
+
+            
             var ticket = TicketFactory.CreateSingleTicket();
             using (var ctx = DbContextFactory.Create(nameof(TicketCanBeSaved)))
             {
+
                 ctx.Tickets.Add(ticket);
                 ctx.SaveChanges();
             }

@@ -1,5 +1,64 @@
 ﻿@page
 @model BugTrackerWeb.Pages.QAView.IndexModel
 @{
-    <p>Welcome my friend, QA eng!</p>
+    <p>Welcome my friend, @Model.QA.Name</p>
+    if (Model.QA.Projects.Count > 0)
+    {
+        <h2>Your projects</h2>
+        <table class="table table-striped border">
+            <tr class="table-secondary">
+                <th>
+                    <label asp-for="QA.Projects.FirstOrDefault().Name"></label>
+                </th>
+                <th>
+                    <label asp-for="QA.Projects.FirstOrDefault().Description"></label>
+                </th>
+            </tr>
+            @foreach (var p in Model.QA.Projects)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => p.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => p.Description)
+                    </td>
+                    <td>
+                        @*<a asp-page="ProjectDetails" asp-route-id="@p.Id">Details</a>*@
+                        <a class="btn btn-info form-control" asp-page="ProjectDetails" asp-route-project="@p">Ticket List</a>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+    if (Model.QA.Tickets.Count > 0)
+    {
+        <table class="table table-striped border">
+            <tr class="table-secondary">
+                <th>
+                    <label asp-for="QA.Tickets.FirstOrDefault().Title"></label>
+                </th>
+                <th>
+                    <label asp-for="QA.Tickets.FirstOrDefault().Description"></label>
+                </th>
+            </tr>
+            @foreach (var p in Model.QA.Tickets)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => p.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => p.Description)
+                    </td>
+                    <td>
+                        <button class="btn btn-info form-control">Manage</button>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
 }

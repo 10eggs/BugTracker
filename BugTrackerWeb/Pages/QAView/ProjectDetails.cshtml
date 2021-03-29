@@ -1,0 +1,39 @@
+﻿@page
+@model BugTrackerWeb.Pages.QAView.ProjectDetailsModel
+@{
+    if (Model.Project!=null)
+    {
+        <h2>Your projects</h2>
+        <table class="table table-striped border">
+            <tr class="table-secondary">
+                <th>
+                    <label asp-for="@Model.Project.Tickets.FirstOrDefault().Title"></label>
+                </th>
+                <th>
+                    <label asp-for="@Model.Project.Tickets.FirstOrDefault().Description"></label>
+                </th>
+                <th>
+                    <label asp-for="@Model.Project.Tickets.FirstOrDefault().TicketPriority"></label>
+                </th>
+            </tr>
+            @foreach (var p in Model.Project.Tickets)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => p.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => p.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => p.TicketPriority)
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <h1>Project was not loaded!</h1>
+    }
+}

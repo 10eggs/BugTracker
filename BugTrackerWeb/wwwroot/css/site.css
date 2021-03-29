@@ -64,7 +64,18 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+
+  /*This section has been added by me*/
+/*  margin-left :0px;
+  margin-right :0px;*/
+
 }
+
+/*.container {
+    margin-left: 0px;
+    margin-right: 0px;
+}*/
+
 .footer {
   position: absolute;
   bottom: 0;
