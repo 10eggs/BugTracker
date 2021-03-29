@@ -88,7 +88,9 @@ namespace BugTracker.Persistance
 
         public async Task<List<Request>> GetCreatedByAuthorAsync(string author)
         {
-            return await _ctx.Requests.Where(t => t.Author == author).ToListAsync();
+            return await _ctx.Requests.Where(r => r.Author == author)
+                .Include(r => r.Project)
+                .ToListAsync();
 
         }
 

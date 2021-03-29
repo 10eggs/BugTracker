@@ -92,7 +92,7 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
                 return RedirectToPage($"/ProjectOwnerView/");
                 
             }
-            _itm.AssignTicket(RequestId, Ticket);
+            await _itm.AssignTicket(RequestId, Ticket);
 
             return RedirectToPage($"/ProjectOwnerView/Index");
         }

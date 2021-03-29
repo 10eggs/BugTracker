@@ -14,7 +14,7 @@ function loadDataTable() {
         "columns": [
             { "data": "title", "width": "30%" },
             { "data": "description", "width": "30%" },
-            { "data": "author", "width": "30%" },
+            { "data": "project", "width": "30%" },
             {
                 "data": "id",
                 "render": function (data) {
@@ -25,7 +25,7 @@ function loadDataTable() {
                         &nbsp;
                         </br>
                         <a class='btn btn-danger text-white' style='cursor:pointer; width:70px;'
-                            onclick=Delete('/api/requests?id='+${data})>
+                            onclick=Delete('api/Requests/delete?id='+${data})>
                             Delete
                         </a>
                         </div>`;

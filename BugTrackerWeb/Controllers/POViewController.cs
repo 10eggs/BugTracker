@@ -54,7 +54,7 @@ namespace BugTrackerWeb.Controllers
 
         public class TicketView
         {
-            public int Id;
+            public string Id;
             public string Title { get; set; }
             public string Description { get; set; }
             public string Author { get; set; }
@@ -63,7 +63,7 @@ namespace BugTrackerWeb.Controllers
             {
                 foreach(var t in tickets)
                 {
-                    yield return new TicketView { Id = t.Id, Title = t.Title, Description = t.Description, Author = t.Author, QaName = t.Qa.Name };
+                    yield return new TicketView { Id = t.Id.ToString(), Title = t.Title, Description = t.Description, Author = t.Author, QaName = t.Qa.Name };
                 }
             }
 

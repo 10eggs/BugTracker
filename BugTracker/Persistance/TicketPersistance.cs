@@ -95,6 +95,10 @@ namespace BugTracker.Persistance
             return await _ctx.Tickets.Where(t => t.Author == author).ToListAsync();
         }
 
+        public async Task<List<Ticket>> GetByRequestAuthor(string author)
+        {
+            return await _ctx.Tickets.Where(t => t.RequestAuthor == author).ToListAsync();
+        }
         public void SaveAssigned(int ticketId, QA qa)
         {
             var ticket = _ctx.Tickets.Include(t=>t.Project)

@@ -27,12 +27,13 @@ namespace BugTrackerWeb.Pages.UserView
         }
 
         public List<Request> Requests { get; set; }
+        public List<Ticket> Tickets { get; set; }
 
 
         public async Task OnGet()
         {
-            //UserRequests = await _rp.GetCreatedByAuthorAsync(User.Identity.Name);
-            Requests = await _rp.GetAllAsync();
+            Requests =  _rp.GetCreatedByAuthor(User.Identity.Name);
+            Tickets =  await _tp.GetByRequestAuthor(User.Identity.Name);
         }
 
         public async Task<IActionResult> OnPostDelete(int id)
