@@ -3,6 +3,7 @@ using BugTracker.Models;
 using BugTracker.PageManagers;
 using BugTracker.Persistance;
 using BugTracker.Persistance.Abstract;
+using BugTracker.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -47,6 +48,10 @@ namespace BugTrackerWeb
             services.AddScoped<IQAManager, QAManager>();
 
             services.AddScoped<ITicketManager, TicketManager>();
+
+
+            //This is testing implementation for singleton
+            services.AddSingleton<IModelDistributor, ModelDistributor>();
 
             //
             //Remove this later

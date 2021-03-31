@@ -13,6 +13,7 @@ namespace BugTracker.Persistance
         public List<Project> GetAll();
         public List<Project> GetOwnedBy(ProjectOwner author);
         public List<Ticket> GetRelatedTickets(Project project);
+        public Task<List<Ticket>> GetRelatedTicketsAssignedToQa(int projectId, int qaId);
         public Task<List<Ticket>> GetRelatedTicketsAsync(int projectId);
         public Task<List<Ticket>> GetRelatedUnassignedTicketsAsync(int pojectId);
         public Task<List<Ticket>> GetRelatedAssignedTicketsAsync(int projectId);

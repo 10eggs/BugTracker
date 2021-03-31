@@ -25,7 +25,10 @@
                     </td>
                     <td>
                         @*<a asp-page="ProjectDetails" asp-route-id="@p.Id">Details</a>*@
-                        <a class="btn btn-info form-control" asp-page="ProjectDetails" asp-route-project="@p">Ticket List</a>
+                        @*Line below is working fine*@
+                        <a class="btn btn-info form-control" asp-page="ProjectDetails" asp-route-project=@p asp-route-projectid=@p.Id asp-route-qaid="@Model.QA.Id">Ticket List</a>
+
+                        @*<a class="btn btn-info form-control" asp-page-handler="ProjectDetails"  asp-route-projectid=@p.Id asp-route-qaid="@Model.QA.Id">Ticket List</a>*@
                     </td>
                     <td>
                     </td>

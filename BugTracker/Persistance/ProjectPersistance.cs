@@ -129,5 +129,17 @@ namespace BugTracker.Persistance
             
             return requests.ToList();
         }
+
+        public async Task<List<Ticket>> GetRelatedTicketsAssignedToQa(int projectId, int qaId)
+        {
+
+            var project = await _ctx.Project
+                .Include(p => p.Tickets)
+                .Where(p => p.Id == projectId)
+                .FirstOrDefaultAsync();
+
+            return project.Tickets.Where(t => t.QaID == qaId).ToList();
+
+        }
     }
 }

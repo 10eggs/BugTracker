@@ -1,32 +1,38 @@
 ﻿@page
 @model BugTrackerWeb.Pages.QAView.ProjectDetailsModel
 @{
-    if (Model.Project!=null)
+    if (Model.TicketList!=null)
     {
         <h2>Your projects</h2>
         <table class="table table-striped border">
             <tr class="table-secondary">
                 <th>
-                    <label asp-for="@Model.Project.Tickets.FirstOrDefault().Title"></label>
+                    <label asp-for="@Model.TicketList.FirstOrDefault().Title"></label>
                 </th>
                 <th>
-                    <label asp-for="@Model.Project.Tickets.FirstOrDefault().Description"></label>
+                    <label asp-for="@Model.TicketList.FirstOrDefault().Description"></label>
                 </th>
                 <th>
-                    <label asp-for="@Model.Project.Tickets.FirstOrDefault().TicketPriority"></label>
+                    <label asp-for="@Model.TicketList.FirstOrDefault().TicketPriority"></label>
+                </th>
+                <th>
+                    <label asp-for="@Model.TicketList.FirstOrDefault().RequestAuthor"></label>
                 </th>
             </tr>
-            @foreach (var p in Model.Project.Tickets)
+            @foreach (var t in Model.TicketList)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(m => p.Title)
+                        @Html.DisplayFor(m => t.Title)
                     </td>
                     <td>
-                        @Html.DisplayFor(m => p.Description)
+                        @Html.DisplayFor(m => t.Description)
                     </td>
                     <td>
-                        @Html.DisplayFor(m => p.TicketPriority)
+                        @Html.DisplayFor(m => t.TicketPriority)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => t.RequestAuthor)
                     </td>
                 </tr>
             }
@@ -34,6 +40,6 @@
     }
     else
     {
-        <h1>Project was not loaded!</h1>
+        <h1>Project details have not been loaded</h1>
     }
 }
