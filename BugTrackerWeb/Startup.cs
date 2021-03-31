@@ -35,6 +35,7 @@ namespace BugTrackerWeb
         {
             services.AddDbContext<AppDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<AppIdentityDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddMemoryCache();
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()
@@ -51,15 +52,9 @@ namespace BugTrackerWeb
 
 
             //This is testing implementation for singleton
-            services.AddSingleton<IModelDistributor, ModelDistributor>();
+            //services.AddSingleton<IModelDistributor, ModelDistributor>();
 
-            //
-            //Remove this later
-            //services.AddMvc().AddRazorPagesOptions(o =>
-            //{
-            //    o.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
-            //});
-            //
+
             services.AddMvc();
             services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
 

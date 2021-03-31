@@ -1,7 +1,7 @@
 ﻿@page
 @model BugTrackerWeb.Pages.QAView.ProjectDetailsModel
 @{
-    if (Model.TicketList!=null)
+    if (Model.TicketList != null)
     {
         <h2>Your projects</h2>
         <table class="table table-striped border">
@@ -42,4 +42,47 @@
     {
         <h1>Project details have not been loaded</h1>
     }
+
+    if (Model.TicketList != null)
+    {
+        <table id="tickets" class="table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">TicketPriority</th>
+                    <th scope="col">RequestAuthor</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.TicketList.Count; i++)
+                {
+                    <tr class="clickable-row">
+                        <th scope="row">@(i+1)</th>
+                        <td>@Model.TicketList.ElementAt(i).Title</td>
+                        <td>@Model.TicketList.ElementAt(i).Description</td>
+                        <td>@Model.TicketList.ElementAt(i).TicketPriority</td>
+                        <td>@Model.TicketList.ElementAt(i).RequestAuthor</td>
+                        <td id="ticketId" style="display:none">@Model.TicketList.ElementAt(i).Id</td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+        <br />
+        <form method="post">
+            <input id="assignticket" type="submit" class="btn btn-success text-white" value="Assign" />
+        </form>
+    }
+    else
+    {
+        <p>Ticket has not been loaded!</p>
+    }
+    <div id="selectedTicket"></div>
 }
+
+@section Scripts{
+    <script src="~/js//QaView/qaManageTicket.js"></script>
+}
+

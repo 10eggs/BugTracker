@@ -24,7 +24,7 @@ namespace BugTracker.Persistance
             return _ctx.QA
                 .Where(q => q.UserId == userId)
                 .Include(q=>q.Projects)
-                .Include(q=>q.Tickets)
+                .Include(q => q.Tickets)
                     .SingleOrDefault();
         }
 
