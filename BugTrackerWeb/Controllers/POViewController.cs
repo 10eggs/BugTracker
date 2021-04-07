@@ -2,6 +2,7 @@
 using BugTracker.Models;
 using BugTracker.Persistance;
 using BugTracker.Persistance.Abstract;
+using BugTrackerWeb.Pages.QAView;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -72,5 +73,28 @@ namespace BugTrackerWeb.Controllers
                 return Transform(tickets).ToList();
             }
         }
+
+
+        ////FOR TEST PURPOSE
+        //[Route("api/QaView/CheckMe/{rm?}")]
+        //[HttpPost]
+        //public async Task<JsonResult> OnPostUpdateTicket(ResponseModel rm)
+        //{
+        //    var d = rm;
+        //    if (!ModelState.IsValid)
+        //    {
+        //        Debug.WriteLine("Model invalid");
+        //    }
+        //    var checkModel = Response;
+        //    //var deserialize = JsonConvert.DeserializeObject<ResponseModel>(r);
+
+        //    var checkIfModelChanged = Response;
+        //    //ResponseModel response = JsonConvert.DeserializeObject<ResponseModel>(updatedTicketJson);
+        //    /**
+        //     * This metho should take json, deserialize it and return json when post positive
+        //     */
+        //    return new JsonResult(new { success = true, message = "Ticket has been assigned!", errormessage = "Something went wrong, try again later" });
+
+        //}
     }
 }

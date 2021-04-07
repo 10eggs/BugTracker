@@ -1,47 +1,8 @@
 ﻿@page
 @model BugTrackerWeb.Pages.QAView.ProjectDetailsModel
+
 @{
-    if (Model.TicketList != null)
-    {
-        <h2>Your projects</h2>
-        <table class="table table-striped border">
-            <tr class="table-secondary">
-                <th>
-                    <label asp-for="@Model.TicketList.FirstOrDefault().Title"></label>
-                </th>
-                <th>
-                    <label asp-for="@Model.TicketList.FirstOrDefault().Description"></label>
-                </th>
-                <th>
-                    <label asp-for="@Model.TicketList.FirstOrDefault().TicketPriority"></label>
-                </th>
-                <th>
-                    <label asp-for="@Model.TicketList.FirstOrDefault().RequestAuthor"></label>
-                </th>
-            </tr>
-            @foreach (var t in Model.TicketList)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(m => t.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => t.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => t.TicketPriority)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => t.RequestAuthor)
-                    </td>
-                </tr>
-            }
-        </table>
-    }
-    else
-    {
-        <h1>Project details have not been loaded</h1>
-    }
+    @*<link rel="stylesheet" href="projectdetails.css" />*@
 
     if (Model.TicketList != null)
     {
@@ -71,18 +32,51 @@
             </tbody>
         </table>
         <br />
-        <form method="post">
-            <input id="assignticket" type="submit" class="btn btn-success text-white" value="Assign" />
-        </form>
     }
     else
     {
         <p>Ticket has not been loaded!</p>
     }
-    <div id="selectedTicket"></div>
+    <article class="selected-ticket">
+        <div class="btn-container">
+            <button class="tab-btn active" data-id="details">Ticket details</button>
+            <button class="tab-btn" data-id="history">Ticket history</button>
+            <button class="tab-btn" data-id="change-status">Change status</button>
+        </div>
+        <article class="selected-ticket-content">
+            <!--single item-->
+            <div class="content active" id="details">
+            </div>
+            <!--end ofsingle item-->
+            <!--single item-->
+            <div class="content" id="history">
+                <p>
+                    History is not implemented yet!
+                </p>
+            </div>
+            <!--end ofsingle item-->
+            <!--single item-->
+            <div class="content" id="change-status">
+                <form id="edit_ticket" method="post">
+                    <div class="form-group">
+                        <label asp-for="EditedTicket.Status" class="control-label"></label>
+                        <select asp-for="EditedTicket.Status" class="form-control" asp-items="@Model.TicketStatDDLOptions"></select>
+                        <span asp-validation-for="EditedTicket.Status" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EditedTicket.Description">Description</label>
+                        <input asp-for="EditedTicket.Description" class="form-control" />
+                    </div>
+                    <input id="update-ticket" type="submit" class="btn btn-success text-white" value="Update" />
+                </form>
+            </div>
+            <!--end ofsingle item-->
+        </article>
+    </article>
 }
 
 @section Scripts{
-    <script src="~/js//QaView/qaManageTicket.js"></script>
-}
+    <script src="~/js/QaView/qaManageTicket.js"></script>
+    <partial name="_ValidationScriptsPartial" />
 
+}

@@ -84,6 +84,10 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
             TicketStatDDLOptions = new SelectList(EnumUtil.GetValues<TicketStatus>());
         }
 
+        /**
+         * This is version with razor forms
+         * 
+         */
         public async Task<IActionResult> OnPostAssignTicketFromForm()
         {
 
