@@ -9,7 +9,6 @@ namespace BugTracker.Persistance
         //Remove 'ticket' word
         public void SaveTicket(Ticket t);
         public void SaveAssigned(int ticketId, QA qa);
-
         public void SaveAssigned(int ticketId, Ticket ticket);
         Task Save(Ticket t);
         Task<Ticket> GetByIdAsync(int? i);
@@ -18,11 +17,13 @@ namespace BugTracker.Persistance
         public List<Ticket> GetCreatedByAuthor(string author);
         public Task<List<Ticket>> GetCreatedByAuthorAsync(string author);
         public Task<List<Ticket>> GetByRequestAuthor(string author);
-
         public List<Ticket> GetAssignedToProject(int projectId);
         public Task Edit(Ticket t, string title, string description);
         public Task DeleteById(int id);
         public Task Delete(Ticket t);
+
+        public Task<Ticket> FindById(int id);
+        public Task UpdateTicket();
 
     }
 }

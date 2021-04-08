@@ -18,10 +18,12 @@ namespace BugTrackerWeb.Pages.QAView
 {
     public class ProjectDetailsModel : PageModel
     {
+        private readonly ITicketPersistance _tp;
         private readonly IProjectPersistance _pp;
         private readonly IMemoryCache _cache;
-        public ProjectDetailsModel(IProjectPersistance pp, IMemoryCache cache)
+        public ProjectDetailsModel(ITicketPersistance tp,IProjectPersistance pp, IMemoryCache cache)
         {
+            _tp = tp;
             _pp = pp;
             _cache = cache;
         }
@@ -35,7 +37,6 @@ namespace BugTrackerWeb.Pages.QAView
         public ResponseModel EditedTicket { get; set; }
 
         public SelectList TicketStatDDLOptions { get; set; }
-        public string Description { get; set; }
 
 
         public async Task OnGet(int projectId, int qaId)
@@ -48,6 +49,8 @@ namespace BugTrackerWeb.Pages.QAView
             TicketStatDDLOptions = new SelectList(EnumUtil.GetValues<TicketStatus>());
 
             _cache.Set("Tickets", input);
+            _cache.Set("ProjectId", projectId);
+            _cache.Set("QaId", qaId);
 
            
         }
@@ -63,19 +66,29 @@ namespace BugTrackerWeb.Pages.QAView
 
         public async Task<JsonResult> OnPostUpdateTicket([Bind(Prefix =nameof(EditedTicket))] ResponseModel response)
         {
-            var r = response;
-            EditedTicket = response;
             if (!ModelState.IsValid)
             {
                  return new JsonResult(new { success = false, errormessage = "ModelState is invalid, try again" });
             }
+
+            var editedTicket= await _tp.FindById(response.TicketId);
+
+            if(await TryUpdateModelAsync(
+                editedTicket,
+                "EditedTicket",
+                t=>t.Description,t=>t.TicketStatus))
+            {
+                await _tp.UpdateTicket();
+            }
+
 
              return new JsonResult(new { success = true, message = "Model state is valid here!" });
         }
     }
     public class ResponseModel
     {
-        public TicketStatus Status { get; set; }
+        public int TicketId { get; set; }
+        public TicketStatus TicketStatus { get; set; }
 
         [Required]
         public string Description { get; set; }
@@ -92,24 +105,8 @@ namespace BugTrackerWeb.Pages.QAView
         public string ProjectName { get; set; }
         public int ProjectId { get; set; }
         public int QaID { get; set; }
-        public List<string> TicketStatusType { get {
-                return ReturnDropDownListValues<TicketStatus>(EnumUtil.GetValues<TicketStatus>());
-            }
-        }
-
         public string TicketStatus { get; set; }
-        public List<string> TickerPriorityType { 
-            get {
-                return ReturnDropDownListValues<TicketPriority>(EnumUtil.GetValues<TicketPriority>());
-            }
-        }
         public string TicketPriority { get; set; }
-
-        public List<string> TicketCategoryType{ 
-            get {
-                return ReturnDropDownListValues<TicketCategory>(EnumUtil.GetValues<TicketCategory>());
-            }
-        }
         public string TicketCategory { get; set; }
         public DateTime Updated { get; set; }
         private static IEnumerable<TicketModelView> Transform(List<Ticket> tickets)
@@ -133,25 +130,10 @@ namespace BugTrackerWeb.Pages.QAView
                 };
             }
         }
-
-        public List<string> ReturnDropDownListValues<T>(IEnumerable<T> typeList)
-        {
-
-            List<string> categoryList = new List<string>();
-            foreach(var t in typeList)
-            {
-                categoryList.Add(t.ToString());
-            }
-            return categoryList;
-
-        }
-
         public static List<TicketModelView> CreateModelView(List<Ticket> tickets)
         {
             return Transform(tickets).ToList();
         }
-
-
     }
 
  

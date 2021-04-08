@@ -1,8 +1,8 @@
 ﻿@page
 @model BugTrackerWeb.Pages.QAView.ProjectDetailsModel
+@using BugTracker.Models.TicketProperties
 
 @{
-    @*<link rel="stylesheet" href="projectdetails.css" />*@
 
     if (Model.TicketList != null)
     {
@@ -46,6 +46,25 @@
         <article class="selected-ticket-content">
             <!--single item-->
             <div class="content active" id="details">
+                <h3>Ticket details</h3>
+
+                <h5>Ticket title</h5>
+                <li id="ticketTitle"></li>
+
+                <h5>Description</h5>
+                <li id="ticketPriority"></li>
+
+                <h5>Ticket category</h5>
+                <li id="ticketDescription"></li>
+
+                <h5>Ticket priority</h5>
+                <li id="ticketCategory"></li>
+
+                <h5>Ticket status</h5>
+                <li id="ticketStatus"></li>
+
+                <h5>Author</h5>
+                <li id="ticketAuthor"></li>
             </div>
             <!--end ofsingle item-->
             <!--single item-->
@@ -59,9 +78,8 @@
             <div class="content" id="change-status">
                 <form id="edit_ticket" method="post">
                     <div class="form-group">
-                        <label asp-for="EditedTicket.Status" class="control-label"></label>
-                        <select asp-for="EditedTicket.Status" class="form-control" asp-items="@Model.TicketStatDDLOptions"></select>
-                        <span asp-validation-for="EditedTicket.Status" class="text-danger"></span>
+                        <label asp-for="EditedTicket.TicketStatus" class="control-label"></label>
+                        <select asp-for="EditedTicket.TicketStatus" class="form-control" asp-items="Html.GetEnumSelectList<TicketStatus>()"></select>
                     </div>
                     <div class="form-group">
                         <label asp-for="EditedTicket.Description">Description</label>

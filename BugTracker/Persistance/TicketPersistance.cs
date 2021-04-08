@@ -127,6 +127,16 @@ namespace BugTracker.Persistance
             _ctx.Tickets.Add(assignedTicket);
             _ctx.SaveChanges();
         }
+
+        public async Task<Ticket> FindById(int id)
+        {
+            return await _ctx.Tickets.FindAsync(id);
+        }
+
+        public async Task UpdateTicket()
+        {
+            await _ctx.SaveChangesAsync();
+        }
     }
 }
 

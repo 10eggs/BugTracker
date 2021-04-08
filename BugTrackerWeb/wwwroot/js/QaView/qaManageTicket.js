@@ -17,14 +17,15 @@ const updateTicketBtn = $('#update-ticket');
 const ticketForm = $('#edit_ticket');
 
 
-//function getUpTickVals() {
-//    updatedTicketVals.status = $('#ticketstatus').val();
-//    updatedTicketVals.description = $('#ticketdescription').val();
-//    return updatedTicketVals;
-//}
-
+ticketTitle = $('#ticketTitle');
+ticketDesc = $('#ticketDescription');
+ticketCategory = $('#ticketCategory');
+ticketPriority = $('#ticketPriority');
+ticketStatus = $('#ticketStatus');
+ticketAuthor = $('#ticketAuthor');
 
 $(document).ready(function () {
+
     $('#tickets').on('click', '.clickable-row', function (event) {
         $(this).addClass('bg-info').siblings().removeClass('bg-info');
         ticketId = $(this).find('#ticketId').html();
@@ -40,29 +41,12 @@ $(document).ready(function () {
             },
             data: { 'ticketid': ticketId }
         }).done(function (response) {
-            console.log(response);
-
-            //Comments are reduntant. Write your code in a way where you dont need to comment it out (hypocrite-style ouuu yeee)
-            //Populate details
-            var detailsContent = `<h3>Ticket details</h3>
-                        <li>${response.title}</li>
-                        <h5>Description</h5>
-                        <li>${response.description}</li>
-                        <h5>Ticket status</h5>
-                        <li>${response.ticketStatus}</li>
-                        <h5>Author</h5>
-                        <li>${response.requestAuthor}</li>`
-            ticketDetailsTab.html(detailsContent);
-
-            //Populate drop down list for ticket details
-            //if (ticketStatusDDL.is(':empty')) {
-            //    console.log('EMPTY!');
-            //    $.each(response.ticketStatusType, function (key, entry) {
-            //        ticketStatusDDL.append($('<option></option>').attr('value', key).text(entry));
-            //    })
-            //}
-
-
+            ticketTitle.text(response.title);
+            ticketDesc.text(response.description);
+            ticketCategory.text(response.ticketCategory);
+            ticketPriority.text(response.ticketPriority);
+            ticketStatus.text(response.ticketStatus);
+            ticketAuthor.text(response.author);
         })
     }),
 
@@ -86,6 +70,7 @@ $(document).ready(function () {
         updateTicketBtn.click(async function (e) {
             e.preventDefault();
             var serializedForm = $('#edit_ticket').serialize();
+            serializedForm += "&EditedTicket.TicketId=" + ticketId;
             console.log('This is serialized form: ', serializedForm);
 
             await $.ajax({
@@ -111,10 +96,3 @@ $(document).ready(function () {
 });
 
 
-//Pass serialized array
-//function objectifyForm(formArray) {//serialize data function
-//    var returnArray = {};
-//    for (var i = 0; i < formArray.length; i++) {
-//        returnArray[formArray[i]['name']] = formArray[i]['value'];
-//    }
-//    return returnArray;
