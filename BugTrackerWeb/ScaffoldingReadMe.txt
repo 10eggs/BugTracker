@@ -17,3 +17,18 @@
 //        returnArray[formArray[i]['name']] = formArray[i]['value'];
 //    }
 //    return returnArray;
+
+
+
+//public static class UrlBuilderExtensions{
+public static UrlBuilder id(this UrlBuilder urlBuilder)=> urlBuilder.Add()
+}
+
+public class UrlBuilder{
+    public List<string> FirledsToInclude = new();
+    public UrlBuilder Add([CallerMemberName] string callSite = null)
+    {
+        FieldsToInclude.Add(callSite);
+        return this;
+    }
+}

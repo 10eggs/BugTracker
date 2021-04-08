@@ -6,11 +6,14 @@
     <title>@ViewData["Title"] - BugTrackerWeb</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/simple-sidebar/css/simple-sidebar.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
-    <link rel="stylesheet" href="~/css/projectdetails.css"/>
+    <link rel="stylesheet" href="~/css/projectdetails.css" />
+    @*<link rel="stylesheet" href="~/css/simpleSidebar.css" />*@
+
 </head>
 <body>
     <header>
@@ -32,27 +35,51 @@
             </div>
         </nav>
     </header>
-
-    <div class="container">
-        @*<div class="row">
-            @if (User.Identity.IsAuthenticated)
-            {
-                <div class="col-3">
-                    <partial name="_SidebarPartial" />
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="d-flex" id="wrapper">
+            <!--left side nav-->
+            <div id="sidebar-wrapper">
+                <div class="sidebar-heading">Start Bootstrap </div>
+                <div class="list-group list-group-flush">
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Shortcuts</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Overview</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
                 </div>
-            }
-        </div>*@
+            </div>
+            <!--/#sidebar-wrapper-->
+
+            <!--Page Content-->
+            <div id="page-content-wrapper">
+                @*<a id="menu-toggle" href="#menu-toggle" class="btn btn-secondary">三</a>*@
+                <div class="container">
+                    @RenderBody()
+                </div>
+                <footer class="border-top footer text-muted">
+                    <div class="container">
+                        &copy; 2021 - BugTrackerWeb - <a asp-area="" asp-page="/Privacy">Privacy</a>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="container">
             <main role="main" class="pb-3">
                 @RenderBody()
             </main>
-  
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - BugTrackerWeb - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
-    </footer>
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2021 - BugTrackerWeb - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            </div>
+        </footer>
+    }
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -65,3 +92,13 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
+@*<div class="row">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="col-3">
+                <partial name="_SidebarPartial" />
+            </div>
+        }
+    </div>*@
