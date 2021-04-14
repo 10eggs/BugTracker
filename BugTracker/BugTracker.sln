@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugTrackerTests", "..\BugTr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugTrackerWeb", "..\BugTrackerWeb\BugTrackerWeb.csproj", "{98D62D13-0C54-45AD-BEAF-46B8656ECCAD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{36F2CF99-C852-409F-9AA3-898C07FBDE5E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{94AFB7E5-1A55-49EF-B543-ABA0165A19AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
