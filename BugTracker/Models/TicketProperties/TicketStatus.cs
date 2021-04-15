@@ -1,11 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BugTracker.Models.TicketProperties
+﻿namespace BugTracker.Models.TicketProperties
 {
     public enum TicketStatus
     {
-        None,Open,Completed
+        New,
+        Open,
+        Fixed,
+        PendingRetest,
+        Retest,
+        Verified,
+        ReOpen,
+        Closed,
+        Duplicate,
+        Rejected,
+        Deferred,
+        Completed,
+        NotABug
     }
 }
