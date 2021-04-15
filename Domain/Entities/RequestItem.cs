@@ -25,14 +25,13 @@ namespace Domain.Entities
                 {
                     DomainEvents.Add(new RequestItemAssignedEvent(this));
                 }
+
+                _assigned = value;
             }
 
         }
         public List<byte[]> Attachements { get; set; }
         public List<DomainEvent> DomainEvents { get; set; } = new List<DomainEvent>();
-        public RequestItem()
-        {
-        }
     }
 }
-}
+
