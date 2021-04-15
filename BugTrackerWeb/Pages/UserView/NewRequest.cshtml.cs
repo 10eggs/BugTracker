@@ -12,18 +12,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BugTrackerWeb.Pages.UserView
 {
-    public class CreateTicketModel : PageModel
+    public class NewRequestModel : PageModel
     {
-        private readonly AppDbContext _ctx;
         private readonly IRequestPersistance _rp;
         private readonly IProjectPersistance _pp;
-        private readonly ITicketPersistance _tp;
-        public CreateTicketModel(AppDbContext context, IRequestPersistance rp, IProjectPersistance pp, ITicketPersistance tp)
+        public NewRequestModel(AppDbContext context, IRequestPersistance rp, IProjectPersistance pp)
         {
-            _ctx = context;
             _rp = rp;
             _pp = pp;
-            _tp = tp;
         }
 
 
@@ -31,18 +27,14 @@ namespace BugTrackerWeb.Pages.UserView
         public Request NewRequest { get; set; }
 
         [BindProperty]
-        public int ProjectId { get; set; }
-
-        [BindProperty]
         public List<SelectListItem> ProjectListDDL { get; set; }
 
-
-        public void OnGet()
+        public async Task OnGet()
         {
             ProjectListDDL = PopulateProjectList();
-        }
 
-        public async Task<IActionResult> OnPost()
+        }
+        public async Task<IActionResult> OnPostSaveRequest()
         {
             if (ModelState.IsValid)
             {
@@ -55,13 +47,11 @@ namespace BugTrackerWeb.Pages.UserView
                 return Page();
             }
         }
-
         public void AssignUserToRequest()
         {
             NewRequest.Author = User.Identity.Name;
         }
 
-        //Maybe it could be generic at some point?
         public List<SelectListItem> PopulateProjectList()
         {
 
@@ -72,5 +62,7 @@ namespace BugTrackerWeb.Pages.UserView
 
             }).ToList();
         }
+
+
     }
 }

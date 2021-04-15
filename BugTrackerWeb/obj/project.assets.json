@@ -10122,9 +10122,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\TPawlak\\source\\repos\\BugTrackerProject\\BugTrackerWeb\\BugTrackerWeb.csproj",
-      "projectName": "BugTrackerWeb",
-      "projectPath": "C:\\Users\\TPawlak\\source\\repos\\BugTrackerProject\\BugTrackerWeb\\BugTrackerWeb.csproj",
+      "projectUniqueName": "C:\\Users\\TPawlak\\source\\repos\\BugTrackerProject\\BugTrackerWeb\\WebUI.csproj",
+      "projectName": "WebUI",
+      "projectPath": "C:\\Users\\TPawlak\\source\\repos\\BugTrackerProject\\BugTrackerWeb\\WebUI.csproj",
       "packagesPath": "C:\\Users\\TPawlak\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\TPawlak\\source\\repos\\BugTrackerProject\\BugTrackerWeb\\obj\\",
       "projectStyle": "PackageReference",

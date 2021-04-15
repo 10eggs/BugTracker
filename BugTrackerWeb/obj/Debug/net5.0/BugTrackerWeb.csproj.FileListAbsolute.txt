@@ -906,9 +906,13 @@ C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\R
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\QAView\ProjectDetails.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\Index.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\Shared\_SidebarPartial.cshtml.g.cs
-C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\CreateRequest.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\EditRequest.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\UpsertRequest.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\TIcketDetails.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\Shared\_EditTicketPartial.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\Shared\_SimpleSidebarPartial.cshtml.g.cs
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\NewRequest.cshtml.g.cs
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\PendingRequests.cshtml.g.cs
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\InProcessRequests.cshtml.g.cs
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\DeleteRequest.cshtml.g.cs
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\_TicketDetails.cshtml.g.cs

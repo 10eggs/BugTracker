@@ -1,0 +1,61 @@
+﻿@page
+@model BugTrackerWeb.Pages.UserView.InProcessRequestsModel
+<link rel="stylesheet" href="~/css/projectdetails.css" />
+
+@{
+    <h2 class="text-info">Requests in process</h2>
+
+    <div class="row">
+        <div class="col-8">
+            @if (Model.Tickets.Count() > 0)
+            {
+                <table id="requestsTable" class="table table-striped border table-sm">
+                    <tr class="table-secondary">
+                        <th>
+                            <label asp-for="Tickets.FirstOrDefault().Title"></label>
+                        </th>
+                        <th>
+                            <label asp-for="Tickets.FirstOrDefault().Description"></label>
+                        </th>
+                        <th>
+                            <label asp-for="Tickets.FirstOrDefault().TicketStatus"></label>
+                        </th>
+                        <th>
+                            <label asp-for="Tickets.FirstOrDefault().Date"></label>
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.Tickets)
+                    {
+                        <tr class="clickable-row">
+                            <td>
+                                @Html.DisplayFor(m => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.TicketStatus)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Date)
+                            </td>
+                            <td id="ticketId" style="display:none">@item.Id</td>
+                            <td>
+                                <button id="checkDetails" class="btn btn-success btn-sm text-white">Details</button>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>You don't have any tickets in processing</p>
+            }
+        </div>
+        <div class="col-sm" id="ticketDetails">Details</div>
+    </div>
+}
+
+@section Scripts{
+    <script src="~/js/UserView/inProcessReq.js"></script>
+}
