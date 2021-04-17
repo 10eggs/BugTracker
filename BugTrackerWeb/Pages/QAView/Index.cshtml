@@ -2,7 +2,7 @@
 @model BugTrackerWeb.Pages.QAView.IndexModel
 @{
     <p>Welcome my friend, @Model.QA.Name</p>
-    if (Model.QA.Projects.Count > 0)
+    if (Model.QA.Projects.ToList().Count > 0)
     {
         <h2>Your projects</h2>
         <table class="table table-striped border">
@@ -31,15 +31,12 @@
         </table>
     }
 
-    if (Model.QA.Tickets.Count > 0)
+    if (Model.QA.Tickets.ToList().Count > 0)
     {
         <table class="table table-striped border">
             <tr class="table-secondary">
                 <th>
                     <label asp-for="QA.Tickets.FirstOrDefault().Title"></label>
-                </th>
-                <th>
-                    <label asp-for="QA.Tickets.FirstOrDefault().Description"></label>
                 </th>
             </tr>
             @foreach (var p in Model.QA.Tickets)
@@ -47,9 +44,6 @@
                 <tr>
                     <td>
                         @Html.DisplayFor(m => p.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => p.Description)
                     </td>
                     <td>
                         <button class="btn btn-info form-control">Manage</button>

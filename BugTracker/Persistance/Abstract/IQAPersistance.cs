@@ -1,4 +1,4 @@
-﻿using BugTracker.Models;
+﻿using Domain.Entities.Roles;
 using System.Collections.Generic;
 
 namespace BugTracker.Persistance

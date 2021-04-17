@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,7 +19,6 @@
     <Folder Include="Common\Models\" />
     <Folder Include="Common\Exceptions\" />
     <Folder Include="Common\Security\" />
-    <Folder Include="RequestItems\Commands\" />
     <Folder Include="RequestItems\EventHandlers\" />
   </ItemGroup>
 

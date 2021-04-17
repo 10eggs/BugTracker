@@ -1,17 +1,18 @@
-﻿using BugTracker.DB;
-using BugTracker.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System;
+using Domain.Entities;
+using Infrastructure.Persistance;
+using Domain.Entities.Roles;
 
 namespace BugTracker.Persistance
 {
     public class ProjectPersistance : IProjectPersistance
     {
-        private AppDbContext _ctx;
-        public ProjectPersistance(AppDbContext context)
+        private ApplicationDbContext _ctx;
+        public ProjectPersistance(ApplicationDbContext context)
         {
             _ctx = context;
         }
@@ -47,7 +48,8 @@ namespace BugTracker.Persistance
             return _ctx.Project.Include(p => p.QAs)
                 .Where(p => p.Id == projId)
                 .Select(p => p.QAs)
-                .SingleOrDefault();
+                .SingleOrDefault()
+                .ToList();
         }
 
         public List<Project> GetOwnedBy(ProjectOwner po)
@@ -61,13 +63,13 @@ namespace BugTracker.Persistance
 
         public List<Ticket> GetRelatedTickets(Project project)
         {
-            //EF.Property<int>(e, "Id")
             return _ctx.Project
                 .Include(e => e.ProjectOwner)
                 .Include(e => e.Tickets)
-                .Where(e => project.Name==e.Name)
+                .Where(e => project.Name == e.Name)
                 .SingleOrDefault()
-                .Tickets;
+                .Tickets
+                .ToList();
         }
 
         public void Save(Project t)
@@ -79,19 +81,20 @@ namespace BugTracker.Persistance
         public void AssignQa(int projectId, QA qa)
         {
             var proj = GetProject(projectId);
-            proj.QAs.Add(qa);
+            proj.QAs.ToList().Add(qa);
             _ctx.SaveChanges();
         }
 
         public async Task<List<Ticket>> GetRelatedTicketsAsync(int projectId)
         {
-            return await _ctx.Project
+            var projects = await _ctx.Project
                 .Where(p => p.Id == projectId)
-                .Include(e => e.ProjectOwner)
                 //Then include error prone
-                .Include(e => e.Tickets).ThenInclude(t=>t.Qa)
-                .Select(t => t.Tickets)
-                .SingleOrDefaultAsync();
+                .Include(e => e.Tickets).ThenInclude(t => t.Qa).ToListAsync();
+
+                 return projects.SingleOrDefault().Tickets.ToList();
+                //.SingleOrDefaultAsync();
+                
         }
 
         public async Task<List<Ticket>> GetRelatedUnassignedTicketsAsync(int projectId)
@@ -114,12 +117,12 @@ namespace BugTracker.Persistance
                 .Include(e => e.ProjectOwner)
                 .Include(e => e.Tickets)
                 .Where(e => e.Id == projectId )
-                .Select(e => e.Tickets.Where(t=>t.IsAssigned==true).ToList()).SingleOrDefaultAsync();
+                .Select(e => e.Tickets.ToList()).SingleOrDefaultAsync();
 
             return assignedTickets;
         }
 
-        public async Task<List<Request>> GetRelatedRequestsAsync(int projId)
+        public async Task<List<RequestItem>> GetRelatedRequestsAsync(int projId)
         {
             var requests = await _ctx.Project
                 .Where(p=>p.Id==projId)

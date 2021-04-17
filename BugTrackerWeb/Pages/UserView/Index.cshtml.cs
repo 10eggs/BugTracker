@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using BugTracker.DB;
-using BugTracker.Models;
 using BugTracker.Persistance;
 using BugTracker.Persistance.Abstract;
+using Domain.Entities;
+using Infrastructure.Persistance;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -18,11 +18,11 @@ namespace BugTrackerWeb.Pages.UserView
     [Authorize]
     public class IndexModel : PageModel
     {
-        private readonly AppDbContext _ctx;
+        private readonly ApplicationDbContext _ctx;
         private readonly ITicketPersistance _tp;
         private readonly IProjectPersistance _pp;
         private readonly IRequestPersistance _rp;
-        public IndexModel(AppDbContext ctx, ITicketPersistance tp, IProjectPersistance pp, IRequestPersistance rp)
+        public IndexModel(ApplicationDbContext ctx, ITicketPersistance tp, IProjectPersistance pp, IRequestPersistance rp)
         {
             _ctx = ctx;
             _tp = tp;
@@ -30,11 +30,11 @@ namespace BugTrackerWeb.Pages.UserView
             _rp = rp;
         }
 
-        public List<Request> Requests { get; set; }
+        public List<RequestItem> Requests { get; set; }
         public List<Ticket> Tickets { get; set; }
 
         [BindProperty]
-        public Request NewRequest { get; set; }
+        public RequestItem NewRequest { get; set; }
 
         [BindProperty]
         public int ProjectId { get; set; }

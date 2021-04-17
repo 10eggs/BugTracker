@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BugTracker.DB;
-using BugTracker.Models;
 using BugTracker.Persistance;
+using Domain.Entities;
+using Infrastructure.Persistance;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -12,9 +12,9 @@ namespace BugTrackerWeb.Pages.Dashboard
 {
     public class EditTicketModel : PageModel
     {
-        private readonly AppDbContext _ctx;
+        private readonly ApplicationDbContext _ctx;
         private readonly ITicketPersistance tp;
-        public EditTicketModel(AppDbContext context)
+        public EditTicketModel(ApplicationDbContext context)
         {
             _ctx = context;
            
@@ -43,7 +43,7 @@ namespace BugTrackerWeb.Pages.Dashboard
                     var tp = new TicketPersistance(_ctx);
                     var et = await tp.GetByIdAsync(EditedTicket.Id);
 
-                    await tp.Edit(et, EditedTicket.Title, EditedTicket.Description);
+                    await tp.Edit(et, EditedTicket.Title);
                     await _ctx.SaveChangesAsync();
                 }
                 return RedirectToPage("Index");

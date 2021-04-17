@@ -1,5 +1,6 @@
-﻿using BugTracker.DB;
-using BugTracker.Models;
+﻿using Domain.Entities;
+using Domain.Entities.Roles;
+using Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,8 @@ namespace BugTracker.Persistance
 {
     public class TicketPersistance : ITicketPersistance
     {
-        private readonly AppDbContext _ctx;
-        public TicketPersistance(AppDbContext context)
+        private readonly ApplicationDbContext _ctx;
+        public TicketPersistance(ApplicationDbContext context)
         {
             _ctx = context;
         }
@@ -69,10 +70,9 @@ namespace BugTracker.Persistance
             return await _ctx.Tickets.FindAsync(i);
         }
 
-        public async Task Edit(Ticket t, string title, string description)
+        public async Task Edit(Ticket t, string title)
         {
             t.Title = title;
-            t.Description = description;
             await _ctx.SaveChangesAsync();
         }
 
@@ -137,6 +137,7 @@ namespace BugTracker.Persistance
         {
             await _ctx.SaveChangesAsync();
         }
+
     }
 }
 

@@ -1,7 +1,7 @@
-﻿using BugTracker.DB;
-using BugTracker.Models;
-using BugTracker.Persistance;
+﻿using BugTracker.Persistance;
 using BugTracker.Persistance.Abstract;
+using Domain.Entities;
+using Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +11,11 @@ namespace BugTracker.PageManagers
 {
     public class TicketManager : ITicketManager
     {
-        private AppDbContext _ctx;
+        private ApplicationDbContext _ctx;
         private ITicketPersistance _tp;
         private IRequestPersistance _rp;
         private IQAPersistance _qap;
-        public TicketManager(AppDbContext ctx, IRequestPersistance rp,ITicketPersistance tp, IQAPersistance qap)
+        public TicketManager(ApplicationDbContext ctx, IRequestPersistance rp,ITicketPersistance tp, IQAPersistance qap)
         {
             _ctx = ctx;
             _tp = tp;

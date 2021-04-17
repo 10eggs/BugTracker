@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using BugTracker.DB;
-using BugTracker.Models;
 using BugTracker.Persistance;
+using Domain.Entities;
+using Infrastructure.Persistance;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -12,9 +9,9 @@ namespace BugTrackerWeb.Pages.Dashboard
 {
     public class UpsertModel : PageModel
     {
-        private readonly AppDbContext _ctx;
+        private readonly ApplicationDbContext _ctx;
         private readonly ITicketPersistance tp;
-        public UpsertModel(AppDbContext context)
+        public UpsertModel(ApplicationDbContext context)
         {
             _ctx = context;
         }
@@ -61,7 +58,7 @@ namespace BugTrackerWeb.Pages.Dashboard
                     {
                         //tp.Update would update every field in the book
                         var et = await tp.GetByIdAsync(EditedTicket.Id);
-                        await tp.Edit(et, EditedTicket.Title, EditedTicket.Description);
+                        await tp.Edit(et, EditedTicket.Title);
                     }
 
                 }

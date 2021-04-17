@@ -1,22 +1,18 @@
-using BugTracker.DB;
-using BugTracker.Models;
+using Application;
+using Application.Common.Interfaces;
 using BugTracker.PageManagers;
 using BugTracker.Persistance;
 using BugTracker.Persistance.Abstract;
-using BugTracker.Utils;
+using Infrastructure;
+using Infrastructure.Persistance;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using WebUI.Services;
 
 namespace BugTrackerWeb
 {
@@ -33,13 +29,16 @@ namespace BugTrackerWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDbContext<AppIdentityDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddApplication();
+            services.AddInfrastructure(Configuration);
+
+            //services.AddDbContext<AppDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationIdentityDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMemoryCache();
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<AppIdentityDbContext>();
+                .AddEntityFrameworkStores<ApplicationIdentityDbContext>();
 
             services.AddScoped<IRequestPersistance, RequestPersistance>();
             services.AddScoped<ITicketPersistance, TicketPersistance>();
@@ -47,6 +46,8 @@ namespace BugTrackerWeb
             services.AddScoped<IProjectPersistance, ProjectPersistance>();
             services.AddScoped<IQAPersistance, QAPersistance>();
             services.AddScoped<IQAManager, QAManager>();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddScoped<IDateTime, DateTimeService>();
 
             services.AddScoped<ITicketManager, TicketManager>();
 

@@ -1,4 +1,5 @@
-﻿using BugTracker.Models;
+﻿using Domain.Entities;
+using Domain.Entities.Roles;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -19,7 +20,7 @@ namespace BugTracker.Persistance
         public Task<List<Ticket>> GetRelatedAssignedTicketsAsync(int projectId);
         public void AssignQa(int projectId, QA qa);
         public List<QA> GetAssignedQAs(int projId);
-        public Task<List<Request>> GetRelatedRequestsAsync(int projId);
+        public Task<List<RequestItem>> GetRelatedRequestsAsync(int projId);
 
     }
 }

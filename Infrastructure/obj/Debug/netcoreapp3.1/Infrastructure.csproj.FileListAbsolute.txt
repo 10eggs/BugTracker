@@ -7,3 +7,8 @@ C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\obj\Debug\netcore
 C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.dll
 C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.pdb
 C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.csprojAssemblyReference.cache
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\bin\Debug\netcoreapp3.1\Application.dll
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\bin\Debug\netcoreapp3.1\Domain.dll
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\bin\Debug\netcoreapp3.1\Application.pdb
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\bin\Debug\netcoreapp3.1\Domain.pdb
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.csproj.CopyComplete

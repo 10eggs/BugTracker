@@ -1,12 +1,12 @@
-﻿using BugTracker.DB;
-using BugTracker.Models;
-using BugTracker.Persistance;
+﻿using BugTracker.Persistance;
 using BugTracker.Persistance.Abstract;
+using Infrastructure.Persistance;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain.Entities;
 
 namespace BugTrackerWeb.Controllers
 {
@@ -14,9 +14,9 @@ namespace BugTrackerWeb.Controllers
     [ApiController]
     public class RequestController : Controller
     {
-        private readonly AppDbContext _ctx;
+        private readonly ApplicationDbContext _ctx;
         private readonly IRequestPersistance _rp;
-        public RequestController(AppDbContext ctx, IRequestPersistance rp)
+        public RequestController(ApplicationDbContext ctx, IRequestPersistance rp)
         {
             _ctx = ctx;
             _rp = rp;
@@ -63,15 +63,15 @@ namespace BugTrackerWeb.Controllers
             public string Project { get; set; }
             //Delete later
             public string Author { get; set; }
-            private static IEnumerable<RequestView> Transform(List<Request> requests)
+            private static IEnumerable<RequestView> Transform(List<RequestItem> requests)
             {
                 foreach (var r in requests)
                 {
-                    yield return new RequestView { Id = r.Id, Title = r.Title, Description = r.Description, Project=r.Project.Name  };
+                    yield return new RequestView { Id = r.Id, Title = r.Title, Project=r.Project.Name  };
                 }
             }
 
-            public static List<RequestView> CreateModelView(List<Request> requests)
+            public static List<RequestView> CreateModelView(List<RequestItem> requests)
             {
                 return Transform(requests).ToList();
             }

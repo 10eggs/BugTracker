@@ -1,19 +1,18 @@
-﻿using BugTracker.DB;
-using BugTracker.Models;
-using BugTracker.Persistance;
-using System;
+﻿using BugTracker.Persistance;
+using Domain.Entities.Roles;
+using Infrastructure.Persistance;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace BugTracker.PageManagers
 {
     public class QAManager:IQAManager
     {
-        AppDbContext _ctx;
+        ApplicationDbContext _ctx;
 
         private IProjectPersistance _ipp;
         private IQAPersistance _qap;
-        public QAManager(AppDbContext ctx)
+        public QAManager(ApplicationDbContext ctx)
         {
             _ipp = new ProjectPersistance(ctx);
             _qap = new QAPersistance(ctx);
@@ -31,7 +30,7 @@ namespace BugTracker.PageManagers
             //This will need to be refeactored later?
             var proj = _ipp.GetProject(projId);
             var qa = _qap.Get(qaId);
-            proj.QAs.Remove(qa);
+            proj.QAs.ToList().Remove(qa);
             _ctx.SaveChanges();
 
         }

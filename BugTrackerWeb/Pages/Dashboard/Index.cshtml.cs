@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using BugTracker.DB;
-using BugTracker.Models;
 using BugTracker.Persistance;
 using BugTracker.Persistance.Abstract;
+using Domain.Entities;
+using Infrastructure.Persistance;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -16,17 +14,17 @@ namespace BugTrackerWeb.Pages.Dashboard
     [Authorize]
     public class IndexModel : PageModel
     {
-        private readonly AppDbContext _ctx;
+        private readonly ApplicationDbContext _ctx;
         private readonly ITicketPersistance _tp;
         private readonly IRequestPersistance _rp;
-        public IndexModel(AppDbContext ctx, ITicketPersistance tp, IRequestPersistance rp)
+        public IndexModel(ApplicationDbContext ctx, ITicketPersistance tp, IRequestPersistance rp)
         {
             _ctx = ctx;
             _tp = tp;
             _rp = rp;
         }
 
-        public List<Request> Requests { get; set; }
+        public List<RequestItem> Requests { get; set; }
 
 
         public async Task OnGet()

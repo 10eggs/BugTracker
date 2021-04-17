@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using BugTracker.Models;
 using BugTracker.Models.TicketProperties;
 using BugTracker.Persistance;
 using BugTracker.Utils;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -71,15 +70,15 @@ namespace BugTrackerWeb.Pages.QAView
                  return new JsonResult(new { success = false, errormessage = "ModelState is invalid, try again" });
             }
 
-            var editedTicket= await _tp.FindById(response.TicketId);
+            //var editedTicket= await _tp.FindById(response.TicketId);
 
-            if(await TryUpdateModelAsync(
-                editedTicket,
-                "EditedTicket",
-                t=>t.Description,t=>t.TicketStatus))
-            {
-                await _tp.UpdateTicket();
-            }
+            //if(await TryUpdateModelAsync(
+            //    editedTicket,
+            //    "EditedTicket",
+            //    t=>t.Description,t=>t.TicketStatus))
+            //{
+            //    await _tp.UpdateTicket();
+            //}
 
 
              return new JsonResult(new { success = true, message = "Model state is valid here!" });
@@ -115,10 +114,8 @@ namespace BugTrackerWeb.Pages.QAView
             {
                 yield return new TicketModelView { Id = t.Id,
                     Title = t.Title,
-                    Description = t.Description,
                     Author = t.Author,
                     RequestAuthor = t.RequestAuthor,
-                    Date = t.Date,
                     ProjectName = t.Project.Name,
                     ProjectId = t.ProjectId,
                     QaID = t.QaID,

@@ -1,27 +1,25 @@
-﻿using BugTracker.Models;
-using System;
+﻿using Domain.Entities;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BugTracker.Persistance.Abstract
 {
     public interface IRequestPersistance
     {
-        public Task SaveAsync(Request req);
+        public Task SaveAsync(RequestItem req);
         //Task Save(Request req);
-        Task<Request> GetByIdAsync(int? i);
-        Request GetById(int i);
-        public List<Request> GetAll();
-        public Task<List<Request>> GetAllAsync();
-        public List<Request> GetCreatedByAuthor(string author);
-        public Task<List<Request>> GetCreatedByAuthorAsync(string author);
-        public List<Request> GetAssignedToProject(int projectId);
-        public Task Edit(Request t, string title, string description);
+        Task<RequestItem> GetByIdAsync(int? i);
+        RequestItem GetById(int i);
+        public List<RequestItem> GetAll();
+        public Task<List<RequestItem>> GetAllAsync();
+        public List<RequestItem> GetCreatedByAuthor(string author);
+        public Task<List<RequestItem>> GetCreatedByAuthorAsync(string author);
+        public List<RequestItem> GetAssignedToProject(int projectId);
+        public Task Edit(RequestItem t, string title);
         public void DeleteById(int id);
         public Task DeleteByIdAsync(int id);
-        public void Delete(Request t);
-        public Task DeleteAsync(Request t);
+        public void Delete(RequestItem t);
+        public Task DeleteAsync(RequestItem t);
 
     }
 }

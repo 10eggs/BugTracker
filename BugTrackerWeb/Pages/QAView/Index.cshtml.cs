@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using BugTracker.Models;
 using BugTracker.Persistance;
+using Domain.Entities;
+using Domain.Entities.Roles;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -31,7 +32,7 @@ namespace BugTrackerWeb.Pages.QAView
         public void OnGet()
         {
             QA = _qap.GetByUserId(_um.GetUserId(HttpContext.User));
-            Projects = QA.Projects;
+            Projects = QA.Projects.ToList();
 
         }
 

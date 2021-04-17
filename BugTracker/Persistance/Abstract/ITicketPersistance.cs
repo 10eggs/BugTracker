@@ -1,4 +1,5 @@
-﻿using BugTracker.Models;
+﻿using Domain.Entities;
+using Domain.Entities.Roles;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -18,7 +19,7 @@ namespace BugTracker.Persistance
         public Task<List<Ticket>> GetCreatedByAuthorAsync(string author);
         public Task<List<Ticket>> GetByRequestAuthor(string author);
         public List<Ticket> GetAssignedToProject(int projectId);
-        public Task Edit(Ticket t, string title, string description);
+        public Task Edit(Ticket t, string title);
         public Task DeleteById(int id);
         public Task Delete(Ticket t);
 

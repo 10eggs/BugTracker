@@ -1,6 +1,6 @@
-﻿using BugTracker.DB;
-using BugTracker.Models;
-using BugTracker.Persistance.Abstract;
+﻿using BugTracker.Persistance.Abstract;
+using Domain.Entities;
+using Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,19 +12,19 @@ namespace BugTracker.Persistance
 {
     public class RequestPersistance : IRequestPersistance
     {
-        private readonly AppDbContext _ctx;
-        public RequestPersistance(AppDbContext ctx)
+        private readonly ApplicationDbContext _ctx;
+        public RequestPersistance(ApplicationDbContext ctx)
         {
             _ctx = ctx;
         }
 
-        public void Delete(Request req)
+        public void Delete(RequestItem req)
         {
             _ctx.Remove(req);
             _ctx.SaveChanges();
         }
 
-        public async Task DeleteAsync(Request req)
+        public async Task DeleteAsync(RequestItem req)
         {
             _ctx.Remove(req);
             await _ctx.SaveChangesAsync();
@@ -44,49 +44,48 @@ namespace BugTracker.Persistance
             await _ctx.SaveChangesAsync();
         }
 
-        public async Task Edit(Request req, string title, string description)
+        public async Task Edit(RequestItem req, string title)
         {
             req.Title = title;
-            req.Description = description;
             await _ctx.SaveChangesAsync();
         }
 
-        public List<Request> GetAll()
+        public List<RequestItem> GetAll()
         {
             return _ctx.Requests.ToList();
         }
 
-        public Task<List<Request>> GetAllAsync()
+        public Task<List<RequestItem>> GetAllAsync()
         {
             return _ctx.Requests.ToListAsync();
         }
 
-        public List<Request> GetAssignedToProject(int projectId)
+        public List<RequestItem> GetAssignedToProject(int projectId)
         {
             return _ctx.Requests.Include(t => t.Project)
                 .Where(t => t.ProjectId == projectId)
                 .ToList();
         }
 
-        public Request GetById(int id)
+        public RequestItem GetById(int id)
         {
             return _ctx.Requests.Where(t => t.Id == id)
                 .SingleOrDefault();
         }
 
-        public async Task<Request> GetByIdAsync(int? id)
+        public async Task<RequestItem> GetByIdAsync(int? id)
         {
             return await _ctx.Requests.FindAsync(id);
         }
 
-        public List<Request> GetCreatedByAuthor(string author)
+        public List<RequestItem> GetCreatedByAuthor(string author)
         {
             return _ctx.Requests    
                 .Where(t => t.Author == author)
                 .ToList();
         }
 
-        public async Task<List<Request>> GetCreatedByAuthorAsync(string author)
+        public async Task<List<RequestItem>> GetCreatedByAuthorAsync(string author)
         {
             return await _ctx.Requests.Where(r => r.Author == author)
                 .Include(r => r.Project)
@@ -95,7 +94,7 @@ namespace BugTracker.Persistance
         }
 
         //This is weird behavior of ef which doesnt save a record! Need to be verified
-        public async Task SaveAsync(Request req)
+        public async Task SaveAsync(RequestItem req)
         {
             await _ctx.Requests.AddAsync(req);
             await _ctx.SaveChangesAsync();

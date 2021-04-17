@@ -1,6 +1,6 @@
-﻿using BugTracker.DB;
-using BugTracker.Models;
+﻿using BugTracker.Models;
 using BugTracker.Repositories.Abstract;
+using Infrastructure.Persistance;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,15 +10,15 @@ namespace BugTracker.Repositories
 {
     class RequestRepository:Repository<Request>,IRequestRepository
     {
-        public RequestRepository(AppDbContext context)
+        public RequestRepository(ApplicationDbContext context)
             : base(context)
         {
 
         }
 
-        public AppDbContext Ctx
+        public ApplicationDbContext Ctx
         {
-            get { return Context as AppDbContext; }
+            get { return Context as ApplicationDbContext; }
 
         }
 

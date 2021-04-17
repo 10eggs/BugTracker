@@ -1,25 +1,24 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BugTracker.DB;
 using BugTracker.Persistance;
-using BugTracker.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using BugTracker.Persistance.Abstract;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
+using Infrastructure.Persistance;
+using Domain.Entities;
 
 namespace BugTrackerWeb.Pages.Dashboard
 {
     public class CreateTicketModel : PageModel
     {
-        private readonly AppDbContext _ctx;
+        private readonly ApplicationDbContext _ctx;
         private readonly IRequestPersistance _rp;
         private readonly IProjectPersistance _pp;
         private readonly ITicketPersistance _tp;
-        public CreateTicketModel(AppDbContext context, IRequestPersistance rp, IProjectPersistance pp,ITicketPersistance tp)
+        public CreateTicketModel(ApplicationDbContext context, IRequestPersistance rp, IProjectPersistance pp,ITicketPersistance tp)
         {
             _ctx = context;
             _rp = rp;
@@ -29,7 +28,7 @@ namespace BugTrackerWeb.Pages.Dashboard
 
         
         [BindProperty]
-        public Request NewRequest { get; set; }
+        public RequestItem NewRequest { get; set; }
 
         [BindProperty]
         public int ProjectId { get; set; }

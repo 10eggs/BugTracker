@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BugTracker.DB;
-using BugTracker.Models;
 using BugTracker.Persistance;
+using Domain.Entities;
+using Infrastructure.Persistance;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -13,7 +13,7 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
     public class ProjectDetailsModel : PageModel
     {
         private ITicketPersistance _tp;
-        public ProjectDetailsModel(AppDbContext ctx, ITicketPersistance tp)
+        public ProjectDetailsModel(ApplicationDbContext ctx, ITicketPersistance tp)
         {
             _tp = tp;
         }

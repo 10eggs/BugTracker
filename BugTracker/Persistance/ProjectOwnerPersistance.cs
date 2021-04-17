@@ -1,16 +1,17 @@
-﻿using BugTracker.DB;
-using BugTracker.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using Infrastructure.Persistance;
+using Domain.Entities.Roles;
+using Domain.Entities;
 
 namespace BugTracker.Persistance
 {
     public class ProjectOwnerPersistance : IProjectOwnerPersistance
     {
-        private AppDbContext _ctx;
-        public ProjectOwnerPersistance(AppDbContext context)
+        private ApplicationDbContext _ctx;
+        public ProjectOwnerPersistance(ApplicationDbContext context)
         {
             _ctx = context;
         }

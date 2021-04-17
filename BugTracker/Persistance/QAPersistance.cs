@@ -1,5 +1,5 @@
-﻿using BugTracker.DB;
-using BugTracker.Models;
+﻿using Domain.Entities.Roles;
+using Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +8,8 @@ namespace BugTracker.Persistance
 {
     public class QAPersistance : IQAPersistance
     {
-        private AppDbContext _ctx;
-        public QAPersistance(AppDbContext ctx)
+        private ApplicationDbContext _ctx;
+        public QAPersistance(ApplicationDbContext ctx)
         {
             _ctx = ctx;
         }

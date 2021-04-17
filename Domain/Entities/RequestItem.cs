@@ -30,7 +30,7 @@ namespace Domain.Entities
             }
 
         }
-        public List<byte[]> Attachements { get; set; }
+        public byte[] Attachements { get; set; }
         public List<DomainEvent> DomainEvents { get; set; } = new List<DomainEvent>();
     }
 }

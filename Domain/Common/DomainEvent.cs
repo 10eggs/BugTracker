@@ -4,12 +4,13 @@ using System.Text;
 
 namespace Domain.Common
 {
-    interface IHasDomainEvent
+    public interface IHasDomainEvent
     {
         public List<DomainEvent> DomainEvents { get; set; }
     }
-    public abstract class DomainEvent
+    public class DomainEvent
     {
+        public int Id { get; set; }
         protected DomainEvent()
         {
             DataOccured = DateTimeOffset.UtcNow;

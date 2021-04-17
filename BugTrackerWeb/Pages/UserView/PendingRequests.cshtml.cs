@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BugTracker.Models;
 using BugTracker.Persistance;
 using BugTracker.Persistance.Abstract;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -38,15 +38,15 @@ namespace BugTrackerWeb.Pages.UserView
         public string Title { get; set; }
         public string Description { get; set; }
         public string Project { get; set; }
-        private static IEnumerable<RequestModelView> Transform(List<Request> requests)
+        private static IEnumerable<RequestModelView> Transform(List<RequestItem> requests)
         {
             foreach (var r in requests)
             {
-                yield return new RequestModelView { Id = r.Id, Title = r.Title, Description = r.Description, Project = r.Project.Name };
+                yield return new RequestModelView { Id = r.Id, Title = r.Title, Project = r.Project.Name };
             }
         }
 
-        public static List<RequestModelView> CreateModelView(List<Request> requests)
+        public static List<RequestModelView> CreateModelView(List<RequestItem> requests)
         {
             return Transform(requests).ToList();
         }

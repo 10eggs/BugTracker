@@ -1,15 +1,11 @@
-﻿using BugTracker.DB;
-using BugTracker.Models;
-using BugTracker.Persistance;
+﻿using BugTracker.Persistance;
 using BugTracker.Persistance.Abstract;
-using BugTrackerWeb.Pages.QAView;
+using Infrastructure.Persistance;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain.Entities;
 
 namespace BugTrackerWeb.Controllers
 {
@@ -19,11 +15,11 @@ namespace BugTrackerWeb.Controllers
 
     public class POViewController : Controller
     {
-        private AppDbContext _ctx;
+        private ApplicationDbContext _ctx;
         private readonly ITicketPersistance _tp;
         private IProjectPersistance _pp;
         private IRequestPersistance _rp;
-        public POViewController(AppDbContext ctx,IProjectPersistance pp, ITicketPersistance tp ,IRequestPersistance rp)
+        public POViewController(ApplicationDbContext ctx,IProjectPersistance pp, ITicketPersistance tp ,IRequestPersistance rp)
         {
             _ctx = ctx;
             _tp = tp;
@@ -64,7 +60,7 @@ namespace BugTrackerWeb.Controllers
             {
                 foreach(var t in tickets)
                 {
-                    yield return new TicketView { Id = t.Id.ToString(), Title = t.Title, Description = t.Description, Author = t.Author, QaName = t.Qa.Name };
+                    yield return new TicketView { Id = t.Id.ToString(), Title = t.Title, Author = t.Author, QaName = t.Qa.Name };
                 }
             }
 

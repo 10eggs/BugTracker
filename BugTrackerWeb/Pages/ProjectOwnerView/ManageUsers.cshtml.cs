@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using BugTracker.PageManagers;
 using Microsoft.AspNetCore.Mvc;
-using BugTracker.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Diagnostics;
+using Domain.Entities.Roles;
 
 namespace BugTrackerWeb.Pages.ProjectOwnerView
 {

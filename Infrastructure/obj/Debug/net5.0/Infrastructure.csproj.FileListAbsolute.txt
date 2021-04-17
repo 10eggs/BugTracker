@@ -1,0 +1,17 @@
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\bin\Debug\net5.0\Infrastructure.deps.json
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\bin\Debug\net5.0\Infrastructure.dll
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\bin\Debug\net5.0\ref\Infrastructure.dll
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\bin\Debug\net5.0\Infrastructure.pdb
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\bin\Debug\net5.0\Application.dll
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\bin\Debug\net5.0\Domain.dll
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\bin\Debug\net5.0\Application.pdb
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\bin\Debug\net5.0\Domain.pdb
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\obj\Debug\net5.0\Infrastructure.csprojAssemblyReference.cache
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\obj\Debug\net5.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\obj\Debug\net5.0\Infrastructure.AssemblyInfoInputs.cache
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\obj\Debug\net5.0\Infrastructure.AssemblyInfo.cs
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\obj\Debug\net5.0\Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\obj\Debug\net5.0\Infrastructure.csproj.CopyComplete
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\obj\Debug\net5.0\Infrastructure.dll
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\obj\Debug\net5.0\ref\Infrastructure.dll
+C:\Users\TPawlak\source\repos\BugTrackerProject\Infrastructure\obj\Debug\net5.0\Infrastructure.pdb

@@ -1,4 +1,5 @@
-﻿using BugTracker.Models;
+﻿using Domain.Entities;
+using Domain.Entities.Roles;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

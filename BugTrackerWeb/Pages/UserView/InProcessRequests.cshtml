@@ -15,13 +15,7 @@
                             <label asp-for="Tickets.FirstOrDefault().Title"></label>
                         </th>
                         <th>
-                            <label asp-for="Tickets.FirstOrDefault().Description"></label>
-                        </th>
-                        <th>
                             <label asp-for="Tickets.FirstOrDefault().TicketStatus"></label>
-                        </th>
-                        <th>
-                            <label asp-for="Tickets.FirstOrDefault().Date"></label>
                         </th>
                     </tr>
                     @foreach (var item in Model.Tickets)
@@ -31,13 +25,7 @@
                                 @Html.DisplayFor(m => item.Title)
                             </td>
                             <td>
-                                @Html.DisplayFor(m => item.Description)
-                            </td>
-                            <td>
                                 @Html.DisplayFor(m => item.TicketStatus)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m => item.Date)
                             </td>
                             <td id="ticketId" style="display:none">@item.Id</td>
                             <td>

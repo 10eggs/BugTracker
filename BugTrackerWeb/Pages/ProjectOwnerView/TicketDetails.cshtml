@@ -15,14 +15,12 @@
         <br />
         <label><b>Description</b></label>
         <br />
-        <tr>@Model.Request.Description</tr>
         <br />
         <label><b>Author</b></label>
         <br />
         <tr>@Model.Request.Author</tr>
         <br />
         <label><b>Created At</b></label>
-        <tr>@Model.Request.CreatedAt</tr>
         <br />
         //Need to be hidden
     }
@@ -39,7 +37,6 @@
             <input type="hidden" asp-for="@Model.Ticket.ProjectId" value="@Model.ProjectId">
             <input type="hidden" asp-for="@Model.Ticket.RequestAuthor" value="@Model.Request.Author">
             <input type="hidden" asp-for="@Model.Ticket.Author" value="@User.Identity.Name">
-            <input type="hidden" asp-for="@Model.Ticket.Updated" value="@DateTime.UtcNow">
 
 
             <div class="form-group">
@@ -48,12 +45,6 @@
                 <span asp-validation-for="Ticket.Title" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Ticket.Description" class="control-label"></label>
-                <input asp-for="Ticket.Description" class="form-control" value="@Model.Request.Description">
-                <span asp-validation-for="Ticket.Description" class="text-danger"></span>
-
-            </div>
 
             <div class="form-group">
                 <label asp-for="Ticket.TicketCategory" class="control-label"></label>

@@ -3,7 +3,7 @@ using Domain.Entities;
 
 namespace Domain.Events.RequesItemEvents
 {
-    class RequestItemAssignedEvent: DomainEvent
+    public class RequestItemAssignedEvent: DomainEvent
     {
         public RequestItemAssignedEvent(RequestItem item)
         {

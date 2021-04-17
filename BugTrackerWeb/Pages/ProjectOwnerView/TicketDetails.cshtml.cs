@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using BugTracker.Models;
 using BugTracker.Models.TicketProperties;
 using BugTracker.PageManagers;
 using BugTracker.Persistance;
 using BugTracker.Persistance.Abstract;
 using BugTracker.Utils;
+using Domain.Entities;
+using Domain.Entities.Roles;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -33,7 +34,7 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
         }
 
         [BindProperty]
-        public Request Request { get; set; }
+        public RequestItem Request { get; set; }
 
         [BindProperty]
         public Ticket Ticket { get; set; }
@@ -49,7 +50,7 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
 
         [BindProperty]
         public ICollection<QA> AvailableQAs { get; set; }
-
+        
         [BindProperty]
         public int QAId { get; set; }
 
@@ -71,7 +72,7 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
             ProjectId = Project.Id;
             RequestId = requestId;
 
-            AvailableQAs = Project.QAs;
+            AvailableQAs = Project.QAs.ToList();
 
             QAsList = AvailableQAs.Select(qa => new SelectListItem
             {
