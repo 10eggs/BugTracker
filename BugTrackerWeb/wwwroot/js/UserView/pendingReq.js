@@ -1,8 +1,8 @@
 ﻿var dataTable;
 
-$(document).ready(function () {
-    loadDataTable();
-})
+//$(document).ready(function () {
+//    loadDataTable();
+//})
 
 function loadDataTable() {
     dataTable = $('#DT_load').DataTable({
@@ -39,6 +39,35 @@ function loadDataTable() {
     });
 }
 
+//function Delete(data) {
+//    swal({
+//        title: "Are you sure?",
+//        text: "Once deleted, you will not be able to recover",
+//        icon: "warning",
+//        buttons: true,
+//        dangerMode: true,
+//    }).then((willDelete) => {
+//        if (willDelete) {
+//            $.ajax({
+//                type: "POST",
+//                buttons: true,
+//                url: `/UserView/DeleteRequest?handler=Delete&id=${data}`,
+//                beforeSend: function (xhr) {
+//                    xhr.setRequestHeader("XSRF-TOKEN",
+//                        $('input:hidden[name="__RequestVerificationToken"]').val());
+//                },
+//            }).done(function (response) {
+//                if (response.success) {
+//                    toastr.success(response.message);
+//                    dataTable.ajax.reload();
+//                }
+//                else
+//                    toastr.error(response.message);
+//            })
+//        }
+//    })
+//};
+
 function Delete(data) {
     swal({
         title: "Are you sure?",
@@ -51,7 +80,7 @@ function Delete(data) {
             $.ajax({
                 type: "POST",
                 buttons: true,
-                url: `/UserView/DeleteRequest?handler=Delete&id=${data}`,
+                url: `/UserView/PendingRequests?handler=Delete&id=${data}`,
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("XSRF-TOKEN",
                         $('input:hidden[name="__RequestVerificationToken"]').val());
@@ -59,23 +88,19 @@ function Delete(data) {
             }).done(function (response) {
                 if (response.success) {
                     toastr.success(response.message);
-                    dataTable.ajax.reload();
                 }
-                else
+                else {
                     toastr.error(response.message);
+                }
+                setTimeout(function () {
+                    location.reload();
+                },3000)
             })
         }
-    })
-};
+    });
+}
 
-
-
-//success: function (data) {
-//    if (data.success) {
-//        toastr.success(data.message);
-//        dataTable.ajax.reload();
-//    }
-//    else {
-//        toastr.error(data.message);
-//    }
-//}
+$('.show-details').on('click', function (event) {
+    var id = $(this).attr('data-id')
+    $('#ticketDetails').load(`/UserView/PendingRequests?handler=RequestItemDetails&id=${id}`);
+})

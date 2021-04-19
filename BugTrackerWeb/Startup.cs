@@ -40,6 +40,8 @@ namespace BugTrackerWeb
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationIdentityDbContext>();
 
+            services.AddSingleton<ICurrentUserService, CurrentUserService>();
+
             services.AddScoped<IRequestPersistance, RequestPersistance>();
             services.AddScoped<ITicketPersistance, TicketPersistance>();
             services.AddScoped<IProjectOwnerPersistance, ProjectOwnerPersistance>();
@@ -50,10 +52,6 @@ namespace BugTrackerWeb
             services.AddScoped<IDateTime, DateTimeService>();
 
             services.AddScoped<ITicketManager, TicketManager>();
-
-
-            //This is testing implementation for singleton
-            //services.AddSingleton<IModelDistributor, ModelDistributor>();
 
 
             services.AddMvc();

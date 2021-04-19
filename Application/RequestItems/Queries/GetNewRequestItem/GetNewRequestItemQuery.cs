@@ -28,9 +28,9 @@ namespace Application.RequestItems.Queries.GetNewRequestItem
         {
             return new NewRequestItemVm
             {
-                AvailableProjects = _context.Project
-                    .Select(p => new ProjectDto { Id = p.Id, ProjectName = p.Name })
-                    .ToList()
+                AvailableProjects = new Dictionary<int, string>(_context.Project
+                .Select(p => new KeyValuePair<int, string>(p.Id, p.Name)))
+        
             };
         }
     }

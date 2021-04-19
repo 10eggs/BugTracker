@@ -8,6 +8,6 @@ namespace Application.RequestItems.Queries.GetNewRequestItem
 {
     public class NewRequestItemVm
     {
-        public IList<ProjectDto> AvailableProjects { get; set; }
+        public IDictionary<int, string> AvailableProjects { get; set; } 
     }
 }

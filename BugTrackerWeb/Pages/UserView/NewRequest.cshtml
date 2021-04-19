@@ -7,27 +7,63 @@
 <div class="border container" style="padding:30px;">
     <form method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <!--Title input START-->
         <div class="form-group row">
             <div class="col-4">
-                <label asp-for="NewRequest.Title"></label>
+                <label asp-for="CreateRequestItemCommand.Title"></label>
             </div>
             <div class="col-6">
-                <input asp-for="NewRequest.Title" class="form-control" />
+                <input asp-for="CreateRequestItemCommand.Title" class="form-control" />
             </div>
-            <span asp-validation-for="NewRequest.Title" class="text-danger field-validation-valid">Required</span>
+            <span asp-validation-for="CreateRequestItemCommand.Title" class="text-danger field-validation-valid">Required</span>
         </div>
+        <!--Title input END-->
+        <!--Step to reproduce input START-->
         <div class="form-group row">
             <div class="col-4">
-                <label asp-for="NewRequest.ProjectId">Project name</label>
+                <label asp-for="CreateRequestItemCommand.StepToReproduce"></label>
             </div>
             <div class="col-6">
-                @*<select asp-for="NewRequest.ProjectId" class="form-control" asp-items="@Model.ProjectListDDL"></select>*@
-                <select asp-for="NewRequest.ProjectId" class="form-control" asp-items="@new SelectList(Model.TestDDL,nameof(TestDDLOption.Id),nameof(TestDDLOption.Name))"></select>
+                <textarea asp-for="CreateRequestItemCommand.StepToReproduce" class="form-control"></textarea>
+            </div>
+            <span asp-validation-for="CreateRequestItemCommand.StepToReproduce" class="text-danger field-validation-valid">Required</span>
+        </div>
+        <!--Step to reproduce input END-->
+        <!--Expected result input START-->
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="CreateRequestItemCommand.ExpectedResult"></label>
+            </div>
+            <div class="col-6">
+                <textarea asp-for="CreateRequestItemCommand.ExpectedResult" class="form-control"></textarea>
+            </div>
+            <span asp-validation-for="CreateRequestItemCommand.ExpectedResult" class="text-danger field-validation-valid">Required</span>
+        </div>
+        <!--Expected result input END-->
+        <!--Actual result input START-->
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="CreateRequestItemCommand.ActualResult"></label>
+            </div>
+            <div class="col-6">
+                <textarea asp-for="CreateRequestItemCommand.ActualResult" class="form-control"></textarea>
+            </div>
+            <span asp-validation-for="CreateRequestItemCommand.ActualResult" class="text-danger field-validation-valid">Required</span>
+        </div>
+        <!--Actual result input END-->
+        <!--Project id input START-->
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="CreateRequestItemCommand.ProjectId">Project name</label>
+            </div>
+            <div class="col-6">
+                <select asp-for="CreateRequestItemCommand.ProjectId" class="form-control" asp-items='@new SelectList(Model.NewRequestItemVm.AvailableProjects,"Key","Value")'></select>
             </div>
             <div>
-                <span asp-validation-for="NewRequest.ProjectId" class="text-danger field-validation-valid">Project ID required</span>
+                <span asp-validation-for="CreateRequestItemCommand.ProjectId" class="text-danger field-validation-valid">Project ID required</span>
             </div>
         </div>
+        <!--Project id input END-->
         <div class="form-group row">
             <div class="col-3 offset-4">
                 <button asp-page-handler="SaveRequest" class="btn btn-primary form-control">Create</button>
