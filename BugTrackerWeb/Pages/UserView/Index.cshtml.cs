@@ -18,57 +18,8 @@ namespace BugTrackerWeb.Pages.UserView
     [Authorize]
     public class IndexModel : PageModel
     {
-        private readonly ApplicationDbContext _ctx;
-        private readonly ITicketPersistance _tp;
-        private readonly IProjectPersistance _pp;
-        private readonly IRequestPersistance _rp;
-        public IndexModel(ApplicationDbContext ctx, ITicketPersistance tp, IProjectPersistance pp, IRequestPersistance rp)
+        public IndexModel()
         {
-            _ctx = ctx;
-            _tp = tp;
-            _pp = pp;
-            _rp = rp;
-        }
-
-        public List<RequestItem> Requests { get; set; }
-        public List<Ticket> Tickets { get; set; }
-
-        [BindProperty]
-        public RequestItem NewRequest { get; set; }
-
-        [BindProperty]
-        public int ProjectId { get; set; }
-
-        public List<SelectListItem> ProjectListDDL { get; set; }
-
-        public async Task OnGet()
-        {
-            Requests =  _rp.GetCreatedByAuthor(User.Identity.Name);
-            Tickets =  await _tp.GetByRequestAuthor(User.Identity.Name);
-            ProjectListDDL = PopulateProjectList();
-            Debug.WriteLine("Check me");
-
-        }
-        public async Task<IActionResult> OnPostDelete(int id)
-        {
-            await _rp.DeleteByIdAsync(id);
-            return RedirectToPage("Index");
-        }
-
-        public void AssignUserToRequest()
-        {
-            NewRequest.Author = User.Identity.Name;
-        }
-
-        public List<SelectListItem> PopulateProjectList()
-        {
-
-            return _pp.GetAll().Select(p => new SelectListItem
-            {
-                Value = p.Id.ToString(),
-                Text = p.Name
-
-            }).ToList();
         }
     }
 }

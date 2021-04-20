@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.RequestItems.Queries.GetNewRequestItem
+namespace Application.RequestItems.GetNewRequestItem
 {
     public class ProjectDto
     {

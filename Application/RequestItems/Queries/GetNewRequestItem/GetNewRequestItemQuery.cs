@@ -1,4 +1,5 @@
 ﻿using Application.Common.Interfaces;
+using Application.RequestItems.GetNewRequestItem;
 using AutoMapper;
 using MediatR;
 using System;
@@ -17,11 +18,9 @@ namespace Application.RequestItems.Queries.GetNewRequestItem
     public class GetNewRequestItemQueryHandler:IRequestHandler<GetNewRequestItemQuery,NewRequestItemVm>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IMapper _mapper;
-        public GetNewRequestItemQueryHandler(IApplicationDbContext context,IMapper mapper)
+        public GetNewRequestItemQueryHandler(IApplicationDbContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
 
         public async Task<NewRequestItemVm> Handle(GetNewRequestItemQuery request, CancellationToken cancellationToken)

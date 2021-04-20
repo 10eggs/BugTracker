@@ -19,17 +19,21 @@ namespace Infrastructure.Persistance
     public class ApplicationDbContext:DbContext,IApplicationDbContext
     {
         private readonly ICurrentUserService _currentUserService;
+        private readonly IAuditService _auditService;
         private readonly IDateTime _dateTime;
         public ApplicationDbContext(
             DbContextOptions<ApplicationDbContext> options,
             //What this line does?
             ICurrentUserService currentUserService,
+            IAuditService auditService,
             IDateTime dateTime):base(options)
         {
             _currentUserService = currentUserService;
+            _auditService = auditService;
             _dateTime = dateTime;
         }
 
+        public DbSet<Audit> Audits { get; set; }
         public DbSet<RequestItem> Requests { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Project> Project { get; set; }
@@ -39,6 +43,7 @@ namespace Infrastructure.Persistance
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
+
             foreach (Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<AuditableEntity> entry in ChangeTracker.Entries<AuditableEntity>())
             {
                 switch (entry.State)
@@ -54,8 +59,11 @@ namespace Infrastructure.Persistance
                         break;
                 }
             }
+            var auditEntries = _auditService.OnBeforeSaveChanges(this);
 
             var result = await base.SaveChangesAsync(cancellationToken);
+
+            await _auditService.OnAfterSaveChanges(this,auditEntries);
 
             return result;
         }

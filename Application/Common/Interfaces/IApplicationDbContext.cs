@@ -8,6 +8,7 @@ namespace Application.Common.Interfaces
 {
     public interface IApplicationDbContext
     {
+        public DbSet<Audit> Audits { get; set; }
         public DbSet<RequestItem> Requests { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Project> Project { get; set; }

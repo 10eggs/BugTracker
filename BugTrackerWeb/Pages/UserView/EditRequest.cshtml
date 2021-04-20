@@ -6,27 +6,55 @@
     <h2 class="text-info">Update ticket</h2>
     <div class="border container" style="padding:30px;">
         <form method="post">
-            <input type="hidden" asp-for="EditedRequest.Id" />
+            <input type="hidden" asp-for="@Model.EditRequestItemCommand.Id" value="@Model.EditRequestItemVm.Id" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="EditedRequest.Title"></label>
-                </div>
-                <div class="col-6">
-                    <input asp-for="EditedRequest.Title" class="form-control" />
-                </div>
-                <span asp-validation-for="EditedRequest.Title" class="text-danger field-validation-valid">Required</span>
-            </div>
 
+            <!--Title start-->
             <div class="form-group row">
                 <div class="col-4">
-                    <label asp-for="EditedRequest.ProjectId">Project name</label>
+                    <label asp-for="EditRequestItemCommand.Title"></label>
                 </div>
                 <div class="col-6">
-                    <select asp-for="EditedRequest.ProjectId" class="form-control" asp-items="@Model.ProjectListDDL"></select>
+                    <input asp-for="EditRequestItemCommand.Title" class="form-control" />
                 </div>
-                <div>
-                    <span asp-validation-for="EditedRequest" class="text-danger field-validation-valid">Project ID required</span>
+            </div>
+            <!--Title end-->
+            <!--StepToReproduce start-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="EditRequestItemCommand.StepsToReproduce"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="EditRequestItemCommand.StepsToReproduce" class="form-control" />
+                </div>
+            </div>
+            <!--StepToReproduce end-->
+            <!--ExpectedResult start-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="EditRequestItemCommand.ExpectedResult"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="EditRequestItemCommand.ExpectedResult" class="form-control" />
+                </div>
+            </div>
+            <!--ExpectedResult end-->
+            <!--ActualResult start-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="EditRequestItemCommand.ActualResult"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="EditRequestItemCommand.ActualResult" class="form-control" />
+                </div>
+            </div>
+            <!--ActualResult end-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="EditRequestItemCommand.ProjectId">Project name</label>
+                </div>
+                <div class="col-6">
+                    <select asp-for="EditRequestItemCommand.ProjectId" class="form-control" asp-items='@new SelectList(Model.EditRequestItemVm.AvailableProjects,"Key","Value")'></select>
                 </div>
             </div>
             <div class="form-group row">

@@ -5,6 +5,7 @@ using BugTracker.Persistance;
 using BugTracker.Persistance.Abstract;
 using Infrastructure;
 using Infrastructure.Persistance;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -32,7 +33,6 @@ namespace BugTrackerWeb
             services.AddApplication();
             services.AddInfrastructure(Configuration);
 
-            //services.AddDbContext<AppDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<ApplicationIdentityDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMemoryCache();
 
@@ -41,6 +41,7 @@ namespace BugTrackerWeb
                 .AddEntityFrameworkStores<ApplicationIdentityDbContext>();
 
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
+            services.AddScoped<IAuditService, AuditService>();
 
             services.AddScoped<IRequestPersistance, RequestPersistance>();
             services.AddScoped<ITicketPersistance, TicketPersistance>();

@@ -460,8 +460,6 @@ C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\R
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\InProcessRequests.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\NewRequest.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\PendingRequests.cshtml.g.cs
-C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\TicketDetails.cshtml.g.cs
-C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\UpsertRequest.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\_TicketDetails.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\_ViewImports.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\_ViewStart.cshtml.g.cs

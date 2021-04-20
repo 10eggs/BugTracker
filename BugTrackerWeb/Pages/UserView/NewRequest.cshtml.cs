@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Common.Interfaces;
 using Application.RequestItems.Commands.CreateRequestItem;
+using Application.RequestItems.GetNewRequestItem;
 using Application.RequestItems.Queries.GetNewRequestItem;
 using BugTracker.Persistance;
 using BugTracker.Persistance.Abstract;
@@ -15,7 +16,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.DependencyInjection;
-using WebUI.Pages;
 
 namespace BugTrackerWeb.Pages.UserView
 {
@@ -46,7 +46,7 @@ namespace BugTrackerWeb.Pages.UserView
             if (ModelState.IsValid)
             {
                 await _mediator.Send(CreateRequestItemCommand);
-                return RedirectToPage("Index");
+                return RedirectToPage("PendingRequests");
             }
             else
             {
