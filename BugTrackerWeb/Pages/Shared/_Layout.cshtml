@@ -50,13 +50,21 @@
             <div id="sidebar-wrapper">
                 <div class="sidebar-heading">Your requests </div>
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action bg-light navbar-menu-item" asp-page="/UserView/Index">Dashboard</a>
-                    <a class="list-group-item list-group-item-action bg-light navbar-menu-item" asp-page="NewRequest">New</a>
-                    <a class="list-group-item list-group-item-action bg-light navbar-menu-item" asp-page="PendingRequests">Pending</a>
-                    <a class="list-group-item list-group-item-action bg-light navbar-menu-item" asp-page="InProcessRequests">In process</a>
-                    <a class="list-group-item list-group-item-action bg-light navbar-menu-item" asp-page="Closed">Closed</a>
-
-                </div>
+                    @if (User.IsInRole("User"))
+                        {
+                        <partial name="_UserSidebar" />
+                        }
+                        else if (User.IsInRole("ProjectOwner"))
+                        {
+                        <partial name="_PoSidebar" />
+                        }
+                        else
+                        {
+                            //Change it later
+                        <span>No role assigned</span>
+                        }
+                    
+                    </div>
             </div>
             <!--/#sidebar-wrapper-->
             <!--Page Content-->

@@ -451,8 +451,6 @@ C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\R
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\Shared\_EditTicketPartial.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\Shared\_Layout.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\Shared\_LoginPartial.cshtml.g.cs
-C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\Shared\_SidebarPartial.cshtml.g.cs
-C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\Shared\_SimpleSidebarPartial.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\DeleteRequest.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\UserView\EditRequest.cshtml.g.cs
@@ -492,3 +490,5 @@ C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\S
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\System.Web.WebPages.Razor.dll
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\System.Web.WebPages.dll
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\Microsoft.Web.Infrastructure.dll
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\Shared\_PoSidebar.cshtml.g.cs
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\Shared\_UserSidebar.cshtml.g.cs

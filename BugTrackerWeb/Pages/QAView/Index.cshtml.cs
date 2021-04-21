@@ -31,8 +31,8 @@ namespace BugTrackerWeb.Pages.QAView
 
         public void OnGet()
         {
-            QA = _qap.GetByUserId(_um.GetUserId(HttpContext.User));
-            Projects = QA.Projects.ToList();
+            //QA = _qap.GetByUserId(_um.GetUserId(HttpContext.User));
+            //Projects = QA.Projects.ToList();
 
         }
 
