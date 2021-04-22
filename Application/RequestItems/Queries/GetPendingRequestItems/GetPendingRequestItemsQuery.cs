@@ -31,10 +31,18 @@ namespace Application.RequestItems.Queries.GetPendingRequestItems
         }
         public async Task<PendingRequestItemsListVm> Handle(GetPendingRequestItemsQuery request, CancellationToken cancellationToken)
         {
+            if (_currentUserService.UserRole.Equals("User"))
+            {
+                return new PendingRequestItemsListVm
+                {
+                    Requests = await _context.Requests
+                    .Where(p => p.Author == _currentUserService.UserId)
+                    .ProjectTo<PendingRequestItemDto>(_mapper.ConfigurationProvider).ToListAsync()
+                };
+            }
             return new PendingRequestItemsListVm
             {
                 Requests = await _context.Requests
-                .Where(p => p.Author == _currentUserService.UserId)
                 .ProjectTo<PendingRequestItemDto>(_mapper.ConfigurationProvider).ToListAsync()
             };
         }

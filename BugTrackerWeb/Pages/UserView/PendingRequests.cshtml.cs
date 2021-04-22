@@ -16,13 +16,11 @@ namespace BugTrackerWeb.Pages.UserView
 {
     public class PendingRequestModel : PageModel
     {
-        private readonly IRequestPersistance _rp;
         private readonly IMediator _mediator;
         private readonly IMemoryCache _cache;
 
-        public PendingRequestModel(IRequestPersistance rp, IMediator mediator,IMemoryCache cache)
+        public PendingRequestModel(IMediator mediator,IMemoryCache cache)
         {
-            _rp = rp;
             _mediator = mediator;
             _cache = cache;
         }
@@ -64,33 +62,33 @@ namespace BugTrackerWeb.Pages.UserView
 
 
 
-        public async Task<JsonResult> OnGetPopulateTable()
-        {
-            var requests = await _rp.GetCreatedByAuthorAsync(User.Identity.Name);
-            var data = RequestModelView.CreateModelView(requests);
+        //public async Task<JsonResult> OnGetPopulateTable()
+        //{
+        //    var requests = await _rp.GetCreatedByAuthorAsync(User.Identity.Name);
+        //    var data = RequestModelView.CreateModelView(requests);
 
-            return new JsonResult(new { data });
-        }
+        //    return new JsonResult(new { data });
+        //}
 
     }
 
-    public class RequestModelView
-    {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public string Project { get; set; }
-        private static IEnumerable<RequestModelView> Transform(List<RequestItem> requests)
-        {
-            foreach (var r in requests)
-            {
-                yield return new RequestModelView { Id = r.Id, Title = r.Title, Project = r.Project.Name };
-            }
-        }
+    //public class RequestModelView
+    //{
+    //    public int Id { get; set; }
+    //    public string Title { get; set; }
+    //    public string Description { get; set; }
+    //    public string Project { get; set; }
+    //    private static IEnumerable<RequestModelView> Transform(List<RequestItem> requests)
+    //    {
+    //        foreach (var r in requests)
+    //        {
+    //            yield return new RequestModelView { Id = r.Id, Title = r.Title, Project = r.Project.Name };
+    //        }
+    //    }
 
-        public static List<RequestModelView> CreateModelView(List<RequestItem> requests)
-        {
-            return Transform(requests).ToList();
-        }
-    }
+    //    public static List<RequestModelView> CreateModelView(List<RequestItem> requests)
+    //    {
+    //        return Transform(requests).ToList();
+    //    }
+    //}
 }

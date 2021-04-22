@@ -492,3 +492,5 @@ C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\S
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\bin\Debug\net5.0\Microsoft.Web.Infrastructure.dll
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\Shared\_PoSidebar.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\Shared\_UserSidebar.cshtml.g.cs
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\ProjectOwnerView\PendingRequests.cshtml.g.cs
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\ProjectOwnerView\AssignTicket.cshtml.g.cs

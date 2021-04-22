@@ -1,0 +1,62 @@
+﻿@page
+@model WebUI.Pages.ProjectOwnerView.PendingRequestsModel
+@using Domain.Common
+
+@{
+    <div class="container row p-0 m0">
+        <div class="col-6">
+            <h2 class="text-info">Pending requests</h2>
+            @if (Model.PendingRequestItemsListVm.Requests.Count() > 0)
+            {
+                <table class="table">
+                    <tr class="table-light">
+                        <th>
+                            <label asp-for="PendingRequestItemsListVm.Requests.FirstOrDefault().Title"></label>
+                        </th>
+                        <th>
+                            <label asp-for="PendingRequestItemsListVm.Requests.FirstOrDefault().ProjectName"></label>
+                        </th>
+                        <th>
+                            <label asp-for="PendingRequestItemsListVm.Requests.FirstOrDefault().Created"></label>
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.PendingRequestItemsListVm.Requests)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(m => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.ProjectName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Created)
+                            </td>
+                            <td>
+                                <a asp-page="AssignTicket" asp-route-id="@item.Id" class="btn btn-success btn-sm text-white">Assign</a>
+                            </td>
+                            <td>
+                                <button data-id="@item.Id" data-projectid="@item.ProjectId" class="btn btn-info btn-sm text-white show-details">Details</button>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>You don't have any tickets in processing</p>
+            }
+        </div>
+
+        <div class="col">
+            <h5 class="text-info">Request details</h5>
+            <article id="ticketDetails">
+                <span class="text-info">You haven't select any requet yet</span>
+            </article>
+        </div>
+    </div>
+}
+
+@section Scripts{ 
+<script src="~/js/PoView/pendingReq.js"></script>
+}

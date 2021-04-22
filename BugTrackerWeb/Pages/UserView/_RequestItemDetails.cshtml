@@ -13,4 +13,10 @@
     <h6>Actual results</h6>
     <span>@Model.ActualResult</span>
 
+    @if (User.IsInRole("ProjectOwner"))
+    {
+        <h6>Author</h6>
+        <span>@Model.Author</span>
+    }
+
 }

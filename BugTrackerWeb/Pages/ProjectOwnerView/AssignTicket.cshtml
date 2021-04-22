@@ -1,0 +1,29 @@
+﻿@page
+@model WebUI.Pages.ProjectOwnerView.AssignTicketModel
+@{
+    <div class="container row p-0 m0">
+        <div class="col-6">
+            <span class="text-info">Here details for ticket assignment</span>
+        </div>
+
+        <div class="col">
+            <h5 class="text-info">Request information</h5>
+
+            <h6>Ticket title</h6>
+            <span>@Model.AssignTicketVm.PendingRequestItemDto.Title</span>
+
+            <h5>Steps to reproduce</h5>
+            <span>@Model.AssignTicketVm.PendingRequestItemDto.StepsToReproduce</span>
+
+            <h6>Expected results</h6>
+            <span>@Model.AssignTicketVm.PendingRequestItemDto.ExpectedResult</span>
+
+            <h6>Actual results</h6>
+            <span>@Model.AssignTicketVm.PendingRequestItemDto.ActualResult</span>
+
+            <h6>Author</h6>
+            <span>@Model.AssignTicketVm.PendingRequestItemDto.Author</span>
+
+        </div>
+    </div>
+}
