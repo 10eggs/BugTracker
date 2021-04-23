@@ -31,9 +31,9 @@ namespace Application.Tickets.Queries.GetAssignTicket
 
         public async Task<AssignTicketVm> Handle(GetAssignTicketQuery request, CancellationToken cancellationToken)
         {
-            var requestItem =  _context.Requests
+            var requestItem =  await _context.Requests
                  .Where(r => r.Id == request.RequestId)
-                 .SingleOrDefault();
+                 .SingleOrDefaultAsync();
 
             return new AssignTicketVm
             {
