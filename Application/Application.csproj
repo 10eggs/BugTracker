@@ -20,8 +20,11 @@
   <ItemGroup>
     <Folder Include="Common\Exceptions\" />
     <Folder Include="Common\Security\" />
+    <Folder Include="Projects\Commands\" />
+    <Folder Include="Projects\EventHandlers\" />
+    <Folder Include="Qa\Commands\" />
+    <Folder Include="Qa\EventHandlers\" />
     <Folder Include="RequestItems\EventHandlers\" />
-    <Folder Include="Tickets\Command\AssignTicket\" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,16 @@
+﻿@model Application.Projects.Queries.GetTeamMembersForProject.TeamMembersVm
+@{
+    @if (Model.Qas.Count() > 0)
+    {
+        foreach (var qa in Model.Qas)
+        {
+            <p>@qa.Name</p>
+            <br />
+        }
+    }
+    else
+    {
+        <span class="text-info">There is no user assigned to this project.</span>
+    }
+
+}

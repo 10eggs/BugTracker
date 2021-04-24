@@ -1,63 +1,52 @@
 ﻿@page
 @model BugTrackerWeb.Pages.ProjectOwnerView.ManageUsersModel
 @{
-    <div class="col-4">
-        <h2 class="text-info">List of all QAs</h2>
-    </div>
-    <table class="table table-striped border">
-        <tr class="table-secondary">
-            <th>
-                Name
-            </th>
-        </tr>
-        @foreach (var qa in Model.AllQAs)
-        {
-            <tr>
-                <td>
-                    @qa.Name
-                </td>
-                <td>
-                    <div class="form-group row">
-                        <div class="col-3 offset-4">
-                            <form method="post">
-                                <input type="submit" asp-route-qaId=@qa.Id asp-route-projectId=@Model.ProjectId value="Assign" class="btn btn-primary form-control" />
-                            </form>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        }
-    </table>
-
-    <div class="col-6">
-        <h2 class="text-info">Assigned QAs</h2>
-    </div>
-    @if (Model.ProjectQAs.Count > 0)
-    {
-        <table class="table table-striped border">
-            <tr class="table-secondary">
-                <th>
-                    <label>Name</label>
-                </th>
-            </tr>
-            @foreach (var qa in Model.ProjectQAs)
+    <div class="container row p-0 m0">
+        <div class="col-6">
+            <h2 class="text-info">Your projects</h2>
+            @if (Model.AllProjectsVm.Projects.Count() > 0)
             {
-                <tr>
-                    <td>
-                        @qa.Name
-                    </td>
-                    <td>
-                        <div class="form-group row">
-                            <div class="col-3 offset-4">
-                                <form method="post">
-                                    <input type="submit" asp-page-handler="DischargeQa" asp-route-qaId=@qa.Id asp-route-projectId=@Model.ProjectId value="Discharge" class="btn btn-primary form-control" />
-                                </form>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+                <table class="table">
+                    <tr class="table-light">
+                        <th>
+                            <label asp-for="AllProjectsVm.Projects.FirstOrDefault().Name"></label>
+                        </th>
+                        <th>
+                            <label asp-for="AllProjectsVm.Projects.FirstOrDefault().Description"></label>
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.AllProjectsVm.Projects)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(m => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Description)
+                            </td>
+                            <td>
+                                <button data-projectid="@item.Id" class="btn btn-info btn-sm text-white show-team-members">Team members</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-info btn-sm text-white add-member">Add member</button>
+                            </td>
+                        </tr>
+                    }
+                </table>
             }
-        </table>
+            else
+            {
+                <p>You don't have any tickets in processing</p>
+            }
+        </div>
+        <div class="col">
+            <div id="details">
+                <h5 class="text-info">Please select 'Team members' or 'Add member' option</h5>
+            </div>
+        </div>
+    </div>
+}
 
-    }
+@section Scripts{
+    <script src="~/js/PoView/manageUsers.js"></script>
 }

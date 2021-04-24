@@ -1,3 +1,4 @@
+using Application.Tickets.Command.AssignTicket;
 using Application.Tickets.Queries.GetAssignTicket;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -17,9 +18,13 @@ namespace WebUI.Pages.ProjectOwnerView
 
         [BindProperty]
         public AssignTicketVm AssignTicketVm { get; set; }
-        public async Task OnGet(int id)
+
+        [BindProperty]
+        public AssignTicketCommand AssignTicketCommand { get; set; }
+
+        public async Task OnGet(int requestId, int projectId)
         {
-            AssignTicketVm = await _mediator.Send(new GetAssignTicketQuery { RequestId = id });
+            AssignTicketVm = await _mediator.Send(new GetAssignTicketQuery { RequestId = requestId, ProjectId = projectId});
 
         }
     }

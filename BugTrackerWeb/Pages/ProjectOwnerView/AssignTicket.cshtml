@@ -3,7 +3,22 @@
 @{
     <div class="container row p-0 m0">
         <div class="col-6">
-            <span class="text-info">Here details for ticket assignment</span>
+            <h3 class="text-info">#@Model.AssignTicketVm.PendingRequestItemDto.Title</h3>
+            <form method="post">
+                @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+                <!--Title input START-->
+                @*<div class="form-group row">
+                    <label asp-for="AssignTicketCommand.Title"></label>
+                    <input asp-for="CreateRequestItemCommand.Title" class="form-control" />
+                    <span asp-validation-for="CreateRequestItemCommand.Title" class="text-danger field-validation-valid">Required</span>
+                </div>*@
+                <!--Title input END-->
+                <div class="form-group row">
+                    <label asp-for="@Model.AssignTicketCommand.TicketPriority">Project name</label>
+                    <select asp-for="@Model.AssignTicketCommand.TicketPriority" class="form-control" asp-items='@new SelectList(@Model.AssignTicketVm.TicketPriority,"Key","Value")'></select>
+                    @*<span asp-validation-for="CreateRequestItemCommand.ProjectId" class="text-danger field-validation-valid">Project ID required</span>*@
+                </div>
+            </form>
         </div>
 
         <div class="col">
