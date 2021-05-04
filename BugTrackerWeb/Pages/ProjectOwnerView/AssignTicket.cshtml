@@ -8,16 +8,21 @@
                 @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
                 <!--Title input START-->
                 @*<div class="form-group row">
-                    <label asp-for="AssignTicketCommand.Title"></label>
-                    <input asp-for="CreateRequestItemCommand.Title" class="form-control" />
-                    <span asp-validation-for="CreateRequestItemCommand.Title" class="text-danger field-validation-valid">Required</span>
                 </div>*@
-                <!--Title input END-->
+                <!--Ticket status START-->
                 <div class="form-group row">
-                    <label asp-for="@Model.AssignTicketCommand.TicketPriority">Project name</label>
-                    <select asp-for="@Model.AssignTicketCommand.TicketPriority" class="form-control" asp-items='@new SelectList(@Model.AssignTicketVm.TicketPriority,"Key","Value")'></select>
-                    @*<span asp-validation-for="CreateRequestItemCommand.ProjectId" class="text-danger field-validation-valid">Project ID required</span>*@
+                    <label asp-for="@Model.AssignTicketCommand.TicketStatus">Ticket priority</label>
+                    <select asp-for="@Model.AssignTicketCommand.TicketStatus" class="form-control" asp-items='@new SelectList(@Model.AssignTicketVm.TicketPriority,"Key","Value")'></select>
+                    <span asp-validation-for="CreateRequestItemCommand.Title" class="text-danger field-validation-valid">Required</span>
                 </div>
+                <!--Ticket status END-->
+                <!--Ticket priority START-->
+                <div class="form-group row">
+                    <label asp-for="@Model.AssignTicketCommand.TicketPriority">Ticket priority</label>
+                    <select asp-for="@Model.AssignTicketCommand.TicketPriority" class="form-control" asp-items='@new SelectList(@Model.AssignTicketVm.TicketPriority,"Key","Value")'></select>
+                </div>
+                <!--Ticker priority END-->
+
             </form>
         </div>
 

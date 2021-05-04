@@ -11,6 +11,7 @@ namespace Infrastructure.Persistance.Configurations
     {
         public void Configure(EntityTypeBuilder<Project> builder)
         {
+
             //builder.HasOne(e => e.ProjectOwner)
             //    .WithMany(e => e.Projects);
 

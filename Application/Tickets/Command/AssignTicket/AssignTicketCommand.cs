@@ -11,11 +11,8 @@ namespace Application.Tickets.Command.AssignTicket
 {
     public class AssignTicketCommand:IRequest<int>
     {
-        [Required]
         public string TicketPriority { get; set; }
-        [Required]
-        public string TicketCategory { get; set; }
-        [Required]
+        public string TicketStatus { get; set; }
         public string TicketSeverity { get; set; }
     }
 

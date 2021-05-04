@@ -13,7 +13,7 @@ namespace Domain.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public IEnumerable<RequestItem> Requests { get; set; }
-        public IEnumerable<Ticket> Tickets { get; set; }
-        public IEnumerable<QA> QAs { get; set; }
+        public IEnumerable<Ticket> Tickets { get; private set; } = new List<Ticket>();
+        public IEnumerable<QA> QAs { get; private set; } = new List<QA>();
     }
 }

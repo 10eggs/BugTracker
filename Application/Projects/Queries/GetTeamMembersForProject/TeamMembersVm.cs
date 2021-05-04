@@ -8,6 +8,7 @@ namespace Application.Projects.Queries.GetTeamMembersForProject
 {
     public class TeamMembersVm
     {
+        public int ProjectId { get; set; }
         public IEnumerable<QaDto> Qas { get; set; }
     }
 }

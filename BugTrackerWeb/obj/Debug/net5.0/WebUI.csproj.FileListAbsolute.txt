@@ -495,3 +495,4 @@ C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\R
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\ProjectOwnerView\PendingRequests.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\ProjectOwnerView\AssignTicket.cshtml.g.cs
 C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\Shared\ProjectOwner\_ManageTeamPartial.cshtml.g.cs
+C:\Users\TPawlak\source\repos\BugTrackerProject\BugTrackerWeb\obj\Debug\net5.0\Razor\Pages\Shared\ProjectOwner\_AddTeamMemberPartial.cshtml.g.cs

@@ -1,3 +1,26 @@
-﻿
+﻿@model BugTrackerWeb.Pages.ProjectOwnerView.ManageUsersModel
+@using Application.Qa.Queries.GetAvailableQas
+
 @{
+    @if (Model.AvailableQasVm.AvailableQas.Count() > 0)
+    {
+        <form id="edit_ticket" method="post">
+            <div class="form-group row">
+                <input asp-for="@Model.AssignQaCommand.ProjectId" value="@Model.ProjectId" style="display:none" />
+            </div>
+            <div class="form-group row col-4">
+                <label asp-for="@Model.AssignQaCommand.UserId">QA's list</label>
+                <select asp-for="@Model.AssignQaCommand.UserId" asp-items='@new SelectList(Model.AvailableQasVm.AvailableQas,nameof(QaDto.Id),nameof(QaDto.Name))'></select>
+            </div>
+            <div class="form-group row col-6">
+                <button asp-page-handler="AssignUser" class="btn-success checkme">Assign</button>
+            </div>
+        </form>
+    }
+    else
+    {
+        <span class="text-info">There is no user assigned to this project.</span>
+    }
+
+
 }

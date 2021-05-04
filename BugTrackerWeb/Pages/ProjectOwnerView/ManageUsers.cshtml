@@ -15,20 +15,20 @@
                             <label asp-for="AllProjectsVm.Projects.FirstOrDefault().Description"></label>
                         </th>
                     </tr>
-                    @foreach (var item in Model.AllProjectsVm.Projects)
+                    @foreach (var project in Model.AllProjectsVm.Projects)
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(m => item.Name)
+                                @Html.DisplayFor(m => project.Name)
                             </td>
                             <td>
-                                @Html.DisplayFor(m => item.Description)
+                                @Html.DisplayFor(m => project.Description)
                             </td>
                             <td>
-                                <button data-projectid="@item.Id" class="btn btn-info btn-sm text-white show-team-members">Team members</button>
+                                <button data-projectid="@project.Id" class="btn btn-info btn-sm text-white show-team-members">Team members</button>
                             </td>
                             <td>
-                                <button class="btn btn-info btn-sm text-white add-member">Add member</button>
+                                <button data-projectid="@project.Id" class="btn btn-info btn-sm text-white add-member">Add member</button>
                             </td>
                         </tr>
                     }
@@ -48,5 +48,21 @@
 }
 
 @section Scripts{
+    <script>
+        $('.show-team-members').on('click', function (event) {
+            var id = $(this).attr('data-projectid');
+            $('#details').load(`/ProjectOwnerView/ManageUsers?handler=TeamMembers&projectid=${id}`);
+        })
+
+        $('.add-member').on('click', function (event) {
+            var id = $(this).attr('data-projectid');
+            $('#details').load(`/ProjectOwnerView/ManageUsers?handler=AddMembers&projectid=${id}`);
+        })
+
+        function assign(userId, projectId) {
+            console.log('Invoked in partial');
+        }
+
+    </script>
     <script src="~/js/PoView/manageUsers.js"></script>
 }

@@ -38,29 +38,15 @@ namespace Application.Tickets.Queries.GetAssignTicket
                  .Where(r => r.Id == request.RequestId)
                  .SingleOrDefaultAsync();
 
-            //IDictionary<int,string> qaList = new Dictionary<int,string>(_context.Project.Where(p => p.Id == request.ProjectId)
-            //    .Select(p => p.QAs.Select(qa => new KeyValuePair<int,string>(qa.Id, qa.Name)).ToDictionary<int,string>));
-
-            //IDictionary<int,string> qas = new Dictionary<int,string>(_context.Project.Where(p => p.Id == request.ProjectId)
-            //    .Select(p => p.QAs)
-            //   .Cast<QA>()
-            //   .Select(qa=>new KeyValuePair<int,string>(qa.Id,qa.Name)));
-
-            //.S)
-            //IDictionary<int, string> qaList = new Dictionary<int, string>(_context.Project
-            //.Select(p => new KeyValuePair<int, string>(p.Id, p.Name)));
-
-            //IDictionary<int,string> qaList = new Dictionary<int,string>(_context.Project
-            //    .Where(p=>p.Requests.Select()
+            var qaList = new Dictionary<int, string>(_context.Project.Where(p => p.Id == request.ProjectId)
+                    .SelectMany(p => p.QAs)
+                   .Select(qa => new KeyValuePair<int, string>(qa.Id, qa.Name)));
 
             return new AssignTicketVm
             {
                 PendingRequestItemDto = _mapper.Map<PendingRequestItemDto>(requestItem),
-                QaList = new Dictionary<int, string>(_context.Project.Where(p => p.Id == request.ProjectId)
-                    .Select(p => p.QAs)
-                   .Cast<QA>()
-                   .Select(qa => new KeyValuePair<int, string>(qa.Id, qa.Name)))
-        };
+                QaList = qaList
+            };
 
         }
     }

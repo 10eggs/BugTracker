@@ -9,7 +9,7 @@ namespace Domain.Entities.Roles
         public int Id { get; set; }
         public string UserId { get; set; }
         public string Name { get; set; }
-        public IEnumerable<Project> Projects { get; set; }
-        public IEnumerable<Ticket> Tickets { get; set; }
+        public IEnumerable<Project> Projects { get; private set; } = new List<Project>();
+        public IEnumerable<Ticket> Tickets { get; private set; } = new List<Ticket>();
     }
 }

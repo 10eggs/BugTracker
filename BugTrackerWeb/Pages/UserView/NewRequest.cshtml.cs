@@ -42,16 +42,8 @@ namespace BugTrackerWeb.Pages.UserView
         }
         public async Task<IActionResult> OnPostSaveRequest()
         {
-
-            if (ModelState.IsValid)
-            {
-                await _mediator.Send(CreateRequestItemCommand);
-                return RedirectToPage("PendingRequests");
-            }
-            else
-            {
-                return Page();
-            }
+            await _mediator.Send(CreateRequestItemCommand);
+            return Page();
         }
     }
 

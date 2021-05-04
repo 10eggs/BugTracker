@@ -10,6 +10,7 @@ namespace Application.Projects.Queries.GetTeamMembersForProject
 {
     public class QaDto:IMapFrom<QA>
     {
+        public int Id { get; set; }
         public string Name { get; set; }
 
     }

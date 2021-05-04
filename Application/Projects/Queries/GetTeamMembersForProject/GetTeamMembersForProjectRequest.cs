@@ -30,7 +30,11 @@ namespace Application.Projects.Queries.GetTeamMembersForProject
         {
             return new TeamMembersVm
             {
-                Qas = await _context.QA.ProjectTo<QaDto>(_mapper.ConfigurationProvider).ToListAsync()
+
+                Qas = await _context.QA.Where(qa => qa.Projects.Any(p => p.Id == request.ProjectId))
+                .ProjectTo<QaDto>(_mapper.ConfigurationProvider).ToListAsync(),
+
+                ProjectId = request.ProjectId
 
             };
         }

@@ -1,10 +1,18 @@
-﻿@model Application.Projects.Queries.GetTeamMembersForProject.TeamMembersVm
+﻿@model BugTrackerWeb.Pages.ProjectOwnerView.ManageUsersModel
+
 @{
-    @if (Model.Qas.Count() > 0)
+    @if (Model.TeamMembersVm.Qas.Count() > 0)
     {
-        foreach (var qa in Model.Qas)
+        foreach (var qa in Model.TeamMembersVm.Qas)
         {
-            <p>@qa.Name</p>
+            <row>
+                <td>
+                    <span>@qa.Name</span>
+                </td>
+                <td>
+                    <button onclick="Delete(@qa.Id,@Model.TeamMembersVm.ProjectId)" class="btn-danger">Discharge from project</button>
+                </td>
+            </row>
             <br />
         }
     }
