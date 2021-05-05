@@ -43,7 +43,7 @@ namespace BugTrackerWeb.Pages.Dashboard
                     var tp = new TicketPersistance(_ctx);
                     var et = await tp.GetByIdAsync(EditedTicket.Id);
 
-                    await tp.Edit(et, EditedTicket.Title);
+                    //await tp.Edit(et, EditedTicket.Title);
                     await _ctx.SaveChangesAsync();
                 }
                 return RedirectToPage("Index");

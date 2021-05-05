@@ -8,21 +8,40 @@
                 @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
                 <!--Title input START-->
                 @*<div class="form-group row">
-                </div>*@
-                <!--Ticket status START-->
-                <div class="form-group row">
-                    <label asp-for="@Model.AssignTicketCommand.TicketStatus">Ticket priority</label>
-                    <select asp-for="@Model.AssignTicketCommand.TicketStatus" class="form-control" asp-items='@new SelectList(@Model.AssignTicketVm.TicketPriority,"Key","Value")'></select>
-                    <span asp-validation-for="CreateRequestItemCommand.Title" class="text-danger field-validation-valid">Required</span>
-                </div>
-                <!--Ticket status END-->
+        </div>*@
                 <!--Ticket priority START-->
                 <div class="form-group row">
                     <label asp-for="@Model.AssignTicketCommand.TicketPriority">Ticket priority</label>
                     <select asp-for="@Model.AssignTicketCommand.TicketPriority" class="form-control" asp-items='@new SelectList(@Model.AssignTicketVm.TicketPriority,"Key","Value")'></select>
                 </div>
+                <!--Ticket priority END-->
+                <!--Ticket priority START-->
+                <div class="form-group row">
+                    <label asp-for="@Model.AssignTicketCommand.TicketSeverity">Ticket severity</label>
+                    <select asp-for="@Model.AssignTicketCommand.TicketSeverity" class="form-control" asp-items='@new SelectList(@Model.AssignTicketVm.TicketSeverity,"Key","Value")'></select>
+                </div>
                 <!--Ticker priority END-->
+                <!--Ticket severity START-->
+                <div class="form-group row">
+                    <label asp-for="@Model.AssignTicketCommand.TicketCategory">Ticket category</label>
+                    <select asp-for="@Model.AssignTicketCommand.TicketCategory" class="form-control" asp-items='@new SelectList(@Model.AssignTicketVm.TicketCategory,"Key","Value")'></select>
+                </div>
+                <!--Ticker severity END-->
+                <!--Ticket severity START-->
+                <div class="form-group row">
+                    <label asp-for="@Model.AssignTicketCommand.TicketStatus">Ticket category</label>
+                    <select asp-for="@Model.AssignTicketCommand.TicketStatus" class="form-control" asp-items='@new SelectList(@Model.AssignTicketVm.TicketStatus,"Key","Value")'></select>
+                </div>
+                <!--Ticker severity END-->
+                <!--QaId START-->
+                <div class="form-group row">
+                    <label asp-for="@Model.AssignTicketCommand.TicketStatus">Select user</label>
+                    <select asp-for="@Model.AssignTicketCommand.QaID" class="form-control" asp-items='@new SelectList(@Model.AssignTicketVm.QaList,"Key","Value")'></select>
+                </div>
+                <!--QaId END-->
+                <input style="display:none" asp-for="@Model.AssignTicketCommand.RequestItemId" value="@Model.AssignTicketVm.PendingRequestItemDto.Id"/>
 
+                <button type="submit">Assign</button>
             </form>
         </div>
 

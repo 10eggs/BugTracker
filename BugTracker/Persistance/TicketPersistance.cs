@@ -39,7 +39,7 @@ namespace BugTracker.Persistance
         public List<Ticket> GetCreatedByAuthor(string author)
         {
             return _ctx.Tickets
-                .Where(t => t.Author == author)
+                //.Where(t => t.Author == author)
                 .ToList();
         }
 
@@ -72,7 +72,7 @@ namespace BugTracker.Persistance
 
         public async Task Edit(Ticket t, string title)
         {
-            t.Title = title;
+            //t.Title = title;
             await _ctx.SaveChangesAsync();
         }
 
@@ -92,12 +92,12 @@ namespace BugTracker.Persistance
 
         public async Task<List<Ticket>> GetCreatedByAuthorAsync(string author)
         {
-            return await _ctx.Tickets.Where(t => t.Author == author).ToListAsync();
+            return await _ctx.Tickets.ToListAsync();
         }
 
         public async Task<List<Ticket>> GetByRequestAuthor(string author)
         {
-            return await _ctx.Tickets.Where(t => t.RequestAuthor == author).ToListAsync();
+            return await _ctx.Tickets.ToListAsync();
         }
         public void SaveAssigned(int ticketId, QA qa)
         {

@@ -113,9 +113,9 @@ namespace BugTrackerWeb.Pages.QAView
             foreach (var t in tickets)
             {
                 yield return new TicketModelView { Id = t.Id,
-                    Title = t.Title,
-                    Author = t.Author,
-                    RequestAuthor = t.RequestAuthor,
+                    //Title = t.Title,
+                    //Author = t.Author,
+                    //RequestAuthor = t.Author,
                     ProjectName = t.Project.Name,
                     ProjectId = t.ProjectId,
                     QaID = t.QaID,

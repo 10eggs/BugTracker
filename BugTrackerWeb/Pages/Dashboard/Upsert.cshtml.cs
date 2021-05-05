@@ -58,7 +58,7 @@ namespace BugTrackerWeb.Pages.Dashboard
                     {
                         //tp.Update would update every field in the book
                         var et = await tp.GetByIdAsync(EditedTicket.Id);
-                        await tp.Edit(et, EditedTicket.Title);
+                        //await tp.Edit(et, EditedTicket.Title);
                     }
 
                 }

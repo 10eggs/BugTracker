@@ -43,7 +43,7 @@ namespace BugTrackerWeb.Pages.UserView
         public async Task<IActionResult> OnPostSaveRequest()
         {
             await _mediator.Send(CreateRequestItemCommand);
-            return Page();
+            return RedirectToPage("/UserView/PendingRequests");
         }
     }
 

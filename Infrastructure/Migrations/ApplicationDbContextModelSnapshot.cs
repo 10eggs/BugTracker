@@ -246,10 +246,13 @@ namespace Infrastructure.Migrations
                     b.Property<int>("QaID")
                         .HasColumnType("int");
 
-                    b.Property<string>("RequestAuthor")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("RequestItemId")
+                        .HasColumnType("int");
 
                     b.Property<string>("StepsToReproduce")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TicketAuthor")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TicketCategory")
@@ -272,6 +275,8 @@ namespace Infrastructure.Migrations
                     b.HasIndex("ProjectId");
 
                     b.HasIndex("QaID");
+
+                    b.HasIndex("RequestItemId");
 
                     b.ToTable("Tickets");
                 });
@@ -349,9 +354,17 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Entities.RequestItem", "RequestItem")
+                        .WithMany()
+                        .HasForeignKey("RequestItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Project");
 
                     b.Navigation("Qa");
+
+                    b.Navigation("RequestItem");
                 });
 
             modelBuilder.Entity("ProjectQA", b =>

@@ -27,5 +27,11 @@ namespace WebUI.Pages.ProjectOwnerView
             AssignTicketVm = await _mediator.Send(new GetAssignTicketQuery { RequestId = requestId, ProjectId = projectId});
 
         }
+        public async Task<IActionResult> OnPost()
+        {
+            var check = AssignTicketCommand;
+            await _mediator.Send(AssignTicketCommand);
+            return RedirectToPage("/ProjectOwnerView/PendingRequests");
+        }
     }
 }

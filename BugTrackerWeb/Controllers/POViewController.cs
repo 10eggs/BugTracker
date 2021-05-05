@@ -60,7 +60,7 @@ namespace BugTrackerWeb.Controllers
             {
                 foreach(var t in tickets)
                 {
-                    yield return new TicketView { Id = t.Id.ToString(), Title = t.Title, Author = t.Author, QaName = t.Qa.Name };
+                    yield return new TicketView { Id = t.Id.ToString()};
                 }
             }
 

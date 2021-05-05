@@ -25,6 +25,8 @@ namespace Application.RequestItems.Queries.GetNewRequestItem
 
         public async Task<NewRequestItemVm> Handle(GetNewRequestItemQuery request, CancellationToken cancellationToken)
         {
+
+
             return new NewRequestItemVm
             {
                 AvailableProjects = new Dictionary<int, string>(_context.Project

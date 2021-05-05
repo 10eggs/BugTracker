@@ -17,6 +17,8 @@ namespace Application.Tickets.Queries.GetAssignTicket
 
         public IDictionary<int, string> TicketSeverity => EnumUtils.EnumDictionary<TicketSeverity>();
 
+        public IDictionary<int, string> TicketStatus => EnumUtils.EnumDictionary<TicketStatus>();
+
         public IDictionary<int, string> QaList { get; set; }
 
         public PendingRequestItemDto PendingRequestItemDto { get; set; }

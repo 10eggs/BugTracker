@@ -12,19 +12,21 @@ namespace Infrastructure.Persistance.Configurations
     {
         public void Configure(EntityTypeBuilder<Ticket> builder)
         {
+
             builder.Ignore(e => e.DomainEvents);
 
-            builder.Property(t=> t.Title)
-                .IsRequired();
 
-            builder.Property(t => t.StepsToReproduce)
-            .IsRequired();
+            //builder.Property(t => t.Title)
+            //    .IsRequired();
 
-            builder.Property(t => t.ExpectedResult)
-                .IsRequired();
+            //builder.Property(t => t.StepsToReproduce)
+            //.IsRequired();
 
-            builder.Property(t => t.Author)
-            .IsRequired();
+            //builder.Property(t => t.ExpectedResult)
+            //    .IsRequired();
+
+            //builder.Property(t => t.Author)
+            //.IsRequired();
 
             builder.HasOne(e => e.Project)
                 .WithMany(e => e.Tickets);

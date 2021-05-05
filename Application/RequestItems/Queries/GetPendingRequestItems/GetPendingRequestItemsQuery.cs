@@ -16,7 +16,6 @@ namespace Application.RequestItems.Queries.GetPendingRequestItems
     {
 
     }
-
     public class GetRequestItemsQueryHandler : IRequestHandler<GetPendingRequestItemsQuery, PendingRequestItemsListVm>
     {
         private readonly IApplicationDbContext _context;
@@ -36,13 +35,14 @@ namespace Application.RequestItems.Queries.GetPendingRequestItems
                 return new PendingRequestItemsListVm
                 {
                     Requests = await _context.Requests
-                    .Where(p => p.Author == _currentUserService.UserId)
+                    .Where(p => p.Author == _currentUserService.UserId && p.Assigned == false)
                     .ProjectTo<PendingRequestItemDto>(_mapper.ConfigurationProvider).ToListAsync()
                 };
             }
             return new PendingRequestItemsListVm
             {
                 Requests = await _context.Requests
+                .Where(p=>p.Assigned == false)
                 .ProjectTo<PendingRequestItemDto>(_mapper.ConfigurationProvider).ToListAsync()
             };
         }

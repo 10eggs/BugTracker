@@ -8,17 +8,23 @@ namespace Domain.Entities
     public class Ticket : AuditableEntity, IHasDomainEvent
     {
         public int Id { get; set; }
+
+        //These need to be removed
         public string Title { get; set; }
         public string StepsToReproduce { get; set; }
         public string ExpectedResult { get; set; }
         public string ActualResult { get; set; }
+        public string Author { get; set; }
+        //
+
+        public RequestItem RequestItem { get; set; }
+        public int RequestItemId { get; set; }
         public TicketStatus TicketStatus { get; set; }
         public TicketPriority TicketPriority { get; set; }
         public TicketCategory TicketCategory { get; set; }
         public TicketSeverity TicketSeverity { get; set; }
         public List<Comment> Comments { get; set; }
-        public string Author { get; set; }
-        public string RequestAuthor { get; set; }
+        public string TicketAuthor { get; set; }
         public Project Project { get; set; }
         public int ProjectId { get; set; }
         public QA Qa { get; set; }

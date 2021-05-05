@@ -21,10 +21,10 @@ namespace Domain.Entities
             get=>_assigned;
             set
             {
-                if(value == true && _assigned == false)
-                {
-                    DomainEvents.Add(new RequestItemAssignedEvent(this));
-                }
+                //if(value == true && _assigned == false)
+                //{
+                //    DomainEvents.Add(new RequestItemAssignedEvent(this));
+                //}
 
                 _assigned = value;
             }
