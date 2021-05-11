@@ -35,6 +35,8 @@ namespace Infrastructure.Persistance.Configurations
 
             builder.HasOne(e => e.Qa);
 
+            builder.HasOne(e => e.RequestItem);
+
             builder.Property(at => at.TicketStatus)
             .HasConversion(at => at.ToString(),
             at => (TicketStatus)Enum.Parse(typeof(TicketStatus), at));

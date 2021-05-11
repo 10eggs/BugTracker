@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Tickets.Queries.GetTicketDetails;
 using BugTracker.Models.TicketProperties;
 using BugTracker.PageManagers;
 using BugTracker.Persistance;
@@ -10,6 +11,7 @@ using BugTracker.Persistance.Abstract;
 using BugTracker.Utils;
 using Domain.Entities;
 using Domain.Entities.Roles;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -23,12 +25,14 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
         private readonly ITicketManager _itm;
         private readonly IRequestPersistance _rp;
         private readonly ITicketPersistance _tp;
-        public TicketDetailsModel(IProjectPersistance pp,ITicketManager itm, IRequestPersistance rp,ITicketPersistance tp)
+        private readonly IMediator _mediator;
+        public TicketDetailsModel(IProjectPersistance pp,ITicketManager itm, IRequestPersistance rp,ITicketPersistance tp,IMediator mediator)
         {
             _itm = itm;
             _pp = pp;
             _rp = rp;
             _tp = tp;
+            _mediator = mediator;
             //This assignment have to be changed!!!
             //TicketCatDDLOptions = new SelectList(EnumUtil.GetValues<TicketCategory>());
         }
@@ -59,8 +63,6 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
         public SelectList TicketStatDDLOptions { get; set; }
 
         public List<SelectListItem> QAsList { get; set; }
-
-
 
         public void OnGetRequestDetails(int projectId, int requestId)
         {
@@ -95,13 +97,12 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
             if (!ModelState.IsValid)
             {
                 return RedirectToPage($"/ProjectOwnerView/");
-                
+
             }
             await _itm.AssignTicket(RequestId, Ticket);
 
             return RedirectToPage($"/ProjectOwnerView/Index");
         }
-
         /**
          * AJAX call for assignmnent 
          */
@@ -116,6 +117,25 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
             //return new JsonResult(new { redirectToUrl = Url.Action("action", "contoller") });
 
         }
+
+
+
+
+
+
+        //***********************************************//
+
+        [BindProperty]
+        public TicketDetailsVm TicketDetailsVm { get; set; }
+        public async Task OnGet(int ticketId)
+        {
+            Debug.WriteLine($"Ticket id: {ticketId}");
+            TicketDetailsVm = await _mediator.Send(new GetTicketDetailsQuery { TicketId = ticketId });
+
+
+        }
+
+
 
     }
 }

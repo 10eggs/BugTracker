@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Tickets.Queries.GetTickets;
@@ -21,6 +22,11 @@ namespace WebUI.Pages.ProjectOwnerView
         public async Task OnGet()
         {
             TicketsVm = await _mediator.Send(new GetTicketsQuery());
+        }
+
+        public async Task OnGetTicketDetails(int ticketId)
+        {
+            Debug.WriteLine($"Ticket id is {ticketId}");
         }
     }
 }

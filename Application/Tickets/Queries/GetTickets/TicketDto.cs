@@ -1,4 +1,5 @@
-﻿using Application.Common.Mappings;
+﻿using Application.Common.Interfaces;
+using Application.Common.Mappings;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Enums.Ticket;
@@ -13,8 +14,8 @@ namespace Application.Tickets.Queries.GetTickets
     public class TicketDto:IMapFrom<Ticket>
     {
         public int Id { get; set; }
-        public string RequestTitle { get; set; }
-        public string TicketAuthor { get; set; }
+        public string Title { get; set; }
+        public string TicketAuthorEmail { get; set; }
         public string QaName { get; set; }
         public TicketStatus TicketStatus { get; set; }
         public TicketPriority TicketPriority { get; set; }
@@ -27,11 +28,19 @@ namespace Application.Tickets.Queries.GetTickets
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Ticket, TicketDto>()
-                .ForMember(d => d.RequestTitle, opt => opt.MapFrom(s => s.RequestItem.Title));
 
+            //Here I had a problem with mapping for 'title' property.
+            //This problem has been solved by changing order of 'CreateMap' invocation,
+            //It didn't work when title had been mapped before qaName, after swapping order
+            //It's working as expected
+            
             profile.CreateMap<Ticket, TicketDto>()
                 .ForMember(d => d.QaName, opt => opt.MapFrom(s => s.Qa.Name));
+
+            profile.CreateMap<Ticket, TicketDto>()
+                .ForMember(d => d.Title, opt => opt.MapFrom(s => s.RequestItem.Title));
+
+
         }
     }
 }

@@ -30,16 +30,9 @@ namespace Application.Tickets.Queries.GetTickets
         }
         public async Task<TicketsVm> Handle(GetTicketsQuery request, CancellationToken cancellationToken)
         {
-
-            var z = await _context.Tickets
-                .Include(t=>t.RequestItem)
-                .Include(t=>t.Qa)
-                .Where(t => t.Project.ProjectOwner.UserId == _currentUser.UserId).ToListAsync();
-
-
             return new TicketsVm
             {
-                Tickets = await _context.Tickets.Include(t=>t.RequestItem)
+                Tickets = await _context.Tickets
                 .Where(t => t.Project.ProjectOwner.UserId == _currentUser.UserId)
                             .ProjectTo<TicketDto>(_mapper.ConfigurationProvider).ToListAsync()
             };

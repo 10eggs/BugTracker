@@ -24,7 +24,8 @@ namespace Domain.Entities
         public TicketCategory TicketCategory { get; set; }
         public TicketSeverity TicketSeverity { get; set; }
         public List<Comment> Comments { get; set; }
-        public string TicketAuthor { get; set; }
+        public string TicketAuthorEmail { get; set; }
+        public string TicketAuthorId { get; set; }
         public Project Project { get; set; }
         public int ProjectId { get; set; }
         public QA Qa { get; set; }

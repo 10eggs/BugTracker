@@ -1,4 +1,73 @@
 ﻿@page
 @model WebUI.Pages.ProjectOwnerView.TicketsModel
 @{
+    <h2 class="text-info">Pending requests</h2>
+    @if (Model.TicketsVm.Tickets.Count() > 0)
+    {
+        <table class="table">
+            <tr class="table-light">
+                <th>
+                    <label asp-for="TicketsVm.Tickets.FirstOrDefault().Title"></label>
+                </th>
+                <th>
+                    <label asp-for="TicketsVm.Tickets.FirstOrDefault().QaName" value="Assigned to">Assigned to</label>
+                </th>
+                <th>
+                    <label asp-for="TicketsVm.Tickets.FirstOrDefault().TicketCategory"></label>
+                </th>
+                <th>
+                    <label asp-for="TicketsVm.Tickets.FirstOrDefault().TicketPriority"></label>
+                </th>
+                <th>
+                    <label asp-for="TicketsVm.Tickets.FirstOrDefault().TicketSeverity"></label>
+                </th>
+                <th>
+                    <label asp-for="TicketsVm.Tickets.FirstOrDefault().TicketStatus"></label>
+                </th>
+                <th>
+                    <label asp-for="TicketsVm.Tickets.FirstOrDefault().LastModified"></label>
+                </th>
+            </tr>
+            @foreach (var ticket in Model.TicketsVm.Tickets)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => ticket.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => ticket.QaName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => ticket.TicketCategory)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => ticket.TicketPriority)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => ticket.TicketSeverity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => ticket.TicketStatus)
+                    </td>
+                    <td>
+                        @if (ticket.LastModified != null)
+                        {
+                            @Html.DisplayFor(m => ticket.LastModified)
+                        }
+                        else
+                        {
+                            <span>Not modified yet</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-page="TicketDetails" asp-route-ticketid="@ticket.Id" class="btn btn-info btn-sm text-white">More</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <p>You don't have any tickets in processing</p>
+    }
 }

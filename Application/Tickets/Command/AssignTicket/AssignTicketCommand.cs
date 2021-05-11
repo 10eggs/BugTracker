@@ -47,7 +47,9 @@ namespace Application.Tickets.Command.AssignTicket
             entry.TicketCategory = request.TicketCategory;
             entry.TicketSeverity = request.TicketSeverity;
 
-            entry.TicketAuthor = _currentUser.UserId;
+            entry.TicketAuthorId = _currentUser.UserId;
+            entry.TicketAuthorEmail = _currentUser.UserEmail;
+
             entry.ProjectId = reqItem.ProjectId;
             entry.QaID = request.QaID;
 
