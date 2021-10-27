@@ -14,6 +14,8 @@ namespace Application.Common.Interfaces
         public DbSet<Project> Project { get; set; }
         public DbSet<QA> QA { get; set; }
         public DbSet<ProjectOwner> ProjectOwner { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 
     }

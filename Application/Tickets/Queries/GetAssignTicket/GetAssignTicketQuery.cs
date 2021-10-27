@@ -47,7 +47,6 @@ namespace Application.Tickets.Queries.GetAssignTicket
                 PendingRequestItemDto = _mapper.Map<PendingRequestItemDto>(requestItem),
                 QaList = qaList
             };
-
         }
     }
 }

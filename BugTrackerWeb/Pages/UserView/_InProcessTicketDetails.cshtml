@@ -1,0 +1,12 @@
+﻿@model Application.RequestItems.Queries.GetInProcessRequestItems.InProcessRequestItemsVm
+@{
+    <h6>Title</h6>
+    <span>@Model.InProcessRequests.FirstOrDefault().Title</span>
+
+    <h6>Created at</h6>
+    <span>@Model.InProcessRequests.FirstOrDefault().Created</span>
+
+    <h6>Project name</h6>
+    <span>@Model.InProcessRequests.FirstOrDefault().ProjectName</span>
+
+}

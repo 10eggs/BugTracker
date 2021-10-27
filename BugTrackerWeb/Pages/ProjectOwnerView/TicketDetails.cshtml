@@ -1,123 +1,47 @@
 ﻿@page
 @model BugTrackerWeb.Pages.ProjectOwnerView.TicketDetailsModel
+
 @using BugTracker.Models
 @{
-
-
-    if (Model.Request != null)
-    {
-        <input id="RequestId" type="hidden" value="@Model.Request.Id" />
-        <h2>Request details</h2>
-
-        <label><b>Title</b></label>
-        <br />
-        <tr>@Model.Request.Title</tr>
-        <br />
-        <label><b>Description</b></label>
-        <br />
-        <br />
-        <label><b>Author</b></label>
-        <br />
-        <tr>@Model.Request.Author</tr>
-        <br />
-        <label><b>Created At</b></label>
-        <br />
-        //Need to be hidden
-    }
-
-
-    @*FORM SECTION STARTER HERE *@
-    <h3 class="text-info">Assign with details</h3>
-    <div class=".container-sm" style="padding:30px;">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-
-            <input type="hidden" asp-for="@Model.RequestId" value="@Model.RequestId">
-            <input type="hidden" asp-for="@Model.Ticket.ProjectId" value="@Model.ProjectId">
-            <input type="hidden" asp-for="@Model.Ticket.Author" value="@Model.Request.Author">
-            <input type="hidden" asp-for="@Model.Ticket.Author" value="@User.Identity.Name">
-
-
-            <div class="form-group">
-                <label asp-for="Ticket.Title" class="control-label"></label>
-                <input asp-for="Ticket.Title" class="form-control" value="@Model.Request.Title">
-                <span asp-validation-for="Ticket.Title" class="text-danger"></span>
-            </div>
-
-
-            <div class="form-group">
-                <label asp-for="Ticket.TicketCategory" class="control-label"></label>
-                <select asp-for="Ticket.TicketCategory" class="form-control" asp-items="@Model.TicketCatDDLOptions"></select>
-                <span asp-validation-for="Ticket.TicketCategory" class="text-danger"></span>
-
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Ticket.TicketPriority" class="control-label"></label>
-                <select asp-for="Ticket.TicketPriority" class="form-control" asp-items="@Model.TicketPriorDDLOptions"></select>
-                <span asp-validation-for="Ticket.TicketPriority" class="text-danger"></span>
-
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Ticket.TicketStatus" class="control-label"></label>
-                <select asp-for="Ticket.TicketStatus" class="form-control" asp-items="@Model.TicketStatDDLOptions"></select>
-                <span asp-validation-for="Ticket.TicketStatus" class="text-danger"></span>
-
-            </div>
-
-            <div class="form-group">
-                <label asp-for="@Model.QAsList" class="control-label"></label>
-                <select asp-for="@Model.Ticket.QaID" class="form-control" asp-items="@Model.QAsList"></select>
-                <span asp-validation-for="@Model.Ticket.QaID" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <input asp-page-handler="AssignTicketFromForm" type="submit" value="Assign Ticket" class="btn btn-secondary text-white" />
-            </div>
-        </form>
-    </div>
-    @*FORM SECTION ENDED HERE *@
-
-
-    if (Model.AvailableQAs != null)
-    {
-        <table id="qas" class="table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (int i = 0; i < Model.AvailableQAs.Count; i++)
+    <div class="container row p-0 m0">
+        <div class="col-6">
+            <h2 class="text-info">Ticket details</h2>
+            <br />
+            <h5>Title</h5>
+            <span>@Model.TicketDetailsVm.Ticket.RequestItem.Title</span>
+            <br />
+            <h5>Created at</h5>
+            <span>@Model.TicketDetailsVm.Ticket.Created</span>
+        </div>
+        <div class="col">
+            <div id="comments">
+                <h2 class="text-info">Comments</h2>
+                @if (@Model.TicketDetailsVm.Ticket.Comments.Count == 0)
                 {
-                    <tr class="clickable-row">
-                        <th scope="row">@(i+1)</th>
-                        <td class="qaName">@Model.AvailableQAs.ElementAt(i).Name</td>
-                        <td id="qaId" style="display:none">@Model.AvailableQAs.ElementAt(i).Id</td>
-                    </tr>
-
+                    <span>There is no comments yet.</span>
                 }
-            </tbody>
-        </table>
-        <br />
-        <form method="post">
-            <input id="assignticket" type="submit" class="btn btn-success text-white" value="Assign" />
-        </form>
-    }
+                else
+                {
+                    @foreach (var i in @Model.TicketDetailsVm.Ticket.Comments)
+                    {
+                        <div style="border:double">
+                            <span>@i.Created</span><br />
+                            <span>@i.Text</span><br />
+                            <span>@i.Author</span><br />
+                        </div>
+                    }
+                }
+                <div class="content">
+                    <form id="add-comment" method="post">
+                        <div class="form-group">
+                            <input style="display:none" asp-for="@Model.AddCommentCommand.TicketId" value="@Model.TicketDetailsVm.Ticket.Id" />
+                            <label asp-for="@Model.AddCommentCommand.Text" class="control-label">New comment</label>
+                            <textarea asp-for="@Model.AddCommentCommand.Text" class="form-control"></textarea>
+                        </div>
+                        <input id="update-ticket" type="submit" class="btn btn-success text-white" value="Add comment" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 }
-
-
-
-
-@section Scripts{
-    <script src="~/js/poTicketDetails.js"></script>
-}
-
-
-<!--<form method="post">
-    <input id="assignticket" type="submit" class="btn btn-danger btn-sm" value="Assign" />-->
-@*type="submit" asp-page-handler="AssignTicket" asp-route-ticketId=@Model.Ticket.Id asp-route-qaName=@Model.QaName*@
-<!--</form>-->

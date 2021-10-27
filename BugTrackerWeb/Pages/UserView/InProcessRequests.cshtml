@@ -7,18 +7,18 @@
 
     <div class="row">
         <div class="col-8">
-            @if (Model.Tickets.Count() > 0)
+            @if (Model.InProcessRequestItemsVm.InProcessRequests.Count() > 0)
             {
                 <table id="requestsTable" class="table table-striped border table-sm">
                     <tr class="table-secondary">
                         <th>
-                            <label asp-for="Tickets.FirstOrDefault().Title"></label>
+                            <label asp-for="InProcessRequestItemsVm.InProcessRequests.FirstOrDefault().Title"></label>
                         </th>
                         <th>
-                            <label asp-for="Tickets.FirstOrDefault().TicketStatus"></label>
+                            <label asp-for="InProcessRequestItemsVm.InProcessRequests.FirstOrDefault().TicketStatus"></label>
                         </th>
                     </tr>
-                    @foreach (var item in Model.Tickets)
+                    @foreach (var item in Model.InProcessRequestItemsVm.InProcessRequests)
                     {
                         <tr class="clickable-row">
                             <td>
@@ -27,9 +27,8 @@
                             <td>
                                 @Html.DisplayFor(m => item.TicketStatus)
                             </td>
-                            <td id="ticketId" style="display:none">@item.Id</td>
                             <td>
-                                <button id="checkDetails" class="btn btn-success btn-sm text-white">Details</button>
+                                <button data-requestid="@item.Id" class="btn btn-success btn-sm text-white show-details">Details</button>
                             </td>
                         </tr>
                     }
@@ -40,7 +39,12 @@
                 <p>You don't have any tickets in processing</p>
             }
         </div>
-        <div class="col-sm" id="ticketDetails">Details</div>
+        <div class="col-sm">
+            <h3 class="text-info">Request details</h3>
+            <article id="ticketDetails">
+                <span class="text-info">You haven't select any requet yet</span>
+            </article>
+        </div>
     </div>
 }
 

@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Application.Tickets.Queries.GetTicketDetails
 {
-    public class TicketDetailsVm
+    public class CommentDto
     {
-        public TicketDto Ticket { get; set; }
-        public CommentDto Comment { get; set; }
+        public string Text { get; set; }
+        public string Author { get; set; }
+        public DateTime Created { get; set; } = DateTime.UtcNow;
+
     }
 }

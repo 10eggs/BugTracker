@@ -19,6 +19,7 @@ namespace WebUI.Pages.ProjectOwnerView
         [BindProperty]
         public AssignTicketVm AssignTicketVm { get; set; }
 
+
         [BindProperty]
         public AssignTicketCommand AssignTicketCommand { get; set; }
 
@@ -29,7 +30,6 @@ namespace WebUI.Pages.ProjectOwnerView
         }
         public async Task<IActionResult> OnPost()
         {
-            var check = AssignTicketCommand;
             await _mediator.Send(AssignTicketCommand);
             return RedirectToPage("/ProjectOwnerView/PendingRequests");
         }

@@ -40,18 +40,20 @@ namespace Application.Tickets.Command.AssignTicket
             var reqItem = await _context.Requests.FindAsync(request.RequestItemId);
             reqItem.Assigned = true;
 
-            var entry = new Ticket();
-            entry.RequestItem = reqItem;
-            entry.TicketStatus = request.TicketStatus;
-            entry.TicketPriority = request.TicketPriority;
-            entry.TicketCategory = request.TicketCategory;
-            entry.TicketSeverity = request.TicketSeverity;
+            var entry = new Ticket
+            {
+                RequestItem = reqItem,
+                TicketStatus = request.TicketStatus,
+                TicketPriority = request.TicketPriority,
+                TicketCategory = request.TicketCategory,
+                TicketSeverity = request.TicketSeverity,
 
-            entry.TicketAuthorId = _currentUser.UserId;
-            entry.TicketAuthorEmail = _currentUser.UserEmail;
+                TicketAuthorId = _currentUser.UserId,
+                TicketAuthorEmail = _currentUser.UserEmail,
 
-            entry.ProjectId = reqItem.ProjectId;
-            entry.QaID = request.QaID;
+                ProjectId = reqItem.ProjectId,
+                QaID = request.QaID
+            };
 
             await _context.Tickets.AddAsync(entry);
             await _context.SaveChangesAsync(cancellationToken);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Tickets.Command.AddComment;
 using Application.Tickets.Queries.GetTicketDetails;
 using BugTracker.Models.TicketProperties;
 using BugTracker.PageManagers;
@@ -119,23 +120,25 @@ namespace BugTrackerWeb.Pages.ProjectOwnerView
         }
 
 
-
-
-
-
         //***********************************************//
 
         [BindProperty]
         public TicketDetailsVm TicketDetailsVm { get; set; }
+
+        [BindProperty]
+        public AddCommentCommand AddCommentCommand { get; set; } = new AddCommentCommand();
+
+        public int TicketId { get; set; }
         public async Task OnGet(int ticketId)
         {
-            Debug.WriteLine($"Ticket id: {ticketId}");
             TicketDetailsVm = await _mediator.Send(new GetTicketDetailsQuery { TicketId = ticketId });
-
-
         }
 
-
+        public async Task<IActionResult> OnPost()
+        {
+            await _mediator.Send(AddCommentCommand);
+            return RedirectToPage("/ProjectOwnerView/TicketDetails",new { ticketId=AddCommentCommand.TicketId });
+        }
 
     }
 }

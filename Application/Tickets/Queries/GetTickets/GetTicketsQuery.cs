@@ -33,8 +33,8 @@ namespace Application.Tickets.Queries.GetTickets
             return new TicketsVm
             {
                 Tickets = await _context.Tickets
-                .Where(t => t.Project.ProjectOwner.UserId == _currentUser.UserId)
-                            .ProjectTo<TicketDto>(_mapper.ConfigurationProvider).ToListAsync()
+                    .Where(t => t.Project.ProjectOwner.UserId == _currentUser.UserId)
+                    .ProjectTo<TicketDto>(_mapper.ConfigurationProvider).ToListAsync()
             };
         }
     }

@@ -23,7 +23,7 @@ namespace Domain.Entities
         public TicketPriority TicketPriority { get; set; }
         public TicketCategory TicketCategory { get; set; }
         public TicketSeverity TicketSeverity { get; set; }
-        public List<Comment> Comments { get; set; }
+        public List<Comment> Comments { get; set; } = new List<Comment>();
         public string TicketAuthorEmail { get; set; }
         public string TicketAuthorId { get; set; }
         public Project Project { get; set; }

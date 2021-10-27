@@ -39,8 +39,6 @@ namespace Application.Tickets.Queries.GetTickets
 
             profile.CreateMap<Ticket, TicketDto>()
                 .ForMember(d => d.Title, opt => opt.MapFrom(s => s.RequestItem.Title));
-
-
         }
     }
 }

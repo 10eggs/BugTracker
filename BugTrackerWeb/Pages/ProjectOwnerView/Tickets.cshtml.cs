@@ -24,9 +24,5 @@ namespace WebUI.Pages.ProjectOwnerView
             TicketsVm = await _mediator.Send(new GetTicketsQuery());
         }
 
-        public async Task OnGetTicketDetails(int ticketId)
-        {
-            Debug.WriteLine($"Ticket id is {ticketId}");
-        }
     }
 }
